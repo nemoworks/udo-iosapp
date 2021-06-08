@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		A0065992266F54EC0089E5F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0065990266F54EC0089E5F1 /* Main.storyboard */; };
 		A0065994266F54ED0089E5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0065993266F54ED0089E5F1 /* Assets.xcassets */; };
 		A0065997266F54ED0089E5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0065995266F54ED0089E5F1 /* LaunchScreen.storyboard */; };
+		A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD368266F8B1800E67089 /* MQTTClient.swift */; };
+		A0ACD36C266F9F3C00E67089 /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD36B266F9F3C00E67089 /* DeviceStatus.swift */; };
 		E462F95BD55CF29928E146E7 /* Pods_UDO_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FE24F79C6EA230A7C2FB5C /* Pods_UDO_Client.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		A0065993266F54ED0089E5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0065996266F54ED0089E5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0065998266F54ED0089E5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0ACD368266F8B1800E67089 /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
+		A0ACD36B266F9F3C00E67089 /* DeviceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatus.swift; sourceTree = "<group>"; };
 		F876161FB67C92B4E7B26F82 /* Pods-UDO Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UDO Client.debug.xcconfig"; path = "Target Support Files/Pods-UDO Client/Pods-UDO Client.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,7 +52,6 @@
 				F876161FB67C92B4E7B26F82 /* Pods-UDO Client.debug.xcconfig */,
 				2A14C4C96A6E0B151A08B0D5 /* Pods-UDO Client.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -73,6 +76,8 @@
 		A0065989266F54EC0089E5F1 /* UDO Client */ = {
 			isa = PBXGroup;
 			children = (
+				A0ACD36D266F9F5400E67089 /* Utils */,
+				A0ACD36A266F9F2A00E67089 /* Types */,
 				A006598A266F54EC0089E5F1 /* AppDelegate.swift */,
 				A006598C266F54EC0089E5F1 /* SceneDelegate.swift */,
 				A006598E266F54EC0089E5F1 /* ViewController.swift */,
@@ -82,6 +87,22 @@
 				A0065998266F54ED0089E5F1 /* Info.plist */,
 			);
 			path = "UDO Client";
+			sourceTree = "<group>";
+		};
+		A0ACD36A266F9F2A00E67089 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				A0ACD36B266F9F3C00E67089 /* DeviceStatus.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		A0ACD36D266F9F5400E67089 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A0ACD368266F8B1800E67089 /* MQTTClient.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		CE48B913B847AC14B163B2C3 /* Frameworks */ = {
@@ -206,9 +227,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */,
 				A006598F266F54EC0089E5F1 /* ViewController.swift in Sources */,
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
 				A006598D266F54EC0089E5F1 /* SceneDelegate.swift in Sources */,
+				A0ACD36C266F9F3C00E67089 /* DeviceStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
