@@ -19,6 +19,7 @@
 		A0ACD3762670578500E67089 /* TextAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3752670578500E67089 /* TextAttribute.swift */; };
 		A0ACD3782670579300E67089 /* EnumAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3772670579300E67089 /* EnumAttribute.swift */; };
 		A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3792670584100E67089 /* SwitchAttribute.swift */; };
+		A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */; };
 		E462F95BD55CF29928E146E7 /* Pods_UDO_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FE24F79C6EA230A7C2FB5C /* Pods_UDO_Client.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		A0ACD3752670578500E67089 /* TextAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttribute.swift; sourceTree = "<group>"; };
 		A0ACD3772670579300E67089 /* EnumAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumAttribute.swift; sourceTree = "<group>"; };
 		A0ACD3792670584100E67089 /* SwitchAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchAttribute.swift; sourceTree = "<group>"; };
+		A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTableViewCell.swift; sourceTree = "<group>"; };
 		F876161FB67C92B4E7B26F82 /* Pods-UDO Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UDO Client.debug.xcconfig"; path = "Target Support Files/Pods-UDO Client/Pods-UDO Client.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,14 +86,11 @@
 		A0065989266F54EC0089E5F1 /* UDO Client */ = {
 			isa = PBXGroup;
 			children = (
+				A0ACD37F2670FDF600E67089 /* Resources */,
 				A0ACD36D266F9F5400E67089 /* Utils */,
 				A0ACD36A266F9F2A00E67089 /* Types */,
-				A006598A266F54EC0089E5F1 /* AppDelegate.swift */,
-				A006598C266F54EC0089E5F1 /* SceneDelegate.swift */,
 				A006598E266F54EC0089E5F1 /* ViewController.swift */,
-				A0065990266F54EC0089E5F1 /* Main.storyboard */,
-				A0065993266F54ED0089E5F1 /* Assets.xcassets */,
-				A0065995266F54ED0089E5F1 /* LaunchScreen.storyboard */,
+				A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */,
 				A0065998266F54ED0089E5F1 /* Info.plist */,
 			);
 			path = "UDO Client";
@@ -123,6 +122,18 @@
 				A0ACD3792670584100E67089 /* SwitchAttribute.swift */,
 			);
 			path = DeviceAttributes;
+			sourceTree = "<group>";
+		};
+		A0ACD37F2670FDF600E67089 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A006598A266F54EC0089E5F1 /* AppDelegate.swift */,
+				A006598C266F54EC0089E5F1 /* SceneDelegate.swift */,
+				A0065990266F54EC0089E5F1 /* Main.storyboard */,
+				A0065995266F54ED0089E5F1 /* LaunchScreen.storyboard */,
+				A0065993266F54ED0089E5F1 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CE48B913B847AC14B163B2C3 /* Frameworks */ = {
@@ -252,6 +263,7 @@
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
 				A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */,
 				A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */,
+				A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */,
 				A0ACD36F266FA19900E67089 /* Device.swift in Sources */,
 				A006598D266F54EC0089E5F1 /* SceneDelegate.swift in Sources */,
 				A0ACD3762670578500E67089 /* TextAttribute.swift in Sources */,
