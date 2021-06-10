@@ -10,12 +10,11 @@ import UIKit
 class DeviceTableViewCell: UITableViewCell {
     @IBOutlet weak var deviceName: UILabel!
     @IBOutlet weak var deviceImage: UIImageView!
-    @IBOutlet weak var deviceDescription: UITextView!
+    @IBOutlet weak var deviceDescription: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.deviceDescription.isEditable = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

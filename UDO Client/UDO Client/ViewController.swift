@@ -7,12 +7,14 @@
 
 import UIKit
 import CocoaMQTT
+import UserNotifications
 
 class ViewController: UIViewController {
     @IBOutlet weak var deviceTableView: UITableView!
     
     let mqttClient = MQTTClient()
-    var devices: [Device] = []
+    var devices: [UDODevice] = []
+    let userNotificationCenter = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +22,25 @@ class ViewController: UIViewController {
         self.mqttClient.delegate = self
         self.deviceTableView.delegate = self
         self.deviceTableView.dataSource = self
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.userNotificationCenter.delegate = self
     }
     
+    func notifyDeviceFound(device: UDODevice) {
+        let content = UNMutableNotificationContent()
+        content.title = "Hello"
+        content.body = "New device"
+        content.sound = .default
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        print("Send notification")
+        self.userNotificationCenter.add(request) {
+            error in
+            if let error = error {
+                print("Notification Error: \(error.localizedDescription)")
+            }
+        }
+    }
     
 
 }
@@ -34,13 +53,13 @@ extension ViewController: MessageRecevieDelegate {
             print("Parse to dictionary:  \(contentDict)")
             let id = contentDict["id"] as! UInt64
             let name = contentDict["name"] as! String
-            let newDevice = Device(id: id, name: name)
+            let newDevice = UDODevice(id: id, name: name)
             print(newDevice)
             let attrs = contentDict["attributes"] as! [String:[Any]]
             newDevice.loadAttrs(attrs: attrs)
+            self.notifyDeviceFound(device: newDevice)
             self.devices.append(newDevice)
             self.deviceTableView.reloadData()
-            // TODO:- commit a notification
         } catch {
             print(error.localizedDescription)
         }
@@ -65,4 +84,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+}
+
+extension ViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        print(userInfo)
+        completionHandler(UNNotificationPresentationOptions(arrayLiteral: .banner))
+    }
 }

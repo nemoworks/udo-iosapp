@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Device: NSObject {
+class UDODevice: NSObject {
     let deviceID:UInt64
     let deviceName: String
     var numericalAttrs : [NumericalAttribute]?
