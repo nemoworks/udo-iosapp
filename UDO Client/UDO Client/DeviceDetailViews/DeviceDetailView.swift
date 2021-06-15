@@ -38,7 +38,7 @@ struct DeviceDetailView: View {
             
             VStack(alignment: .leading) {
                 Text(self.device!.deviceName)
-                    .font(.title)
+                    .font(.largeTitle)
                 
                 HStack {
                     Text("Device ID: ").font(.subheadline).foregroundColor(.gray)
@@ -54,7 +54,7 @@ struct DeviceDetailView: View {
             
             HStack {
                 TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
-                    DeviceStatusView().tabItem {
+                    DeviceStatusView(device: self.device!).tabItem {
                         Image(systemName: "star.square")
                         Text("设备状态")
                     }.tag(1)
@@ -74,6 +74,19 @@ struct DeviceDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
         let previewDevice = UDODevice(id: 0x12345678, name: "XiaoMi Air Purifier")
-        DeviceDetailView(device: previewDevice)
+        previewDevice.textAttrs = [
+            TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
+        ]
+        previewDevice.numericalAttrs = [
+            NumericalAttribute(name: "Temperature", value: 25.5),
+            NumericalAttribute(name: "Humidity", value: 0.5)
+        ]
+        previewDevice.enumAttrs = [
+            EnumAttribute(name: "Fan Speed", options: ["High", "Mid", "Low"], currentOption: 1, editable: false)
+        ]
+        previewDevice.switchAttrs = [
+            SwitchAttribute(name: "On", on: true, editable: false)
+        ]
+        return DeviceDetailView(device: previewDevice)
     }
 }

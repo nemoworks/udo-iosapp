@@ -10,18 +10,18 @@ def publish():
         'id': 1234,
         'attributes': {
             'numerical': [{
-                'name': 'temperature',
+                'name': 'Temperature',
                 'value': 24.5
             }, {
-                'name': 'humidity',
+                'name': 'Humidity',
                 'value': 0.5
             }],
             'text': [{
-                'name': 'description',
+                'name': 'Description',
                 'content': 'Xiaomi air purifier can purify the air'
             }],
             'enum': [{
-                'name': 'speed',
+                'name': 'Speed',
                 'options': ['low', 'mid', 'high'],
                 'value': 2,
                 'editable': True,

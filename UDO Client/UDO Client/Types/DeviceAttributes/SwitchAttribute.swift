@@ -7,10 +7,11 @@
 
 import UIKit
 
-class SwitchAttribute: NSObject {
-    let name: String
+class SwitchAttribute: NSObject, Identifiable {
+    var name: String
     var on: Bool
     var editable: Bool
+    var id:String{return name}
     
     public override var description: String {return "\(self.name): \(self.on), \(self.editable)"}
     

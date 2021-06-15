@@ -7,9 +7,10 @@
 
 import UIKit
 
-class TextAttribute: NSObject {
+class TextAttribute: NSObject, Identifiable {
     let name:String
     let content: String
+    var id:String {return name}
     
     public override var description: String {return "\(self.name): \(self.content)"}
     

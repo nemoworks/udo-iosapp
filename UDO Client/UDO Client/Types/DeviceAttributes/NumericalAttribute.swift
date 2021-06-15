@@ -7,9 +7,11 @@
 
 import UIKit
 
-class NumericalAttribute: NSObject {
+class NumericalAttribute: NSObject, Identifiable {
     let name: String
     var value: Float64
+    var id:String {return name}
+    
     
     public override var description: String {return "\(self.name): \(self.value)"}
     

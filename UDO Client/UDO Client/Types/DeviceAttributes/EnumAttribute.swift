@@ -7,11 +7,12 @@
 
 import UIKit
 
-class EnumAttribute: NSObject {
-    let name: String
-    let options: [String]
-    let currentOption: Int
+class EnumAttribute: NSObject, Identifiable {
+    var name: String
+    var options: [String]
+    var currentOption: Int
     let editable: Bool
+    var id:String{return name}
     
     public override var description: String {
         return "\(self.name) \(self.options) \(self.editable) \(self.currentOption)"
