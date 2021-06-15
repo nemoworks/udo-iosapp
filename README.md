@@ -18,3 +18,9 @@ $ python test_publisher.py
 ```
 
 ![image](./doc/1.gif)
+
+
+
+## 问题
+
+应用在后台无法接受MQTT，需要将MQTT的接受从ViewController转移到专用的后台任务

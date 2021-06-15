@@ -21,6 +21,10 @@
 		A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3792670584100E67089 /* SwitchAttribute.swift */; };
 		A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */; };
 		A0ACD3812671AFC600E67089 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */; };
+		A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */; };
+		A0D74F362678942200FE86E1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F352678942200FE86E1 /* MapView.swift */; };
+		A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */; };
+		A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */; };
 		E462F95BD55CF29928E146E7 /* Pods_UDO_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FE24F79C6EA230A7C2FB5C /* Pods_UDO_Client.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +47,10 @@
 		A0ACD3792670584100E67089 /* SwitchAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchAttribute.swift; sourceTree = "<group>"; };
 		A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTableViewCell.swift; sourceTree = "<group>"; };
 		A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
+		A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
+		A0D74F352678942200FE86E1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatusView.swift; sourceTree = "<group>"; };
+		A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHistoryView.swift; sourceTree = "<group>"; };
 		F876161FB67C92B4E7B26F82 /* Pods-UDO Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UDO Client.debug.xcconfig"; path = "Target Support Files/Pods-UDO Client/Pods-UDO Client.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,8 +99,8 @@
 				A0ACD37F2670FDF600E67089 /* Resources */,
 				A0ACD36D266F9F5400E67089 /* Utils */,
 				A0ACD36A266F9F2A00E67089 /* Types */,
+				A0D74F342678907A00FE86E1 /* DeviceDetailViews */,
 				A006598E266F54EC0089E5F1 /* ViewController.swift */,
-				A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */,
 				A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */,
 				A0065998266F54ED0089E5F1 /* Info.plist */,
 			);
@@ -137,6 +145,18 @@
 				A0065993266F54ED0089E5F1 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A0D74F342678907A00FE86E1 /* DeviceDetailViews */ = {
+			isa = PBXGroup;
+			children = (
+				A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */,
+				A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */,
+				A0D74F352678942200FE86E1 /* MapView.swift */,
+				A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */,
+				A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */,
+			);
+			path = DeviceDetailViews;
 			sourceTree = "<group>";
 		};
 		CE48B913B847AC14B163B2C3 /* Frameworks */ = {
@@ -264,11 +284,15 @@
 				A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */,
 				A006598F266F54EC0089E5F1 /* ViewController.swift in Sources */,
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
+				A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */,
+				A0D74F362678942200FE86E1 /* MapView.swift in Sources */,
 				A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */,
 				A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */,
+				A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */,
 				A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */,
 				A0ACD36F266FA19900E67089 /* UDODevice.swift in Sources */,
 				A006598D266F54EC0089E5F1 /* SceneDelegate.swift in Sources */,
+				A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */,
 				A0ACD3812671AFC600E67089 /* DeviceDetailViewController.swift in Sources */,
 				A0ACD3762670578500E67089 /* TextAttribute.swift in Sources */,
 				A0ACD3782670579300E67089 /* EnumAttribute.swift in Sources */,
@@ -441,6 +465,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Y2VQ245QA;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "UDO Client/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

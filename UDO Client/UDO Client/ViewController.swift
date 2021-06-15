@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         self.deviceTableView.dataSource = self
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.userNotificationCenter.delegate = self
+        self.deviceTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
     
     func notifyDeviceFound(device: UDODevice) {
@@ -42,6 +43,15 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "deviceDetail" {
+            let vc = segue.destination as! DeviceDetailViewController
+            let cell = sender as! DeviceTableViewCell
+            let index = self.deviceTableView.indexPath(for: cell)!.row
+            vc.device = self.devices[index]
+        }
+    }
 
 }
 
@@ -81,6 +91,19 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let image = UIImage(named: "air-purifier")
         cell.deviceImage.image = image
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // this will turn on `masksToBounds` just before showing the cell
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+        let verticalPadding: CGFloat = 8
+        let maskLayer = CALayer()
+        maskLayer.cornerRadius = 10    //if you want round edges
+        maskLayer.backgroundColor = UIColor.black.cgColor
+        maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height:cell.bounds.height).insetBy(dx: 0, dy: verticalPadding/2)
+        cell.layer.mask = maskLayer
     }
     
     
