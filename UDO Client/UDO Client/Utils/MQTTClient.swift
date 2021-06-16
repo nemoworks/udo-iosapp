@@ -29,7 +29,7 @@ class MQTTClient: NSObject {
         self.client?.delegate = self
         self.client?.username = "test"
         self.client?.password = "test"
-        self.client?.willMessage = CocoaMQTTWill(topic: "/will ", message: "offline")
+        self.client?.willMessage = CocoaMQTTMessage(topic: "/will ", string: "offline")
         self.client?.keepAlive = 60
         _ = self.client?.connect()
         
@@ -38,6 +38,7 @@ class MQTTClient: NSObject {
 }
 
 extension MQTTClient: CocoaMQTTDelegate {
+    
     // These two methods are all we care about for now.
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         self.client?.subscribe("topic/udo-test")
@@ -56,8 +57,10 @@ extension MQTTClient: CocoaMQTTDelegate {
         
     }
     
+    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
+    }
     
-    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopic topics: [String]) {
+    func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopics topics: [String]) {
         print("MQTT Client subscribe topics \(topics)")
     }
     

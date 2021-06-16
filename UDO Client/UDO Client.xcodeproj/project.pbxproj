@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,16 +21,16 @@
 		A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3792670584100E67089 /* SwitchAttribute.swift */; };
 		A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */; };
 		A0ACD3812671AFC600E67089 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */; };
+		A0D352C3267993960086B92F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C2267993960086B92F /* SwiftPackageProductDependency */; };
+		A0D352C6267995610086B92F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C5267995610086B92F /* SwiftPackageProductDependency */; };
+		A0D352C8267995610086B92F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C7267995610086B92F /* SwiftPackageProductDependency */; };
 		A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */; };
 		A0D74F362678942200FE86E1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F352678942200FE86E1 /* MapView.swift */; };
 		A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */; };
 		A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */; };
-		E462F95BD55CF29928E146E7 /* Pods_UDO_Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FE24F79C6EA230A7C2FB5C /* Pods_UDO_Client.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A14C4C96A6E0B151A08B0D5 /* Pods-UDO Client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UDO Client.release.xcconfig"; path = "Target Support Files/Pods-UDO Client/Pods-UDO Client.release.xcconfig"; sourceTree = "<group>"; };
-		83FE24F79C6EA230A7C2FB5C /* Pods_UDO_Client.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UDO_Client.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0065987266F54EC0089E5F1 /* UDO Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UDO Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A006598A266F54EC0089E5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A006598C266F54EC0089E5F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,7 +51,6 @@
 		A0D74F352678942200FE86E1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatusView.swift; sourceTree = "<group>"; };
 		A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHistoryView.swift; sourceTree = "<group>"; };
-		F876161FB67C92B4E7B26F82 /* Pods-UDO Client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UDO Client.debug.xcconfig"; path = "Target Support Files/Pods-UDO Client/Pods-UDO Client.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,29 +58,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E462F95BD55CF29928E146E7 /* Pods_UDO_Client.framework in Frameworks */,
+				A0D352C6267995610086B92F /* BuildFile in Frameworks */,
+				A0D352C8267995610086B92F /* BuildFile in Frameworks */,
+				A0D352C3267993960086B92F /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		698963EEFCA04C1A4B6C72CE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F876161FB67C92B4E7B26F82 /* Pods-UDO Client.debug.xcconfig */,
-				2A14C4C96A6E0B151A08B0D5 /* Pods-UDO Client.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		A006597E266F54EC0089E5F1 = {
 			isa = PBXGroup;
 			children = (
 				A0065989266F54EC0089E5F1 /* UDO Client */,
 				A0065988266F54EC0089E5F1 /* Products */,
-				698963EEFCA04C1A4B6C72CE /* Pods */,
-				CE48B913B847AC14B163B2C3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,14 +149,6 @@
 			path = DeviceDetailViews;
 			sourceTree = "<group>";
 		};
-		CE48B913B847AC14B163B2C3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				83FE24F79C6EA230A7C2FB5C /* Pods_UDO_Client.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,17 +156,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A006599B266F54ED0089E5F1 /* Build configuration list for PBXNativeTarget "UDO Client" */;
 			buildPhases = (
-				D78DCEA961CE1C20059A1FD5 /* [CP] Check Pods Manifest.lock */,
 				A0065983266F54EC0089E5F1 /* Sources */,
 				A0065984266F54EC0089E5F1 /* Frameworks */,
 				A0065985266F54EC0089E5F1 /* Resources */,
-				5505EBF3179AB721876DD136 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "UDO Client";
+			packageProductDependencies = (
+				A0D352C2267993960086B92F /* SwiftPackageProductDependency */,
+				A0D352C5267995610086B92F /* SwiftPackageProductDependency */,
+				A0D352C7267995610086B92F /* SwiftPackageProductDependency */,
+			);
 			productName = "UDO Client";
 			productReference = A0065987266F54EC0089E5F1 /* UDO Client.app */;
 			productType = "com.apple.product-type.application";
@@ -212,6 +197,10 @@
 				Base,
 			);
 			mainGroup = A006597E266F54EC0089E5F1;
+			packageReferences = (
+				A0D352C1267993960086B92F /* RemoteSwiftPackageReference */,
+				A0D352C4267995610086B92F /* RemoteSwiftPackageReference */,
+			);
 			productRefGroup = A0065988266F54EC0089E5F1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,48 +222,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		5505EBF3179AB721876DD136 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-UDO Client/Pods-UDO Client-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-UDO Client/Pods-UDO Client-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UDO Client/Pods-UDO Client-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D78DCEA961CE1C20059A1FD5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-UDO Client-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A0065983266F54EC0089E5F1 /* Sources */ = {
@@ -439,7 +386,6 @@
 		};
 		A006599C266F54ED0089E5F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F876161FB67C92B4E7B26F82 /* Pods-UDO Client.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -459,7 +405,6 @@
 		};
 		A006599D266F54ED0089E5F1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A14C4C96A6E0B151A08B0D5 /* Pods-UDO Client.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -500,6 +445,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A0D352C1267993960086B92F /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
+		A0D352C4267995610086B92F /* RemoteSwiftPackageReference */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/emqx/CocoaMQTT";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A0D352C2267993960086B92F /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0D352C1267993960086B92F /* RemoteSwiftPackageReference */;
+			productName = SwiftUICharts;
+		};
+		A0D352C5267995610086B92F /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0D352C4267995610086B92F /* RemoteSwiftPackageReference */;
+			productName = CocoaMQTTWebSocket;
+		};
+		A0D352C7267995610086B92F /* SwiftPackageProductDependency */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0D352C4267995610086B92F /* RemoteSwiftPackageReference */;
+			productName = CocoaMQTT;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A006597F266F54EC0089E5F1 /* Project object */;
 }
