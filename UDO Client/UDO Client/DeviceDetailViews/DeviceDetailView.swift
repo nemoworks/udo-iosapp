@@ -22,14 +22,22 @@ struct CircleImage: View {
 
 struct DeviceDetailView: View {
     var device: UDODevice?
+    
+    let mapView = MKMapView()
+    
     init(device:UDODevice) {
         self.device = device
     }
     
+    let chartDatas = [
+        ("Temperature", [14.0,13.0,54.0,62.0,12.5,4.5,7.6,55.5]),
+        ("Humidity", [14.1,23.3,34.5,66.3,22.4,44.6,73.5,5.9]),
+    ]
+    
     var body: some View {
         VStack {
-            MapView().frame(height:250).ignoresSafeArea(edges: .top)
-            
+            let region = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4))
+            MapView(region: region).frame(height:250).ignoresSafeArea(edges: .top)
             CircleImage()
                 .offset(y:-190)
                 .padding(.bottom, -190)
@@ -53,12 +61,12 @@ struct DeviceDetailView: View {
             }.padding()
             
             HStack {
-                TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
+                TabView{
                     DeviceStatusView(device: self.device!).tabItem {
                         Image(systemName: "star.square")
                         Text("设备状态")
                     }.tag(1)
-                    DeviceHistoryView().tabItem {
+                    DeviceHistoryView(datas:self.chartDatas).tabItem {
                         Image(systemName: "chart.bar")
                         Text("历史数据")
                     }.tag(2)

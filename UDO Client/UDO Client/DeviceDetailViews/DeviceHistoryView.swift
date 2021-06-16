@@ -9,13 +9,40 @@ import SwiftUI
 import SwiftUICharts
 
 struct DeviceHistoryView: View {
+    let styles:[ChartStyle] = [
+        ChartStyle(backgroundColor: .white, accentColor: Colors.BorderBlue, gradientColor: GradientColors.blue, textColor: .black, legendTextColor: .black, dropShadowColor: .gray),
+        
+        ChartStyle(backgroundColor: .white, accentColor: Colors.BorderBlue, gradientColor: GradientColors.prplNeon, textColor: .black, legendTextColor: .black, dropShadowColor: .gray),
+        
+        ChartStyle(backgroundColor: .white, accentColor: Colors.BorderBlue, gradientColor: GradientColors.orange, textColor: .black, legendTextColor: .black, dropShadowColor: .gray),
+        
+    ]
+    
+    init(datas: [(String, [Double])]) {
+        self.datas = datas
+    }
+    
+    @State var datas: [(String, [Double])]
+    
     var body: some View {
-        Text("History")
+        ScrollView {
+            VStack {
+                ForEach(self.datas.indices) { index in
+                    let (title, data) = self.$datas[index].wrappedValue
+                    LineChartView(data: data, title: title, form: ChartForm.large, rateValue: 0).padding()
+                }
+            }
+        }
     }
 }
 
 struct DeviceHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        DeviceHistoryView()
+        let datas = [
+            ("Temperature", [14.0,13.0,54.0,62.0,12.5,4.5,7.6,55.5]),
+            ("Humidity", [14.1,23.3,34.5,66.3,22.4,44.6,73.5,5.9]),
+        ]
+        
+        return DeviceHistoryView(datas: datas)
     }
 }
