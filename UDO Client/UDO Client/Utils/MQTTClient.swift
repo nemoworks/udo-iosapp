@@ -48,42 +48,48 @@ extension MQTTClient: CocoaMQTTDelegate {
         self.delegate?.didReceiveMessage(message: message)
     }
     
-    // Other methods for Delegate
+    // Other methods
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
-    
+        print("MQTT did publish message \(message)")
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
+        print("MQTT did publish ack \(id) ")
+    }
+    
+    
+    
+    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
         
     }
     
-    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
-    }
-    
     func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopics topics: [String]) {
-        print("MQTT Client subscribe topics \(topics)")
-    }
-    
-    func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopic topic: String) {
-        print("MQTT Client unsubscribe topic \(topic)")
+        print("MQTT did unsubscribe topics: \(topics)")
     }
     
     func mqttDidPing(_ mqtt: CocoaMQTT) {
-        print("MQTT Client did ping")
+        print("MQTT did ping")
     }
     
     func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
-        print("MQTT Client receive pong")
+        print("MQTT did pong")
     }
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        print("MQTT Client disconnect")
+        print("MQTT did disconnect")
         if let err = err {
-            print("Errror: \(err.localizedDescription)")
+            print("Error: \(err.localizedDescription)")
         } else {
-            print("No error")
+            return 
         }
     }
+    
+    
+    
+    
+    
+    
+    
     
     
 }
