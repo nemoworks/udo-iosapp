@@ -13,26 +13,29 @@ protocol MessageRecevieDelegate:AnyObject {
 }
 
 class MQTTClient: NSObject {
-    let BROKER_HOST = "test.mosquitto.org"
-    let BROKER_PORT:UInt16 = 1883
+    static var BROKER_HOST = ""
+    static var BROKER_PORT:UInt16 = 1883
     let clientID = "cn.edu.nju.udo.iOSClient"
     var client: CocoaMQTT?
     weak var delegate: MessageRecevieDelegate?
     
     override init() {
         super.init()
-        setUpMQTT()
     }
     
-    func setUpMQTT() {
-        self.client = CocoaMQTT(clientID: self.clientID, host: self.BROKER_HOST, port: self.BROKER_PORT)
+    func setUpMQTT()->Bool {
+        if MQTTClient.BROKER_HOST == "" {
+            print("Can not connect to MQTT Service")
+            return false
+        }
+        self.client = CocoaMQTT(clientID: self.clientID, host: MQTTClient.BROKER_HOST, port: MQTTClient.BROKER_PORT)
         self.client?.delegate = self
         self.client?.username = "test"
         self.client?.password = "test"
         self.client?.willMessage = CocoaMQTTMessage(topic: "/will ", string: "offline")
         self.client?.keepAlive = 60
-        _ = self.client?.connect()
-        
+        let connected = self.client?.connect()
+        return connected!
     }
     
 }

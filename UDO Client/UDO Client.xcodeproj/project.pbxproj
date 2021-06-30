@@ -21,9 +21,9 @@
 		A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3792670584100E67089 /* SwitchAttribute.swift */; };
 		A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */; };
 		A0ACD3812671AFC600E67089 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */; };
-		A0D352C3267993960086B92F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C2267993960086B92F /* SwiftPackageProductDependency */; };
-		A0D352C6267995610086B92F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C5267995610086B92F /* SwiftPackageProductDependency */; };
-		A0D352C8267995610086B92F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C7267995610086B92F /* SwiftPackageProductDependency */; };
+		A0D352C3267993960086B92F /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C2267993960086B92F /* SwiftUICharts */; };
+		A0D352C6267995610086B92F /* CocoaMQTTWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C5267995610086B92F /* CocoaMQTTWebSocket */; };
+		A0D352C8267995610086B92F /* CocoaMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C7267995610086B92F /* CocoaMQTT */; };
 		A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */; };
 		A0D74F362678942200FE86E1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F352678942200FE86E1 /* MapView.swift */; };
 		A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */; };
@@ -39,6 +39,7 @@
 		A0065993266F54ED0089E5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0065996266F54ED0089E5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0065998266F54ED0089E5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A08AF49B268C2F1E002F9D8C /* UDO ClientRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UDO ClientRelease.entitlements"; sourceTree = "<group>"; };
 		A0ACD368266F8B1800E67089 /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
 		A0ACD36E266FA19900E67089 /* UDODevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDODevice.swift; sourceTree = "<group>"; };
 		A0ACD3732670577600E67089 /* NumericalAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalAttribute.swift; sourceTree = "<group>"; };
@@ -58,9 +59,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0D352C6267995610086B92F /* BuildFile in Frameworks */,
-				A0D352C8267995610086B92F /* BuildFile in Frameworks */,
-				A0D352C3267993960086B92F /* BuildFile in Frameworks */,
+				A0D352C6267995610086B92F /* CocoaMQTTWebSocket in Frameworks */,
+				A0D352C8267995610086B92F /* CocoaMQTT in Frameworks */,
+				A0D352C3267993960086B92F /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +87,7 @@
 		A0065989266F54EC0089E5F1 /* UDO Client */ = {
 			isa = PBXGroup;
 			children = (
+				A08AF49B268C2F1E002F9D8C /* UDO ClientRelease.entitlements */,
 				A0ACD37F2670FDF600E67089 /* Resources */,
 				A0ACD36D266F9F5400E67089 /* Utils */,
 				A0ACD36A266F9F2A00E67089 /* Types */,
@@ -166,9 +168,9 @@
 			);
 			name = "UDO Client";
 			packageProductDependencies = (
-				A0D352C2267993960086B92F /* SwiftPackageProductDependency */,
-				A0D352C5267995610086B92F /* SwiftPackageProductDependency */,
-				A0D352C7267995610086B92F /* SwiftPackageProductDependency */,
+				A0D352C2267993960086B92F /* SwiftUICharts */,
+				A0D352C5267995610086B92F /* CocoaMQTTWebSocket */,
+				A0D352C7267995610086B92F /* CocoaMQTT */,
 			);
 			productName = "UDO Client";
 			productReference = A0065987266F54EC0089E5F1 /* UDO Client.app */;
@@ -198,8 +200,8 @@
 			);
 			mainGroup = A006597E266F54EC0089E5F1;
 			packageReferences = (
-				A0D352C1267993960086B92F /* RemoteSwiftPackageReference */,
-				A0D352C4267995610086B92F /* RemoteSwiftPackageReference */,
+				A0D352C1267993960086B92F /* XCRemoteSwiftPackageReference "ChartView" */,
+				A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */,
 			);
 			productRefGroup = A0065988266F54EC0089E5F1 /* Products */;
 			projectDirPath = "";
@@ -408,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "UDO Client/UDO ClientRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Y2VQ245QA;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -447,7 +450,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A0D352C1267993960086B92F /* RemoteSwiftPackageReference */ = {
+		A0D352C1267993960086B92F /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
@@ -455,7 +458,7 @@
 				minimumVersion = 1.5.5;
 			};
 		};
-		A0D352C4267995610086B92F /* RemoteSwiftPackageReference */ = {
+		A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/emqx/CocoaMQTT";
 			requirement = {
@@ -466,19 +469,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A0D352C2267993960086B92F /* SwiftPackageProductDependency */ = {
+		A0D352C2267993960086B92F /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A0D352C1267993960086B92F /* RemoteSwiftPackageReference */;
+			package = A0D352C1267993960086B92F /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
-		A0D352C5267995610086B92F /* SwiftPackageProductDependency */ = {
+		A0D352C5267995610086B92F /* CocoaMQTTWebSocket */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A0D352C4267995610086B92F /* RemoteSwiftPackageReference */;
+			package = A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */;
 			productName = CocoaMQTTWebSocket;
 		};
-		A0D352C7267995610086B92F /* SwiftPackageProductDependency */ = {
+		A0D352C7267995610086B92F /* CocoaMQTT */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A0D352C4267995610086B92F /* RemoteSwiftPackageReference */;
+			package = A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */;
 			productName = CocoaMQTT;
 		};
 /* End XCSwiftPackageProductDependency section */

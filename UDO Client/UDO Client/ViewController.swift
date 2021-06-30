@@ -13,24 +13,48 @@ class ViewController: UIViewController {
     @IBOutlet weak var deviceTableView: UITableView!
     
     let mqttClient = MQTTClient()
-    var devices: [UDODevice] = []
+    var devices: [UDODevice] = [
+    
+        
+    ]
     let userNotificationCenter = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        let previewDevice = UDODevice(id: 0x12345678, name: "XiaoMi Air Purifier")
+//        previewDevice.textAttrs = [
+//            TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
+//        ]
+//        previewDevice.numericalAttrs = [
+//            NumericalAttribute(name: "Temperature", value: 25.5),
+//            NumericalAttribute(name: "Humidity", value: 0.5)
+//        ]
+//        previewDevice.enumAttrs = [
+//            EnumAttribute(name: "Fan Speed", options: ["High", "Mid", "Low"], currentOption: 1, editable: false)
+//        ]
+//        previewDevice.switchAttrs = [
+//            SwitchAttribute(name: "On", on: true, editable: false)
+//        ]
+//        self.devices.append(previewDevice)
+        
+        let connected = self.mqttClient.setUpMQTT()
+        if !connected {
+            let alert = UIAlertController(title: "Service unavailable", message: "Can not connect to MQTT Service", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
         self.mqttClient.delegate = self
         self.deviceTableView.delegate = self
         self.deviceTableView.dataSource = self
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.userNotificationCenter.delegate = self
         self.deviceTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
     
     func notifyDeviceFound(device: UDODevice) {
         let content = UNMutableNotificationContent()
-        content.title = "Hello"
-        content.body = "New device"
+        content.title = "New device"
+        content.body = "Find a new udo device"
         content.sound = .default
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
@@ -43,6 +67,14 @@ class ViewController: UIViewController {
         }
     }
     
+    func reconnectToMQTT() {
+        let connected = self.mqttClient.setUpMQTT()
+        if !connected {
+            let alert = UIAlertController(title: "Service unavailable", message: "Can not connect to MQTT Service", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "deviceDetail" {
@@ -109,10 +141,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension ViewController: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        print(userInfo)
-        completionHandler(UNNotificationPresentationOptions(arrayLiteral: .banner))
-    }
-}

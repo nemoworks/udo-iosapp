@@ -10,12 +10,18 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        UNUserNotificationCenter.current().delegate = self
+        if let response = connectionOptions.notificationResponse {
+            let userInfo = response.notification.request.content.userInfo
+            let mqtt = userInfo["mqtt"] as! [String:AnyObject]
+            self.handleMQTTConfiguration(config: mqtt)
+        }
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -48,5 +54,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+    func handleMQTTConfiguration(config: [String:AnyObject]) {
+        print("Will set \(config)")
+        MQTTClient.BROKER_HOST = config["ip"] as! String
+        if MQTTClient.BROKER_HOST == "" {
+            fatalError()
+        }
+        MQTTClient.BROKER_PORT = config["port"] as! UInt16
+    }
+    
 }
 
+extension SceneDelegate:UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        if let mqtt = userInfo["mqtt"] as? [String: AnyObject] {
+            MQTTClient.BROKER_HOST = mqtt["ip"] as! String
+            MQTTClient.BROKER_PORT = mqtt["port"] as! UInt16
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        if let mqtt = userInfo["mqtt"] as? [String: AnyObject] {
+            MQTTClient.BROKER_HOST = mqtt["ip"] as! String
+            MQTTClient.BROKER_PORT = mqtt["port"] as! UInt16
+        }
+        let navigationController = self.window?.rootViewController as? UINavigationController
+        let vc = navigationController?.viewControllers.first as? ViewController
+        if let vc = vc {
+            vc.reconnectToMQTT()
+        }
+        completionHandler(UNNotificationPresentationOptions(arrayLiteral: .banner))
+    }
+}

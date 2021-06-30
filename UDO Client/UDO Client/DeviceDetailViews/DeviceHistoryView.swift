@@ -29,7 +29,9 @@ struct DeviceHistoryView: View {
             VStack {
                 ForEach(self.datas.indices) { index in
                     let (title, data) = self.$datas[index].wrappedValue
-                    LineChartView(data: data, title: title, form: ChartForm.large, rateValue: 0).padding()
+                    LineChartView(data: data, title: title, form: ChartForm.extraLarge, rateValue: 0)
+                        .padding()
+                        
                 }
             }
         }

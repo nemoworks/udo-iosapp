@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--设备列表-->
+        <!--Devices-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="UDO_Client" customModuleProvider="target" sceneMemberID="viewController">
@@ -80,7 +80,7 @@
                             <constraint firstItem="UcJ-26-ks2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="wrl-h5-QQz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="设备列表" largeTitleDisplayMode="always" id="48R-bS-GjX"/>
+                    <navigationItem key="navigationItem" title="Devices" largeTitleDisplayMode="always" id="48R-bS-GjX"/>
                     <connections>
                         <outlet property="deviceTableView" destination="UcJ-26-ks2" id="bsk-y6-a2j"/>
                     </connections>
@@ -98,14 +98,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXA-iM-mPA">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="822"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2vI-Xe-BZR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="2vI-Xe-BZR" firstAttribute="bottom" secondItem="nXA-iM-mPA" secondAttribute="bottom" id="6ev-NS-pr1"/>
+                            <constraint firstAttribute="bottom" secondItem="nXA-iM-mPA" secondAttribute="bottom" constant="20" symbolic="YES" id="CQ9-mn-RFn"/>
+                            <constraint firstItem="nXA-iM-mPA" firstAttribute="top" secondItem="2vI-Xe-BZR" secondAttribute="top" id="Wcf-uo-wpJ"/>
                             <constraint firstItem="nXA-iM-mPA" firstAttribute="leading" secondItem="2vI-Xe-BZR" secondAttribute="leading" id="etL-ss-Wyz"/>
                             <constraint firstItem="nXA-iM-mPA" firstAttribute="top" secondItem="2vI-Xe-BZR" secondAttribute="top" id="gUq-ix-L8P"/>
                             <constraint firstItem="2vI-Xe-BZR" firstAttribute="trailing" secondItem="nXA-iM-mPA" secondAttribute="trailing" id="j2a-e3-vcK"/>

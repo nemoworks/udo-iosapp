@@ -22,7 +22,11 @@ class DeviceDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    override var prefersHomeIndicatorAutoHidden:Bool{
+        return true
+    }
+    
+    
     /*
     // MARK: - Navigation
 
