@@ -95,10 +95,20 @@ extension ViewController: MessageRecevieDelegate {
             print("Parse to dictionary:  \(contentDict)")
             let id = contentDict["id"] as! UInt64
             let name = contentDict["name"] as! String
+            let attrs = contentDict["attributes"] as! [String:[Any]]
+            let historyData = contentDict["history"] as! [String: [Double]]
+            for (index, device) in self.devices.enumerated() {
+                if device.deviceID == id {
+                    self.devices[index].loadAttrs(attrs: attrs)
+                    self.devices[index].loadHistory(history: historyData)
+                    return
+                }
+            }
+            //new device
             let newDevice = UDODevice(id: id, name: name)
             print(newDevice)
-            let attrs = contentDict["attributes"] as! [String:[Any]]
             newDevice.loadAttrs(attrs: attrs)
+            newDevice.loadHistory(history: historyData)
             self.notifyDeviceFound(device: newDevice)
             self.devices.append(newDevice)
             self.deviceTableView.reloadData()

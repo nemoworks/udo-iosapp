@@ -13,7 +13,7 @@ struct CircleImage: View {
     var body: some View {
         Image("air-purifier2")
             .resizable()
-            .frame(width: 200, height: 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(width: 200, height: 200, alignment: .center)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white))
             .shadow(radius: 7)
@@ -29,10 +29,6 @@ struct DeviceDetailView: View {
         self.device = device
     }
     
-    let chartDatas = [
-        ("Temperature", [14.0,13.0,54.0,62.0,12.5,4.5,7.6,55.5]),
-        ("Humidity", [14.1,23.3,34.5,66.3,22.4,44.6,73.5,5.9]),
-    ]
     
     var body: some View {
         VStack {
@@ -41,8 +37,6 @@ struct DeviceDetailView: View {
             CircleImage()
                 .offset(y:-190)
                 .padding(.bottom, -190)
-                
-                
             
             VStack(alignment: .leading) {
                 Text(self.device!.deviceName)
@@ -54,10 +48,6 @@ struct DeviceDetailView: View {
                     Text(String(self.device!.deviceID)).font(.subheadline).foregroundColor(.gray)
                 }.padding(.top, 5)
                 Divider()
-                
-//                Text("About Turtle Rock").font(.title2).padding(.top, 5)
-//                Text("Descriptive text goes here.").padding(.top, 5)
-                
             }.padding()
             
             HStack {
@@ -66,7 +56,7 @@ struct DeviceDetailView: View {
                         Image(systemName: "star.square")
                         Text("设备状态")
                     }.tag(1)
-                    DeviceHistoryView(datas:self.chartDatas).tabItem {
+                    DeviceHistoryView(datas:self.device!.history).tabItem {
                         Image(systemName: "chart.bar")
                         Text("历史数据")
                     }.tag(2)

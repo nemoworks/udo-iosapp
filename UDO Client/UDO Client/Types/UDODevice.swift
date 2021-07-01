@@ -14,6 +14,7 @@ class UDODevice: NSObject {
     var textAttrs : [TextAttribute]?
     var enumAttrs : [EnumAttribute]?
     var switchAttrs : [SwitchAttribute]?
+    var history: [String:[Double]] = [:]
     var timestamp : UInt64 = 0
     
     public override var description: String {return "Device: \(self.deviceName) @ \(self.deviceID)"}
@@ -35,5 +36,8 @@ class UDODevice: NSObject {
         self.switchAttrs = switchAttrsDict.map{SwitchAttribute.init(contentDict: $0)}
     }
     
+    func loadHistory(history: [String: [Double]]) {
+        self.history = history
+    }
     
 }

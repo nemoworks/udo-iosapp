@@ -12,7 +12,7 @@ struct MapView: View {
     @State var region:MKCoordinateRegion
     
     var body: some View {
-        Map(coordinateRegion: $region).disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+        Map(coordinateRegion: $region, showsUserLocation: true).disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
     }
     
     init(region:MKCoordinateRegion) {
