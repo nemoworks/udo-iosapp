@@ -80,8 +80,9 @@ extension SceneDelegate:UNUserNotificationCenterDelegate {
             MQTTClient.BROKER_HOST = mqtt["ip"] as! String
             MQTTClient.BROKER_PORT = mqtt["port"] as! UInt16
         }
-        let navigationController = self.window?.rootViewController as? UINavigationController
-        let vc = navigationController?.viewControllers.first as? ViewController
+        let tabBarController = self.window?.rootViewController as! UITabBarController
+        let navigationController = tabBarController.viewControllers?.first as! UINavigationController
+        let vc = navigationController.viewControllers.first as? ViewController
         if let vc = vc {
             vc.reconnectToMQTT()
         }

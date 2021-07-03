@@ -32,8 +32,7 @@ struct DeviceDetailView: View {
     
     var body: some View {
         VStack {
-            let region = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4))
-            MapView(region: region).frame(height:250).ignoresSafeArea(edges: .top)
+            MapView(region:self.device!.deviceLocation!).frame(height:250).ignoresSafeArea(edges: .top)
             CircleImage()
                 .offset(y:-190)
                 .padding(.bottom, -190)

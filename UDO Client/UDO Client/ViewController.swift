@@ -93,14 +93,20 @@ extension ViewController: MessageRecevieDelegate {
         do {
             let contentDict = try JSONSerialization.jsonObject(with: message.string!.data(using: .utf8)!, options: []) as! [String:Any]
             print("Parse to dictionary:  \(contentDict)")
+            let sender = contentDict["sender"] as! String
+            if sender != "server" {
+                return
+            }
             let id = contentDict["id"] as! UInt64
             let name = contentDict["name"] as! String
             let attrs = contentDict["attributes"] as! [String:[Any]]
             let historyData = contentDict["history"] as! [String: [Double]]
+            let location = contentDict["location"] as! [String: Double]
             for (index, device) in self.devices.enumerated() {
                 if device.deviceID == id {
                     self.devices[index].loadAttrs(attrs: attrs)
                     self.devices[index].loadHistory(history: historyData)
+                    self.devices[index].setDeviceRegion(latitude: location["latitude"]!, longitude: location["longitude"]!)
                     return
                 }
             }
@@ -109,6 +115,7 @@ extension ViewController: MessageRecevieDelegate {
             print(newDevice)
             newDevice.loadAttrs(attrs: attrs)
             newDevice.loadHistory(history: historyData)
+            newDevice.setDeviceRegion(latitude: location["latitude"]!, longitude: location["longitude"]!)
             self.notifyDeviceFound(device: newDevice)
             self.devices.append(newDevice)
             self.deviceTableView.reloadData()

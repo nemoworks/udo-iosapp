@@ -17,3 +17,4 @@ $ python test_publisher.py
 
 
 
+![image](./doc/result.gif)
