@@ -21,9 +21,7 @@ struct CircleImage: View {
 }
 
 struct DeviceDetailView: View {
-    var device: UDODevice?
-    
-    let mapView = MKMapView()
+    var device: UDODevice
     
     init(device:UDODevice) {
         self.device = device
@@ -32,30 +30,31 @@ struct DeviceDetailView: View {
     
     var body: some View {
         VStack {
-            MapView(region:self.device!.deviceLocation!).frame(height:250).ignoresSafeArea(edges: .top)
+            MapView(region:self.device.deviceLocation ?? MKCoordinateRegion() ).frame(height:250).ignoresSafeArea(edges: .top)
+            
             CircleImage()
                 .offset(y:-190)
                 .padding(.bottom, -190)
             
             VStack(alignment: .leading) {
-                Text(self.device!.deviceName)
+                Text(self.device.deviceName)
                     .font(.largeTitle)
                 
                 HStack {
                     Text("Device ID: ").font(.subheadline).foregroundColor(.gray)
                     Spacer(minLength: 10)
-                    Text(String(self.device!.deviceID)).font(.subheadline).foregroundColor(.gray)
+                    Text(String(self.device.deviceID)).font(.subheadline).foregroundColor(.gray)
                 }.padding(.top, 5)
                 Divider()
             }.padding()
             
             HStack {
                 TabView{
-                    DeviceStatusView(device: self.device!).tabItem {
+                    DeviceStatusView(device: self.device).tabItem {
                         Image(systemName: "star.square")
                         Text("设备状态")
                     }.tag(1)
-                    DeviceHistoryView(datas:self.device!.history).tabItem {
+                    DeviceHistoryView(datas:self.device.history).tabItem {
                         Image(systemName: "chart.bar")
                         Text("历史数据")
                     }.tag(2)

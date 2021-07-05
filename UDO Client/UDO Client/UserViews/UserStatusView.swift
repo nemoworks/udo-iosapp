@@ -16,15 +16,10 @@ struct UserStatusView: View {
     var userID = UIDevice.current.identifierForVendor?.uuidString
     @State var isAvailable: Bool = true
     
+    private var locationManager = CLLocationManager()
+    
     var body: some View {
         VStack {
-            
-            HStack {
-                Text("User Location").font(.title2).bold()
-                Spacer()
-            }
-            
-            MapView(region: self.region).frame(height:280).ignoresSafeArea(edges: .top)
             
             Divider()
             
@@ -51,7 +46,11 @@ struct UserStatusView: View {
             }
             
             Spacer()
-        }.padding()
+        }.padding().onAppear{
+            if locationManager.authorizationStatus != .authorizedWhenInUse {
+                locationManager.requestWhenInUseAuthorization()
+            }
+        }
     }
 }
 

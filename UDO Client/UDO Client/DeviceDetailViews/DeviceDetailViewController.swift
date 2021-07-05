@@ -13,6 +13,7 @@ class DeviceDetailViewController: UIViewController {
     var device: UDODevice?
     @IBOutlet weak var theContainer: UIView!
     
+    
     override func viewDidLoad() {
         let childView = UIHostingController(rootView: DeviceDetailView(device: self.device!))
         addChild(childView)

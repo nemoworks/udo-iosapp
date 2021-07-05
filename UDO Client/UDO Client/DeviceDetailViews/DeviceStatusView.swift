@@ -13,7 +13,8 @@ struct DeviceStatusView: View {
     var enumAttrs : [EnumAttribute]
     @State var switchAttrs : [SwitchAttribute]
     
-    init(device:UDODevice) {
+    init(device: UDODevice) {
+        
         self.numericalAttrs = device.numericalAttrs ?? []
         self.textAttrs = device.textAttrs ?? []
         self.enumAttrs = device.enumAttrs ?? []
@@ -107,7 +108,9 @@ struct DeviceStatusView_Previews: PreviewProvider {
         previewDevice.switchAttrs = [
             SwitchAttribute(name: "On", on: true, editable: false)
         ]
-        return DeviceStatusView(device: previewDevice)
+        return DeviceStatusView(
+            device: previewDevice
+        )
             
     }
 }

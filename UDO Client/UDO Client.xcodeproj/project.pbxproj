@@ -43,6 +43,7 @@
 		A0065998266F54ED0089E5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A06BFB4426903D8500504FDF /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		A06BFB4626903D9900504FDF /* UserStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusView.swift; sourceTree = "<group>"; };
+		A06BFB4A269329EA00504FDF /* UDO ClientDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UDO ClientDebug.entitlements"; sourceTree = "<group>"; };
 		A08AF49B268C2F1E002F9D8C /* UDO ClientRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UDO ClientRelease.entitlements"; sourceTree = "<group>"; };
 		A0ACD368266F8B1800E67089 /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
 		A0ACD36E266FA19900E67089 /* UDODevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDODevice.swift; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		A0065989266F54EC0089E5F1 /* UDO Client */ = {
 			isa = PBXGroup;
 			children = (
+				A06BFB4A269329EA00504FDF /* UDO ClientDebug.entitlements */,
 				A08AF49B268C2F1E002F9D8C /* UDO ClientRelease.entitlements */,
 				A0ACD37F2670FDF600E67089 /* Resources */,
 				A0ACD36D266F9F5400E67089 /* Utils */,
@@ -407,10 +409,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "UDO Client/UDO ClientDebug.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Y2VQ245QA;
 				INFOPLIST_FILE = "UDO Client/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,7 +435,7 @@
 				DEVELOPMENT_TEAM = 9Y2VQ245QA;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "UDO Client/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

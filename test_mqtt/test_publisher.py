@@ -1,10 +1,12 @@
 import paho.mqtt.client as mqtt
 import json
+import time
 
 
 def publish():
     client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
-    client.connect('test.mosquitto.org', port=1883)
+    client.username_pw_set(username='udo-user', password='123456')
+    client.connect('210.28.134.32', port=1883)
     payload = {
         'sender': 'server',
         'name': 'XiaoMi Air Purifier',
@@ -50,9 +52,11 @@ def publish():
         }
     }
 
-    payload = json.dumps(payload, indent='  ')
-
-    client.publish('topic/udo-test', payload)
+    for i in range(5):
+        payload['id'] += 1
+        payload_json = json.dumps(payload, indent='  ')
+        client.publish('topic/test', payload_json)
+        time.sleep(0.2)
     client.disconnect()
 
 
