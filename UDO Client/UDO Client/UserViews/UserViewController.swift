@@ -9,6 +9,15 @@ import UIKit
 import SwiftUI
 import MapKit
 
+struct UserStatus: Codable {
+    let name: String
+    let sender: String
+    let latitude: Double
+    let longitude: Double
+    let available: Bool
+    
+}
+
 class UserViewController: UIViewController {
 
     @IBOutlet weak var theContainer: UIView!
@@ -33,25 +42,34 @@ class UserViewController: UIViewController {
         if locationManager.authorizationStatus != .authorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
         }
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        _ = MQTTClient.shared.publish(data: makeUserStatusPayload())
     }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
     
-//    function makeUserStatusPayload()->String {
-//        
-//    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func makeUserStatusPayload()->Data {
+        let name = self.userView.userName
+        let id = self.userView.userID!
+        let coordinate = self.mapView.userLocation.coordinate
+        let available = self.userView.isAvailable
+        
+        let userStatus = UserStatus(name: name, sender: id, latitude: coordinate.latitude, longitude: coordinate.longitude, available: available )
+        
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(userStatus)
+            return data
+        }catch {
+            print("Encode error: \(error.localizedDescription)")
+        }
+        
+        return Data()
     }
-    */
 
 }

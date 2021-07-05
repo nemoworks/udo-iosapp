@@ -12,7 +12,6 @@ import UserNotifications
 class ViewController: UIViewController {
     @IBOutlet weak var deviceTableView: UITableView!
     
-    let mqttClient = MQTTClient()
     var devices: [UDODevice] = [
     
         
@@ -21,30 +20,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        let previewDevice = UDODevice(id: 0x12345678, name: "XiaoMi Air Purifier")
-//        previewDevice.textAttrs = [
-//            TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
-//        ]
-//        previewDevice.numericalAttrs = [
-//            NumericalAttribute(name: "Temperature", value: 25.5),
-//            NumericalAttribute(name: "Humidity", value: 0.5)
-//        ]
-//        previewDevice.enumAttrs = [
-//            EnumAttribute(name: "Fan Speed", options: ["High", "Mid", "Low"], currentOption: 1, editable: false)
-//        ]
-//        previewDevice.switchAttrs = [
-//            SwitchAttribute(name: "On", on: true, editable: false)
-//        ]
-//        self.devices.append(previewDevice)
         
-        let connected = self.mqttClient.setUpMQTT()
+        let connected = MQTTClient.shared.setUpMQTT()
         if !connected {
             let alert = UIAlertController(title: "Service unavailable", message: "Can not connect to MQTT Service", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        self.mqttClient.delegate = self
+        MQTTClient.shared.delegate = self
         self.deviceTableView.delegate = self
         self.deviceTableView.dataSource = self
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -68,7 +51,7 @@ class ViewController: UIViewController {
     }
     
     func reconnectToMQTT() {
-        let connected = self.mqttClient.setUpMQTT()
+        let connected = MQTTClient.shared.setUpMQTT()
         if !connected {
             let alert = UIAlertController(title: "Service unavailable", message: "Can not connect to MQTT Service", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

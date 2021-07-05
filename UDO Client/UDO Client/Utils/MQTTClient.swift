@@ -15,20 +15,22 @@ protocol MessageRecevieDelegate:AnyObject {
 class MQTTClient: NSObject {
     static var BROKER_HOST = ""
     static var BROKER_PORT:UInt16 = 1883
-    let clientID = "cn.edu.nju.udo.iOSClient"
+    static let clientID = "cn.edu.nju.udo.iOSClient"
     var client: CocoaMQTT?
     weak var delegate: MessageRecevieDelegate?
     
-    override init() {
+    private override init() {
         super.init()
     }
+    
+    static var shared: MQTTClient = MQTTClient()
     
     func setUpMQTT()->Bool {
         if MQTTClient.BROKER_HOST == "" {
             print("Can not connect to MQTT Service")
             return false
         }
-        self.client = CocoaMQTT(clientID: self.clientID, host: MQTTClient.BROKER_HOST, port: MQTTClient.BROKER_PORT)
+        self.client = CocoaMQTT(clientID: MQTTClient.clientID, host: MQTTClient.BROKER_HOST, port: MQTTClient.BROKER_PORT)
         self.client?.delegate = self
         self.client?.username = "udo-user"
         self.client?.password = "123456"
@@ -36,6 +38,11 @@ class MQTTClient: NSObject {
         self.client?.keepAlive = 60
         let connected = self.client?.connect()
         return connected!
+    }
+    
+    func publish(data: Data)->Int?{
+        let payload = String(data: data, encoding: .utf8)!
+        return self.client?.publish("topic/test", withString: payload)
     }
     
 }
