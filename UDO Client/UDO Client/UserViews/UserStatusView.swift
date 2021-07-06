@@ -8,15 +8,20 @@
 import SwiftUI
 import MapKit
 
+protocol UserStatusChangeDelegate:AnyObject {
+    func changeAvaliable(to value: Bool)
+}
 
 struct UserStatusView: View {
     
     var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 31, longitude: 118), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
     var userName: String = "test user"
     var userID = UIDevice.current.identifierForVendor?.uuidString
-    @State var isAvailable: Bool = true
+    @State var isAvailable: Bool = false
     
     private var locationManager = CLLocationManager()
+    
+    weak var delegate: UserStatusChangeDelegate?
     
     var body: some View {
         VStack {
@@ -42,7 +47,9 @@ struct UserStatusView: View {
             HStack {
                 Text("Available").font(.title2).bold().padding()
                 Spacer()
-                Toggle("", isOn: self.$isAvailable)
+                Toggle("", isOn: self.$isAvailable).onChange(of: self.isAvailable, perform: { value in
+                    self.delegate?.changeAvaliable(to: value)
+                })
             }
             
             Spacer()

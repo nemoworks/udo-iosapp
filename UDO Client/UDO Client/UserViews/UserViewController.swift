@@ -23,13 +23,16 @@ class UserViewController: UIViewController {
     @IBOutlet weak var theContainer: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
-    let userView = UserStatusView()
+    var userView = UserStatusView()
     let locationManager = CLLocationManager()
+    var timer: Timer?
+    var isAvailable: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.userView.delegate = self
         let childView = UIHostingController(rootView: self.userView)
         childView.view.frame = theContainer.bounds
         theContainer.addSubview(childView.view)
@@ -42,12 +45,12 @@ class UserViewController: UIViewController {
         if locationManager.authorizationStatus != .authorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
         }
-        
+        self.startTimer()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        _ = MQTTClient.shared.publish(data: makeUserStatusPayload())
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        _ = MQTTClient.shared.publish(data: makeUserStatusPayload())
+//    }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
@@ -56,8 +59,11 @@ class UserViewController: UIViewController {
     func makeUserStatusPayload()->Data {
         let name = self.userView.userName
         let id = self.userView.userID!
-        let coordinate = self.mapView.userLocation.coordinate
-        let available = self.userView.isAvailable
+        var coordinate = self.mapView.userLocation.coordinate
+        if !self.isAvailable {
+            coordinate = CLLocationCoordinate2D()
+        }
+        let available = self.isAvailable
         
         let userStatus = UserStatus(name: name, sender: id, latitude: coordinate.latitude, longitude: coordinate.longitude, available: available )
         
@@ -71,5 +77,32 @@ class UserViewController: UIViewController {
         
         return Data()
     }
+    
+    func startTimer() {
+        if self.timer == nil {
+            self.timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true){
+                timer in
+                DispatchQueue.global().async {
+                    let payload = self.makeUserStatusPayload()
+                    _ = MQTTClient.shared.publish(data: payload)
+                }
+            }
+        }
+    }
+    
+    func stopTimer() {
+        if self.timer != nil {
+            self.timer?.invalidate()
+            self.timer = nil
+        }
+    }
+    
+    
+}
 
+extension UserViewController : UserStatusChangeDelegate {
+    func changeAvaliable(to value: Bool) {
+        print("Change value to \(value)")
+        self.isAvailable = value
+    }
 }
