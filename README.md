@@ -15,6 +15,6 @@ $ pip install paho-mqtt==1.5.1
 $ python test_publisher.py
 ```
 
+<img src="./doc/result2.gif" alt="image" style="zoom:50%;" />
 
-
-![image](./doc/result.gif)
+<img src="./doc/result.gif" alt="image" style="zoom:50%;" />
