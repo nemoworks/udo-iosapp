@@ -6,91 +6,144 @@
 //
 
 import SwiftUI
+import UIKit
+
 
 struct DeviceStatusView: View {
     var numericalAttrs : [NumericalAttribute]
     var textAttrs : [TextAttribute]
-    var enumAttrs : [EnumAttribute]
-    @State var switchAttrs : [SwitchAttribute]
+    let deviceID: UInt64
+    @State var enumAttrs : [EnumAttribute]
+    @State var booleanAttrs : [BooleanAttribute]
     
     init(device: UDODevice) {
-        
+        self.deviceID = device.deviceID
         self.numericalAttrs = device.numericalAttrs ?? []
         self.textAttrs = device.textAttrs ?? []
         self.enumAttrs = device.enumAttrs ?? []
-        self.switchAttrs = device.switchAttrs ?? []
+        self.booleanAttrs = device.booleanAttrs ?? []
     }
     
     @ViewBuilder
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(self.textAttrs) { textAttr in
-                    HStack {
-                        Text(textAttr.name)
-                            .font(.title2)
-                            .bold()
-                        Spacer(minLength: 20)
-                        Text(textAttr.content)
-                            .font(.headline)
-                            .foregroundColor(.blue)
-                            .multilineTextAlignment(.leading)
-                            .lineLimit(nil)
-                            .fixedSize(horizontal: false, vertical: true)
+        HStack {
+            ScrollView {
+                VStack {
+                    ForEach(self.textAttrs) { textAttr in
+                        HStack {
+                            Text(textAttr.name)
+                                .font(.title2)
+                                .bold()
+                            Spacer(minLength: 20)
+                            Text(textAttr.content)
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }.padding(.top, 3)
+                    
+                    if(self.textAttrs.count > 0) {
+                     Divider().padding(.top, 5)
                     }
-                }.padding(.top, 3)
                 
-                if(self.textAttrs.count > 0) {
-                 Divider().padding(.top, 5)
-                }
-            
-                ForEach(self.numericalAttrs) { numericalAttr in
-                    HStack {
-                        Text(numericalAttr.name)
-                            .font(.title2)
-                            .bold()
-                        Spacer()
-                        Text(String(numericalAttr.value))
-                            .font(.title2)
-                            .foregroundColor(.blue)
-                            .padding(.trailing, 5)
+                    ForEach(self.numericalAttrs) { numericalAttr in
+                        HStack {
+                            Text(numericalAttr.name)
+                                .font(.title2)
+                                .bold()
+                            Spacer()
+                            Text(String(numericalAttr.value))
+                                .font(.title2)
+                                .foregroundColor(.gray)
+                                .padding(.trailing, 5)
+                        }
+                    }.padding(.top, 3)
+                    
+                    if(self.numericalAttrs.count > 0) {
+                        Divider().padding(.top, 5)
                     }
-                }.padding(.top, 3)
-                
-                if(self.numericalAttrs.count > 0) {
-                    Divider().padding(.top, 5)
-                }
-                
-                ForEach(self.enumAttrs) { enumAttr in
-                    HStack {
-                        Text(enumAttr.name)
-                            .font(.title2)
-                            .bold()
-                        Spacer()
-                        Text(String(enumAttr.options[enumAttr.currentOption]))
-                            .font(.title2)
-                            .foregroundColor(.blue)
+                    
+                    
+                    ForEach(self.enumAttrs.indices) { index in
+                        HStack {
+                            Text(self.enumAttrs[index].name)
+                                .font(.title2)
+                                .bold()
+                            
+                            Spacer()
+                            
+                            Picker("", selection: self.$enumAttrs[index].currentOption) {
+                                ForEach(self.enumAttrs[index].options, id:\.self) {
+                                    Text($0)
+                                }
+                            }.frame(minWidth: 0, idealWidth: 80, maxWidth: 80, minHeight: 0, idealHeight: 90, maxHeight: 120, alignment: .center)
+                            .clipped()
+                            .cornerRadius(20)
+                        }
                     }
-                }.padding(.top, 3)
-                
-                if(self.enumAttrs.count > 0) {
-                    Divider().padding(.top, 5)
-                }
-                
-                ForEach(self.switchAttrs.indices) { index in
-                    HStack {
-                        Text(self.switchAttrs[index].name)
-                            .font(.title2)
-                            .bold()
-                        Spacer()
-                        Toggle("", isOn: self.$switchAttrs[index].on)
+                    
+                    if(self.enumAttrs.count > 0) {
+                        Divider().padding(.top, 5)
                     }
-                }
-                
-            }.padding()
+                    
+                    ForEach(self.booleanAttrs.indices) { index in
+                        HStack {
+                            Text(self.booleanAttrs[index].name)
+                                .font(.title2)
+                                .bold()
+                            Spacer()
+                            Toggle("", isOn: self.$booleanAttrs[index].on)
+                        }
+                    }
+                    
+                    Divider()
+                    
+                    Button(action: {
+                        print("Done")
+                        let userID = (UIDevice.current.identifierForVendor?.uuidString)!
+                        var deviceEnumAttributes: [String:String] = [:]
+                        var deviceBooleanAttributes: [String:Bool] = [:]
+                        for enumAttr in self.enumAttrs {
+                            if enumAttr.editable {
+                                deviceEnumAttributes[enumAttr.name] = enumAttr.currentOption
+                            }
+                        }
+                        
+                        for booleanAttr in self.booleanAttrs {
+                            if booleanAttr.editable {
+                                deviceBooleanAttributes[booleanAttr.name] = booleanAttr.on
+                            }
+                        }
+                        
+                        let deviceStatus = DeviceStatus(device_id: self.deviceID, sender: userID, enum_status: deviceEnumAttributes, boolean_status: deviceBooleanAttributes)
+                        let encoder = JSONEncoder()
+                        do {
+                            let data = try encoder.encode(deviceStatus)
+                            _ = MQTTClient.shared.publish(data: data)
+                        } catch {
+                            print("error: \(error.localizedDescription)")
+                        }
+                        
+                    }) {
+                        Text("Done").font(.title2).bold().foregroundColor(.blue)
+                    }
+                    
+                }.padding()
+            }
         }
     }
 }
+
+struct DeviceStatus: Encodable {
+    let device_id: UInt64
+    let sender: String
+    let enum_status: [String: String]
+    let boolean_status: [String: Bool]
+}
+
+
 
 struct DeviceStatusView_Previews: PreviewProvider {
     static var previews: some View {
@@ -103,10 +156,10 @@ struct DeviceStatusView_Previews: PreviewProvider {
             NumericalAttribute(name: "Humidity", value: 0.5)
         ]
         previewDevice.enumAttrs = [
-            EnumAttribute(name: "Fan Speed", options: ["High", "Mid", "Low"], currentOption: 1, editable: false)
+            EnumAttribute(name: "Fan Speed", options: ["High", "Mid", "Low"], currentOption: "Mid", editable: false)
         ]
-        previewDevice.switchAttrs = [
-            SwitchAttribute(name: "On", on: true, editable: false)
+        previewDevice.booleanAttrs = [
+            BooleanAttribute(name: "On", on: true, editable: false)
         ]
         return DeviceStatusView(
             device: previewDevice

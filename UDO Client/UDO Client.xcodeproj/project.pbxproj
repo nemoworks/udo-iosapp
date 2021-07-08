@@ -20,14 +20,13 @@
 		A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3732670577600E67089 /* NumericalAttribute.swift */; };
 		A0ACD3762670578500E67089 /* TextAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3752670578500E67089 /* TextAttribute.swift */; };
 		A0ACD3782670579300E67089 /* EnumAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3772670579300E67089 /* EnumAttribute.swift */; };
-		A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3792670584100E67089 /* SwitchAttribute.swift */; };
+		A0ACD37A2670584100E67089 /* BooleanAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3792670584100E67089 /* BooleanAttribute.swift */; };
 		A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */; };
 		A0ACD3812671AFC600E67089 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */; };
 		A0D352C3267993960086B92F /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C2267993960086B92F /* SwiftUICharts */; };
 		A0D352C6267995610086B92F /* CocoaMQTTWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C5267995610086B92F /* CocoaMQTTWebSocket */; };
 		A0D352C8267995610086B92F /* CocoaMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C7267995610086B92F /* CocoaMQTT */; };
 		A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */; };
-		A0D74F362678942200FE86E1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F352678942200FE86E1 /* MapView.swift */; };
 		A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */; };
 		A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */; };
 /* End PBXBuildFile section */
@@ -50,11 +49,10 @@
 		A0ACD3732670577600E67089 /* NumericalAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericalAttribute.swift; sourceTree = "<group>"; };
 		A0ACD3752670578500E67089 /* TextAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAttribute.swift; sourceTree = "<group>"; };
 		A0ACD3772670579300E67089 /* EnumAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumAttribute.swift; sourceTree = "<group>"; };
-		A0ACD3792670584100E67089 /* SwitchAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchAttribute.swift; sourceTree = "<group>"; };
+		A0ACD3792670584100E67089 /* BooleanAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanAttribute.swift; sourceTree = "<group>"; };
 		A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTableViewCell.swift; sourceTree = "<group>"; };
 		A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
 		A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
-		A0D74F352678942200FE86E1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatusView.swift; sourceTree = "<group>"; };
 		A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,7 +136,7 @@
 				A0ACD3732670577600E67089 /* NumericalAttribute.swift */,
 				A0ACD3752670578500E67089 /* TextAttribute.swift */,
 				A0ACD3772670579300E67089 /* EnumAttribute.swift */,
-				A0ACD3792670584100E67089 /* SwitchAttribute.swift */,
+				A0ACD3792670584100E67089 /* BooleanAttribute.swift */,
 			);
 			path = DeviceAttributes;
 			sourceTree = "<group>";
@@ -160,7 +158,6 @@
 			children = (
 				A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */,
 				A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */,
-				A0D74F352678942200FE86E1 /* MapView.swift */,
 				A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */,
 				A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */,
 			);
@@ -252,9 +249,8 @@
 				A006598F266F54EC0089E5F1 /* ViewController.swift in Sources */,
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
 				A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */,
-				A0D74F362678942200FE86E1 /* MapView.swift in Sources */,
 				A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */,
-				A0ACD37A2670584100E67089 /* SwitchAttribute.swift in Sources */,
+				A0ACD37A2670584100E67089 /* BooleanAttribute.swift in Sources */,
 				A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */,
 				A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */,
 				A0ACD36F266FA19900E67089 /* UDODevice.swift in Sources */,

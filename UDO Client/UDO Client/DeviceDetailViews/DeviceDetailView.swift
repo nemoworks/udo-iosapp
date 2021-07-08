@@ -9,16 +9,6 @@ import SwiftUI
 import MapKit
 
 
-struct CircleImage: View {
-    var body: some View {
-        Image("air-purifier2")
-            .resizable()
-            .frame(width: 200, height: 200, alignment: .center)
-            .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white))
-            .shadow(radius: 7)
-    }
-}
 
 struct DeviceDetailView: View {
     var device: UDODevice
@@ -30,12 +20,6 @@ struct DeviceDetailView: View {
     
     var body: some View {
         VStack {
-            MapView(region:self.device.deviceLocation ?? MKCoordinateRegion() ).frame(height:250).ignoresSafeArea(edges: .top)
-            
-            CircleImage()
-                .offset(y:-190)
-                .padding(.bottom, -190)
-            
             VStack(alignment: .leading) {
                 Text(self.device.deviceName)
                     .font(.largeTitle)
@@ -78,10 +62,10 @@ struct DeviceDetailView_Previews: PreviewProvider {
             NumericalAttribute(name: "Humidity", value: 0.5)
         ]
         previewDevice.enumAttrs = [
-            EnumAttribute(name: "Fan Speed", options: ["High", "Mid", "Low"], currentOption: 1, editable: false)
+            EnumAttribute(name: "Fan Speed", options: ["High", "Mid", "Low"], currentOption: "Mid", editable: false)
         ]
-        previewDevice.switchAttrs = [
-            SwitchAttribute(name: "On", on: true, editable: false)
+        previewDevice.booleanAttrs = [
+            BooleanAttribute(name: "On", on: true, editable: false)
         ]
         return DeviceDetailView(device: previewDevice)
     }

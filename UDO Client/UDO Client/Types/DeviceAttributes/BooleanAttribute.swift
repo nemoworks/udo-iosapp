@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SwitchAttribute: NSObject, Identifiable {
+class BooleanAttribute: NSObject, Identifiable {
     var name: String
     var on: Bool
     var editable: Bool

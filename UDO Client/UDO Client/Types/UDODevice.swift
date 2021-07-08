@@ -14,7 +14,7 @@ class UDODevice: NSObject {
     var numericalAttrs : [NumericalAttribute]?
     var textAttrs : [TextAttribute]?
     var enumAttrs : [EnumAttribute]?
-    var switchAttrs : [SwitchAttribute]?
+    var booleanAttrs : [BooleanAttribute]?
     var history: [String:[Double]] = [:]
     var timestamp : UInt64 = 0
     var deviceLocation: MKCoordinateRegion?
@@ -27,15 +27,25 @@ class UDODevice: NSObject {
     }
     
     func loadAttrs(attrs:[String:[Any]]) {
-        let textAttrsDict = attrs["text"] as! [[String:String]]
-        let numericalAttrsDict = attrs["numerical"] as! [[String:Any]]
-        let enumAttrsDict = attrs["enum"] as! [[String:Any]]
-        let switchAttrsDict = attrs["switch"] as! [[String:Any]]
+        let textAttrsDict = attrs["text"] as? [[String:String]]
+        let numericalAttrsDict = attrs["numerical"] as? [[String:Any]]
+        let enumAttrsDict = attrs["enum"] as? [[String:Any]]
+        let booleanAttrsDict = attrs["boolean"] as? [[String:Any]]
         
-        self.textAttrs = textAttrsDict.map{TextAttribute.init(contentDict: $0)}
-        self.numericalAttrs = numericalAttrsDict.map{NumericalAttribute.init(contentDict: $0)}
-        self.enumAttrs = enumAttrsDict.map{EnumAttribute.init(contentDict: $0)}
-        self.switchAttrs = switchAttrsDict.map{SwitchAttribute.init(contentDict: $0)}
+        if let textAttrsDict = textAttrsDict {
+            self.textAttrs = textAttrsDict.map{TextAttribute.init(contentDict: $0)}
+        }
+        if let numericalAttrsDict = numericalAttrsDict {
+            self.numericalAttrs =  numericalAttrsDict.map{NumericalAttribute.init(contentDict: $0)}
+        }
+        if let enumAttrsDict = enumAttrsDict {
+            self.enumAttrs = enumAttrsDict.map{EnumAttribute.init(contentDict: $0)}
+            
+        }
+        if let booleanAttrsDict = booleanAttrsDict {
+            self.booleanAttrs = booleanAttrsDict.map{BooleanAttribute.init(contentDict: $0)}
+        }
+        
     }
     
     func loadHistory(history: [String: [Double]]) {

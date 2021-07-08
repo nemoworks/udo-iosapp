@@ -15,7 +15,7 @@ protocol MessageRecevieDelegate:AnyObject {
 class MQTTClient: NSObject {
     static var BROKER_HOST = ""
     static var BROKER_PORT:UInt16 = 1883
-    static let clientID = "cn.edu.nju.udo.iOSClient"
+    static let clientID = "cn.edu.nju.udo.iOSClient-" + (UIDevice.current.identifierForVendor?.uuidString)!
     var client: CocoaMQTT?
     weak var delegate: MessageRecevieDelegate?
     

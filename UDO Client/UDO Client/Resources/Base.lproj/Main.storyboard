@@ -98,22 +98,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXA-iM-mPA">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="822"/>
+                                <rect key="frame" x="0.0" y="316" width="414" height="506"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="T0a-qg-sov">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="308" id="xoN-D5-4Nb"/>
+                                </constraints>
+                            </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2vI-Xe-BZR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="nXA-iM-mPA" firstAttribute="top" secondItem="T0a-qg-sov" secondAttribute="bottom" constant="8" symbolic="YES" id="0wq-Vm-Tu1"/>
                             <constraint firstAttribute="bottom" secondItem="nXA-iM-mPA" secondAttribute="bottom" constant="20" symbolic="YES" id="CQ9-mn-RFn"/>
-                            <constraint firstItem="nXA-iM-mPA" firstAttribute="top" secondItem="2vI-Xe-BZR" secondAttribute="top" id="Wcf-uo-wpJ"/>
+                            <constraint firstItem="T0a-qg-sov" firstAttribute="trailing" secondItem="2vI-Xe-BZR" secondAttribute="trailing" id="Gdp-U0-355"/>
+                            <constraint firstItem="T0a-qg-sov" firstAttribute="leading" secondItem="2vI-Xe-BZR" secondAttribute="leading" id="aQz-S8-WvJ"/>
                             <constraint firstItem="nXA-iM-mPA" firstAttribute="leading" secondItem="2vI-Xe-BZR" secondAttribute="leading" id="etL-ss-Wyz"/>
-                            <constraint firstItem="nXA-iM-mPA" firstAttribute="top" secondItem="2vI-Xe-BZR" secondAttribute="top" id="gUq-ix-L8P"/>
+                            <constraint firstItem="T0a-qg-sov" firstAttribute="top" secondItem="2vI-Xe-BZR" secondAttribute="top" id="hxy-cp-BTR"/>
                             <constraint firstItem="2vI-Xe-BZR" firstAttribute="trailing" secondItem="nXA-iM-mPA" secondAttribute="trailing" id="j2a-e3-vcK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ug6-YI-l5s"/>
                     <connections>
+                        <outlet property="mapView" destination="T0a-qg-sov" id="Zbr-7o-7PP"/>
                         <outlet property="theContainer" destination="nXA-iM-mPA" id="b4M-lh-v6A"/>
                     </connections>
                 </viewController>

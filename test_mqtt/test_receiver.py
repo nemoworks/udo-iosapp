@@ -10,11 +10,11 @@ def on_connect(client: mqtt.Client, userdata, flags, rc):
 
 def on_message(client: mqtt.Client, userdata, msg):
     payload = msg.payload.decode()
-    content_dict = json.loads(s=payload)
-    if content_dict['sender'] != 'server':
+    try:
+        content_dict = json.loads(s=payload)
+        print(content_dict)
+    except:
         print(payload)
-    else:
-        print("Receive from server")
 
 
 client = mqtt.Client(client_id='cn.edu.nju.czh.Receiver')

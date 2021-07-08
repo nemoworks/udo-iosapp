@@ -10,7 +10,7 @@ import UIKit
 class EnumAttribute: NSObject, Identifiable {
     var name: String
     var options: [String]
-    var currentOption: Int
+    var currentOption: String
     let editable: Bool
     var id:String{return name}
     
@@ -18,7 +18,7 @@ class EnumAttribute: NSObject, Identifiable {
         return "\(self.name) \(self.options) \(self.editable) \(self.currentOption)"
     }
     
-    init(name: String, options: [String], currentOption: Int, editable: Bool) {
+    init(name: String, options: [String], currentOption: String, editable: Bool) {
         self.name = name
         self.options = options
         self.currentOption = currentOption
@@ -29,6 +29,7 @@ class EnumAttribute: NSObject, Identifiable {
         self.name = contentDict["name"] as! String
         self.editable = contentDict["editable"] as! Bool
         self.options = contentDict["options"] as! [String]
-        self.currentOption = contentDict["value"] as! Int
+        self.currentOption = contentDict["value"] as! String
     }
+    
 }

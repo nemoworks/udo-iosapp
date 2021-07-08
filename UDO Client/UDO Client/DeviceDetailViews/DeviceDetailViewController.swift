@@ -7,11 +7,14 @@
 
 import UIKit
 import SwiftUI
+import MapKit
 
 class DeviceDetailViewController: UIViewController {
     
     var device: UDODevice?
     @IBOutlet weak var theContainer: UIView!
+    @IBOutlet weak var mapView: MKMapView!
+    let locationManager = CLLocationManager()
     
     
     override func viewDidLoad() {
@@ -20,7 +23,16 @@ class DeviceDetailViewController: UIViewController {
         childView.view.frame = theContainer.bounds
         theContainer.addSubview(childView.view)
         childView.didMove(toParent: self)
-        // Do any additional setup after loading the view.
+        // set up mapView
+        self.mapView.userTrackingMode = .follow
+        self.mapView.isZoomEnabled = false
+        self.mapView.isScrollEnabled = false
+        self.mapView.isUserInteractionEnabled = false
+        if locationManager.authorizationStatus != .authorizedWhenInUse {
+            locationManager.requestWhenInUseAuthorization()
+        }
+        
+        
     }
     
     override var prefersHomeIndicatorAutoHidden:Bool{

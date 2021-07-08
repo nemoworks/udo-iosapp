@@ -76,8 +76,12 @@ extension ViewController: MessageRecevieDelegate {
         do {
             let contentDict = try JSONSerialization.jsonObject(with: message.string!.data(using: .utf8)!, options: []) as! [String:Any]
             print("Parse to dictionary:  \(contentDict)")
-            let sender = contentDict["sender"] as! String
-            if sender != "server" {
+            let sender = contentDict["sender"]
+            if let sender = sender as? String {
+                if sender != "server" {
+                    return
+                }
+            } else {
                 return
             }
             let id = contentDict["id"] as! UInt64

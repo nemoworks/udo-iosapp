@@ -26,10 +26,10 @@ def publish():
             'enum': [{
                 'name': 'Speed',
                 'options': ['low', 'mid', 'high'],
-                'value': 2,
+                'value': 'mid',
                 'editable': True,
             }],
-            'switch': [{
+            'boolean': [{
                 'name': 'On',
                 'on': True,
                 'editable': True,
@@ -56,7 +56,7 @@ def publish():
         payload['id'] += 1
         payload_json = json.dumps(payload, indent='  ')
         client.publish('topic/test', payload_json)
-        time.sleep(0.2)
+        time.sleep(1)
     client.disconnect()
 
 
