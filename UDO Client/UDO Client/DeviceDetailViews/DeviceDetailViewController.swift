@@ -24,14 +24,15 @@ class DeviceDetailViewController: UIViewController {
         theContainer.addSubview(childView.view)
         childView.didMove(toParent: self)
         // set up mapView
+        self.mapView.delegate = self
         self.mapView.userTrackingMode = .follow
         self.mapView.isZoomEnabled = false
         self.mapView.isScrollEnabled = false
-        self.mapView.isUserInteractionEnabled = false
         if locationManager.authorizationStatus != .authorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
         }
         
+        self.setupDevicePin()
         
     }
     
@@ -39,5 +40,37 @@ class DeviceDetailViewController: UIViewController {
         return true
     }
     
+    func setupDevicePin() {
+        if let device = self.device {
+            if let center = device.deviceLocation?.center {
+                let devicePin = UDOMapAnnotation(deviceName: device.deviceName)
+                devicePin.coordinate = center
+                self.mapView.addAnnotation(devicePin)
+            }
+        }
+    }
 
+}
+
+
+extension DeviceDetailViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is UDOMapAnnotation) {
+            return nil
+        }
+        
+        let identifier = "udo-device"
+        var annotationView =  mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        let udoAnnotation = annotation as! UDOMapAnnotation
+        let image = UIImage(named: UDOMapAnnotation.ImageByDeviceName[udoAnnotation.deviceName!]!)
+        annotationView!.image = imageWithImage(image: image!, scaledToSize: CGSize(width: 50, height: 50))
+        return annotationView
+    }
 }
