@@ -1,0 +1,5 @@
+{
+    "Simulator Target Bundle": "cn.edu.nju.czh.UDO-Client",
+    "aps":{"alert":"This device will connect to the UDO MQTT service @ 210.28.134.32:1883", "sound":"default"}, 
+    "mqtt":{"ip":"210.28.134.32", "port":1883}
+}
