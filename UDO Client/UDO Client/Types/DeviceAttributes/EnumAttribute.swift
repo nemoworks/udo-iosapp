@@ -25,11 +25,4 @@ class EnumAttribute: NSObject, Identifiable {
         self.editable = editable
     }
     
-    init(contentDict: [String:Any]) {
-        self.name = contentDict["name"] as! String
-        self.editable = contentDict["editable"] as! Bool
-        self.options = contentDict["options"] as! [String]
-        self.currentOption = contentDict["value"] as! String
-    }
-    
 }

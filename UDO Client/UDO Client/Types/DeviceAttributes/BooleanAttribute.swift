@@ -20,10 +20,4 @@ class BooleanAttribute: NSObject, Identifiable {
         self.on = on
         self.editable = editable
     }
-    
-    init(contentDict:[String:Any]) {
-        self.name = contentDict["name"] as! String
-        self.on = contentDict["on"] as! Bool
-        self.editable = contentDict["editable"] as! Bool
-    }
 }

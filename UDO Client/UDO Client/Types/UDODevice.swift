@@ -11,10 +11,10 @@ import MapKit
 class UDODevice: NSObject {
     let deviceID:UInt64
     let deviceName: String
-    var numericalAttrs : [NumericalAttribute]?
-    var textAttrs : [TextAttribute]?
-    var enumAttrs : [EnumAttribute]?
-    var booleanAttrs : [BooleanAttribute]?
+    var numericalAttrs : [NumericalAttribute]
+    var textAttrs : [TextAttribute]
+    var enumAttrs : [EnumAttribute]
+    var booleanAttrs : [BooleanAttribute]
     var history: [String:[Double]] = [:]
     var timestamp : UInt64 = 0
     var deviceLocation: MKCoordinateRegion?
@@ -24,28 +24,45 @@ class UDODevice: NSObject {
     init(id:UInt64, name:String) {
         self.deviceID = id
         self.deviceName = name
+        self.numericalAttrs = []
+        self.textAttrs = []
+        self.enumAttrs = []
+        self.booleanAttrs = []
     }
     
-    func loadAttrs(attrs:[String:[Any]]) {
-        let textAttrsDict = attrs["text"] as? [[String:String]]
-        let numericalAttrsDict = attrs["numerical"] as? [[String:Any]]
-        let enumAttrsDict = attrs["enum"] as? [[String:Any]]
-        let booleanAttrsDict = attrs["boolean"] as? [[String:Any]]
-        
-        if let textAttrsDict = textAttrsDict {
-            self.textAttrs = textAttrsDict.map{TextAttribute.init(contentDict: $0)}
+    func loadAttrs(attrs:[String:[String:Any]]) {
+        for attr in attrs {
+            let attrName = attr.key
+            let attrContent = attr.value
+            let catetory = attrContent["category"] as! String
+            switch catetory {
+            case "numerical":
+                print("A numerical attr: \(attrName)")
+                let value = attrContent["value"] as! Float64
+                let newAttr = NumericalAttribute(name: attrName, value: value)
+                self.numericalAttrs.append(newAttr)
+            case "text":
+                print("A text attr: \(attrName)")
+                let value = attrContent["value"] as! String
+                let newAttr = TextAttribute(name: attrName, content: value)
+                self.textAttrs.append(newAttr)
+            case "enum":
+                print("A enum attr: \(attrName)")
+                let value = attrContent["value"] as! String
+                let options = attrContent["options"] as! [String]
+                let editable = attrContent["editable"] as! Bool
+                let newAttr = EnumAttribute(name: attrName, options: options, currentOption: value, editable: editable)
+                self.enumAttrs.append(newAttr)
+            case "boolean":
+                print("A boolean attr: \(attrName)")
+                let value = attrContent["value"] as! Bool
+                let editable = attrContent["editable"] as! Bool
+                let newAttr = BooleanAttribute(name: attrName, on: value, editable: editable)
+                self.booleanAttrs.append(newAttr)
+            default:
+                print("No such kind of attr")
+            }
         }
-        if let numericalAttrsDict = numericalAttrsDict {
-            self.numericalAttrs =  numericalAttrsDict.map{NumericalAttribute.init(contentDict: $0)}
-        }
-        if let enumAttrsDict = enumAttrsDict {
-            self.enumAttrs = enumAttrsDict.map{EnumAttribute.init(contentDict: $0)}
-            
-        }
-        if let booleanAttrsDict = booleanAttrsDict {
-            self.booleanAttrs = booleanAttrsDict.map{BooleanAttribute.init(contentDict: $0)}
-        }
-        
     }
     
     func loadHistory(history: [String: [Double]]) {

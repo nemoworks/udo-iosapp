@@ -20,8 +20,4 @@ class NumericalAttribute: NSObject, Identifiable {
         self.value = value
     }
     
-    init(contentDict:[String:Any]) {
-        self.name = contentDict["name"] as! String
-        self.value = contentDict["value"] as! Float64
-    }
 }

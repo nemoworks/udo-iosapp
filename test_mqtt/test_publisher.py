@@ -11,28 +11,29 @@ def publish():
         'name': 'XiaoMi Air Purifier',
         'id': 1234,
         'attributes': {
-            'numerical': [{
-                'name': 'Temperature',
+            'Temperature': {
                 'value': 24.5,
-            }, {
-                'name': 'Humidity',
+                'category': 'numerical'
+            },
+            'Humidity': {
                 'value': 0.5,
-            }],
-            'text': [{
-                'name': 'Description',
-                'content': 'Xiaomi air purifier can purify the air'
-            }],
-            'enum': [{
-                'name': 'Speed',
-                'options': ['low', 'mid', 'high'],
+                'category': 'numerical'
+            },
+            'Description': {
+                'value': 'Xiaomi air purifier can purify the air',
+                'category': 'text'
+            },
+            'Speed': {
                 'value': 'mid',
-                'editable': True,
-            }],
-            'boolean': [{
-                'name': 'On',
-                'on': True,
-                'editable': True,
-            }]
+                'options': ['low', 'mid', 'high'],
+                'category': 'enum',
+                'editable': True
+            },
+            'On': {
+                'value': True,
+                'category': 'boolean',
+                'editable': True
+            }
         },
         'history': {
             'Temperature': [

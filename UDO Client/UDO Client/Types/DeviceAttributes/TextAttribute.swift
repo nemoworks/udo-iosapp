@@ -18,11 +18,4 @@ class TextAttribute: NSObject, Identifiable {
         self.name = name
         self.content = content
     }
-    
-    init(contentDict: [String:String]) {
-        self.name = contentDict["name"]!
-        self.content = contentDict["content"]!
-    }
-    
-    
 }
