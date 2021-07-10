@@ -44,7 +44,6 @@ class UserViewController: UIViewController {
         if locationManager.authorizationStatus != .authorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
         }
-        self.startTimer()
     }
     
     
@@ -55,9 +54,9 @@ class UserViewController: UIViewController {
     func makeUserStatusPayload()->Data {
         let name = self.userView.userName
         let id = self.userView.userID!
-        var coordinate = self.mapView.userLocation.coordinate
-        if !self.isAvailable {
-            coordinate = CLLocationCoordinate2D()
+        var coordinate = CLLocationCoordinate2D()
+        if self.isAvailable {
+            coordinate = self.mapView.userLocation.coordinate
         }
         let available = self.isAvailable
         
