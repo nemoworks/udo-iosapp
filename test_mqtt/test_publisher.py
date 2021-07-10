@@ -8,7 +8,6 @@ def publish():
     client.username_pw_set(username='udo-user', password='123456')
     client.connect('210.28.134.32', port=1883)
     payload = {
-        'sender': 'server',
         'name': 'XiaoMi Air Purifier',
         'id': 1234,
         'attributes': {
@@ -47,15 +46,16 @@ def publish():
             ]
         },
         'location': {
-            'latitude': 32.12344,
-            'longitude': 118.328759
+            'latitude': 32.11088,
+            'longitude': 118.9701
         }
     }
 
     for i in range(5):
         payload['id'] += 1
         payload_json = json.dumps(payload, indent='  ')
-        client.publish('topic/test', payload_json)
+        print(payload_json)
+        client.publish('topic/sub', payload_json)
         time.sleep(1)
     client.disconnect()
 

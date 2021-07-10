@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A006598A266F54EC0089E5F1 /* AppDelegate.swift */; };
 		A006598D266F54EC0089E5F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A006598C266F54EC0089E5F1 /* SceneDelegate.swift */; };
-		A006598F266F54EC0089E5F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A006598E266F54EC0089E5F1 /* ViewController.swift */; };
+		A006598F266F54EC0089E5F1 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A006598E266F54EC0089E5F1 /* DeviceViewController.swift */; };
 		A0065992266F54EC0089E5F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0065990266F54EC0089E5F1 /* Main.storyboard */; };
 		A0065994266F54ED0089E5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0065993266F54ED0089E5F1 /* Assets.xcassets */; };
 		A0065997266F54ED0089E5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0065995266F54ED0089E5F1 /* LaunchScreen.storyboard */; };
@@ -37,7 +37,7 @@
 		A0065987266F54EC0089E5F1 /* UDO Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UDO Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A006598A266F54EC0089E5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A006598C266F54EC0089E5F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A006598E266F54EC0089E5F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A006598E266F54EC0089E5F1 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		A0065991266F54EC0089E5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A0065993266F54ED0089E5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0065996266F54ED0089E5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,7 +101,8 @@
 				A06BFB4326903D1F00504FDF /* UserViews */,
 				A0D74F342678907A00FE86E1 /* DeviceDetailViews */,
 				A0ACD36A266F9F2A00E67089 /* Types */,
-				A006598E266F54EC0089E5F1 /* ViewController.swift */,
+				A006598E266F54EC0089E5F1 /* DeviceViewController.swift */,
+				A06BFB4426903D8500504FDF /* UserViewController.swift */,
 				A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */,
 				A0B9DB7A26971C0400DD4134 /* UDOMapAnnotation.swift */,
 				A0065998266F54ED0089E5F1 /* Info.plist */,
@@ -112,7 +113,6 @@
 		A06BFB4326903D1F00504FDF /* UserViews */ = {
 			isa = PBXGroup;
 			children = (
-				A06BFB4426903D8500504FDF /* UserViewController.swift */,
 				A06BFB4626903D9900504FDF /* UserStatusView.swift */,
 			);
 			path = UserViews;
@@ -252,7 +252,7 @@
 				A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */,
 				A06BFB4526903D8500504FDF /* UserViewController.swift in Sources */,
 				A06BFB4726903D9900504FDF /* UserStatusView.swift in Sources */,
-				A006598F266F54EC0089E5F1 /* ViewController.swift in Sources */,
+				A006598F266F54EC0089E5F1 /* DeviceViewController.swift in Sources */,
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
 				A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */,
 				A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */,

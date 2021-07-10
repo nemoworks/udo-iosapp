@@ -41,16 +41,12 @@ class UserViewController: UIViewController {
         self.mapView.userTrackingMode = .follow
         self.mapView.isZoomEnabled = false
         self.mapView.isScrollEnabled = false
-        self.mapView.isUserInteractionEnabled = false
         if locationManager.authorizationStatus != .authorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
         }
         self.startTimer()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        _ = MQTTClient.shared.publish(data: makeUserStatusPayload())
-//    }
     
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true

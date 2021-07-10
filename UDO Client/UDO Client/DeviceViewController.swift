@@ -20,14 +20,12 @@ class DeviceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let connected = MQTTClient.shared.setUpMQTT()
-        if !connected {
+        if !connected{
             let alert = UIAlertController(title: "Service unavailable", message: "Can not connect to MQTT Service", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
-        MQTTClient.shared.delegate = self
         self.deviceTableView.delegate = self
         self.deviceTableView.dataSource = self
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -50,16 +48,6 @@ class DeviceViewController: UIViewController {
         }
     }
     
-    func reconnectToMQTT() {
-        let connected = MQTTClient.shared.setUpMQTT()
-        if !connected {
-            let alert = UIAlertController(title: "Service unavailable", message: "Can not connect to MQTT Service", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            MQTTClient.shared.saveMQTTConfiguration()
-        }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "deviceDetail" {

@@ -17,11 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         UNUserNotificationCenter.current().delegate = self
-        if let response = connectionOptions.notificationResponse {
-            let userInfo = response.notification.request.content.userInfo
-            let mqtt = userInfo["mqtt"] as! [String:AnyObject]
-            self.handleMQTTConfiguration(config: mqtt)
-        }
+        let tabBarController = self.window?.rootViewController as! UITabBarController
+        let deviceViewController = (tabBarController.viewControllers?.first as! UINavigationController).viewControllers.first as! DeviceViewController
+        MQTTClient.shared.delegate = deviceViewController
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -52,16 +50,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
-    func handleMQTTConfiguration(config: [String:AnyObject]) {
-        print("Will set \(config)")
-        MQTTClient.BROKER_HOST = config["ip"] as! String
-        if MQTTClient.BROKER_HOST == "" {
-            fatalError()
-        }
-        MQTTClient.BROKER_PORT = config["port"] as! UInt16
-    }
     
 }
 
@@ -72,6 +60,7 @@ extension SceneDelegate:UNUserNotificationCenterDelegate {
             MQTTClient.BROKER_HOST = mqtt["ip"] as! String
             MQTTClient.BROKER_PORT = mqtt["port"] as! UInt16
         }
+        _ = MQTTClient.shared.setUpMQTT()
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -80,12 +69,7 @@ extension SceneDelegate:UNUserNotificationCenterDelegate {
             MQTTClient.BROKER_HOST = mqtt["ip"] as! String
             MQTTClient.BROKER_PORT = mqtt["port"] as! UInt16
         }
-        let tabBarController = self.window?.rootViewController as! UITabBarController
-        let navigationController = tabBarController.viewControllers?.first as! UINavigationController
-        let vc = navigationController.viewControllers.first as? ViewController
-        if let vc = vc {
-            vc.reconnectToMQTT()
-        }
+        _ = MQTTClient.shared.setUpMQTT()
         completionHandler(UNNotificationPresentationOptions(arrayLiteral: .banner))
     }
 }

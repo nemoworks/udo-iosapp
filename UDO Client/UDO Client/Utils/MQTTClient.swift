@@ -12,6 +12,11 @@ protocol MessageRecevieDelegate:AnyObject {
     func didReceiveMessage(message: CocoaMQTTMessage)
 }
 
+struct MQTTConfiguration : Codable {
+    let host:String
+    let port: UInt16
+}
+
 class MQTTClient: NSObject {
     static var BROKER_HOST = ""
     static var BROKER_PORT:UInt16 = 1883
@@ -21,6 +26,11 @@ class MQTTClient: NSObject {
     
     private override init() {
         super.init()
+        let mqttConfiguration = self.loadMQTTConfiguration()
+        if let mqttConfiguration = mqttConfiguration {
+            MQTTClient.BROKER_HOST = mqttConfiguration.host
+            MQTTClient.BROKER_PORT = mqttConfiguration.port
+        }
     }
     
     static var shared: MQTTClient = MQTTClient()
@@ -29,6 +39,9 @@ class MQTTClient: NSObject {
         if MQTTClient.BROKER_HOST == "" {
             print("Can not connect to MQTT Service")
             return false
+        }
+        if let previousClient = self.client {
+            previousClient.disconnect()
         }
         self.client = CocoaMQTT(clientID: MQTTClient.clientID, host: MQTTClient.BROKER_HOST, port: MQTTClient.BROKER_PORT)
         self.client?.delegate = self
@@ -40,9 +53,47 @@ class MQTTClient: NSObject {
         return connected!
     }
     
+    func connectState() -> CocoaMQTTConnState? {
+        return self.client?.connState
+    }
+    
     func publish(data: Data)->Int?{
         let payload = String(data: data, encoding: .utf8)!
-        return self.client?.publish("topic/test", withString: payload)
+        return self.client?.publish("topic/pub", withString: payload)
+    }
+    
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func dataFilePath() -> URL {
+        return documentsDirectory().appendingPathComponent("MQTT.plist")
+    }
+    
+    func saveMQTTConfiguration() {
+        let encoder = PropertyListEncoder()
+        do {
+            let mqttConfiguration = MQTTConfiguration(host: MQTTClient.BROKER_HOST, port: MQTTClient.BROKER_PORT)
+            let data = try encoder.encode(mqttConfiguration)
+            try data.write(to: dataFilePath(), options: .atomic)
+        } catch {
+            print("Error encoding: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadMQTTConfiguration() -> MQTTConfiguration? {
+        let path = dataFilePath()
+        if let data = try? Data(contentsOf: path) {
+            let decoder = PropertyListDecoder()
+            do {
+                let mqttConfiguration = try decoder.decode(MQTTConfiguration.self, from: data)
+                return mqttConfiguration
+            } catch {
+                print("Error decoding: \(error.localizedDescription)")
+            }
+        }
+        return nil
     }
     
 }
@@ -51,7 +102,7 @@ extension MQTTClient: CocoaMQTTDelegate {
     
     // These two methods are all we care about for now.
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        self.client?.subscribe("topic/test")
+        self.client?.subscribe("topic/sub")
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
