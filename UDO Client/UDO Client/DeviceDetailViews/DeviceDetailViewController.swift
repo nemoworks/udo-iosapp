@@ -18,7 +18,7 @@ class DeviceDetailViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        let childView = UIHostingController(rootView: DeviceDetailView(device: self.device!))
+        let childView = UIHostingController(rootView: DeviceDetailView(device: self.device!, vc: self))
         addChild(childView)
         childView.view.frame = theContainer.bounds
         theContainer.addSubview(childView.view)
@@ -73,4 +73,27 @@ extension DeviceDetailViewController: MKMapViewDelegate {
         annotationView!.image = imageWithImage(image: image!, scaledToSize: CGSize(width: 50, height: 50))
         return annotationView
     }
+}
+
+extension DeviceDetailViewController: DeviceStatusSendDelegate {
+    func sendDeviceStatus(deviceStatus: DeviceStatus) {
+        print("Will send device status: \(deviceStatus)")
+        let deviceOriginObject:[String:Any] = (self.device?.originObject)!
+        let enumStatus:[String:String] = deviceStatus.enum_status
+        let booleanStatus:[String:Bool] = deviceStatus.boolean_status
+        var jsonObject = JSON(deviceOriginObject)
+        
+        for e in enumStatus {
+            jsonObject["attributes"][e.key].stringValue = e.value
+        }
+        for b in booleanStatus {
+            jsonObject["attributes"][b.key].boolValue = b.value
+        }
+        
+        let jsonStr = jsonObject.rawString()!
+        
+        _ = MQTTClient.shared.publish(str: jsonStr)
+    }
+    
+    
 }

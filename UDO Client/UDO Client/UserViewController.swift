@@ -11,10 +11,10 @@ import MapKit
 
 struct UserStatus: Codable {
     let name: String
-    let sender: String
-    let latitude: Double
-    let longitude: Double
+    let id: String
+    let location: String
     let available: Bool
+    let avatarUrl: String
     
 }
 
@@ -27,6 +27,8 @@ class UserViewController: UIViewController {
     let locationManager = CLLocationManager()
     var timer: Timer?
     var isAvailable: Bool = false
+    
+    let avatarURL = "https://avatars.githubusercontent.com/u/70647748?v=4"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,9 @@ class UserViewController: UIViewController {
         }
         let available = self.isAvailable
         
-        let userStatus = UserStatus(name: name, sender: id, latitude: coordinate.latitude, longitude: coordinate.longitude, available: available )
+        let locationString = String(coordinate.longitude) + "," + String(coordinate.latitude)
+        
+        let userStatus = UserStatus(name: name, id: id, location: locationString ,available: available, avatarUrl: self.avatarURL)
         
         let encoder = JSONEncoder()
         do {

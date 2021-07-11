@@ -39,13 +39,27 @@ class DeviceViewController: UIViewController {
             let contentDict = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
             print("Parse to dictionary:  \(contentDict)")
             
-            let id = contentDict["id"] as! UInt64
-            let name = contentDict["name"] as! String
+            var id = "1234567"
+            if contentDict["id"] != nil {
+                id = contentDict["id"] as! String
+            }
+            var name = "XiaoMiAirPurifier"
+            if contentDict["name"] != nil {
+                name = contentDict["name"] as! String
+            }
             let attrs = contentDict["attributes"] as! [String:[String:Any]]
-            let historyData = contentDict["history"] as! [String: [Double]]
-            let location = contentDict["location"] as! [String: Double]
+            var historyData:[String: [Double]] = [:]
+            if contentDict["history"] != nil && contentDict["history"] is [String: [Double]]{
+                historyData = contentDict["history"] as! [String: [Double]]
+            }
+            var location = ["longitude":0.0, "latitude": 0.0]
+            if contentDict["location"] != nil && contentDict["location"] is [String: Double] {
+                location = contentDict["location"] as! [String:Double]
+            }
+            
             for (index, device) in self.devices.enumerated() {
                 if device.deviceID == id {
+                    self.devices[index].originObject = contentDict
                     self.devices[index].loadAttrs(attrs: attrs)
                     self.devices[index].loadHistory(history: historyData)
                     self.devices[index].setDeviceRegion(latitude: location["latitude"]!, longitude: location["longitude"]!)
@@ -54,6 +68,7 @@ class DeviceViewController: UIViewController {
             }
 //            //new device
             let newDevice = UDODevice(id: id, name: name)
+            newDevice.originObject = contentDict
             newDevice.loadAttrs(attrs: attrs)
             newDevice.loadHistory(history: historyData)
             newDevice.setDeviceRegion(latitude: location["latitude"]!, longitude: location["longitude"]!)

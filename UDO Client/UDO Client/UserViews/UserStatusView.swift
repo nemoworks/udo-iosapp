@@ -29,8 +29,9 @@ struct UserStatusView: View {
             Divider()
             
             HStack {
-                Text("User Name").font(.title2).bold().padding()
+                Text("User").font(.title2).bold().padding()
                 Spacer(minLength: 10)
+                UserAvatar()
                 Text(self.userName).font(.title2).padding().foregroundColor(.gray)
             }
             

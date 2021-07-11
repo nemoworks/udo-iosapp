@@ -9,19 +9,25 @@ import SwiftUI
 import UIKit
 
 
+protocol DeviceStatusSendDelegate: AnyObject {
+    func sendDeviceStatus(deviceStatus: DeviceStatus)
+}
+
 struct DeviceStatusView: View {
     var numericalAttrs : [NumericalAttribute]
     var textAttrs : [TextAttribute]
-    let deviceID: UInt64
+    let deviceID: String
     @State var enumAttrs : [EnumAttribute]
     @State var booleanAttrs : [BooleanAttribute]
+    var delegate: DeviceStatusSendDelegate?
     
-    init(device: UDODevice) {
+    init(device: UDODevice, deviceViewController: DeviceDetailViewController) {
         self.deviceID = device.deviceID
-        self.numericalAttrs = device.numericalAttrs ?? []
-        self.textAttrs = device.textAttrs ?? []
-        self.enumAttrs = device.enumAttrs ?? []
-        self.booleanAttrs = device.booleanAttrs ?? []
+        self.numericalAttrs = device.numericalAttrs
+        self.textAttrs = device.textAttrs
+        self.enumAttrs = device.enumAttrs
+        self.booleanAttrs = device.booleanAttrs
+        self.delegate = deviceViewController
     }
     
     @ViewBuilder
@@ -118,13 +124,7 @@ struct DeviceStatusView: View {
                         }
                         
                         let deviceStatus = DeviceStatus(device_id: self.deviceID, sender: userID, enum_status: deviceEnumAttributes, boolean_status: deviceBooleanAttributes)
-                        let encoder = JSONEncoder()
-                        do {
-                            let data = try encoder.encode(deviceStatus)
-                            _ = MQTTClient.shared.publish(data: data)
-                        } catch {
-                            print("error: \(error.localizedDescription)")
-                        }
+                        self.delegate?.sendDeviceStatus(deviceStatus: deviceStatus)
                         
                     }) {
                         Text("Done").font(.title2).bold().foregroundColor(.blue)
@@ -137,7 +137,7 @@ struct DeviceStatusView: View {
 }
 
 struct DeviceStatus: Encodable {
-    let device_id: UInt64
+    let device_id: String
     let sender: String
     let enum_status: [String: String]
     let boolean_status: [String: Bool]
@@ -147,7 +147,7 @@ struct DeviceStatus: Encodable {
 
 struct DeviceStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewDevice = UDODevice(id: 0x12345678, name: "XiaoMi Air Purifier")
+        let previewDevice = UDODevice(id: "0x12345678", name: "XiaoMi Air Purifier")
         previewDevice.textAttrs = [
             TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
         ]
@@ -162,7 +162,7 @@ struct DeviceStatusView_Previews: PreviewProvider {
             BooleanAttribute(name: "On", on: true, editable: false)
         ]
         return DeviceStatusView(
-            device: previewDevice
+            device: previewDevice, deviceViewController: DeviceDetailViewController()
         )
             
     }

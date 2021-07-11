@@ -1,12 +1,13 @@
 import json
 from typing import Dict
 import paho.mqtt.client as mqtt
+from paho.mqtt.subscribeoptions import SubscribeOptions
 
 
 def on_connect(client: mqtt.Client, userdata, flags, rc):
     print('Connected with result code: {}'.format(rc))
-    client.subscribe('topic/pub')
-    client.subscribe('topic/sub')
+    client.subscribe([('topic/pub', 0), ('topic/sub', 2)])
+    # client.subscribe('topic/sub')
 
 
 def on_message(client: mqtt.Client, userdata, msg):

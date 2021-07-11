@@ -9,7 +9,7 @@ def publish():
     client.connect('210.28.134.32', port=1883)
     payload = {
         'name': 'XiaoMi Air Purifier',
-        'id': 1234,
+        'id': "1e2w3awdAWd2",
         'attributes': {
             'Temperature': {
                 'value': 24.5,
@@ -25,7 +25,11 @@ def publish():
             },
             'Speed': {
                 'value': 'mid',
-                'options': ['low', 'mid', 'high'],
+                'options': {
+                    "option1": 'low',
+                    "option2": 'mid',
+                    "option3": 'high'
+                },
                 'category': 'enum',
                 'editable': True
             },
@@ -52,8 +56,8 @@ def publish():
         }
     }
 
-    for i in range(5):
-        payload['id'] += 1
+    for i in range(1):
+        payload['id'] += "1"
         payload_json = json.dumps(payload, indent='  ')
         print(payload_json)
         client.publish('topic/sub', payload_json)

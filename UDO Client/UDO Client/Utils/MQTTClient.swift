@@ -62,6 +62,10 @@ class MQTTClient: NSObject {
         return self.client?.publish("topic/pub", withString: payload)
     }
     
+    func publish(str: String)->Int? {
+        return self.client?.publish("topic/pub", withString: str)
+    }
+    
     func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]

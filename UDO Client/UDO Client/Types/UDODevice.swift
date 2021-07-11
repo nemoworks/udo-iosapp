@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class UDODevice: NSObject {
-    let deviceID:UInt64
+    let deviceID:String
     let deviceName: String
     var numericalAttrs : [NumericalAttribute]
     var textAttrs : [TextAttribute]
@@ -18,10 +18,11 @@ class UDODevice: NSObject {
     var history: [String:[Double]] = [:]
     var timestamp : UInt64 = 0
     var deviceLocation: MKCoordinateRegion?
+    var originObject: [String:Any]?
     
     public override var description: String {return "Device: \(self.deviceName) @ \(self.deviceID)"}
     
-    init(id:UInt64, name:String) {
+    init(id:String, name:String) {
         self.deviceID = id
         self.deviceName = name
         self.numericalAttrs = []
@@ -49,7 +50,12 @@ class UDODevice: NSObject {
             case "enum":
                 print("A enum attr: \(attrName)")
                 let value = attrContent["value"] as! String
-                let options = attrContent["options"] as! [String]
+                let optionsDict = attrContent["options"] as! [String:String]
+                var options:[String] = []
+                for k in Array(optionsDict.keys).sorted(by: <) {
+                    options.append(optionsDict[k as String]!)
+                }
+                
                 let editable = attrContent["editable"] as! Bool
                 let newAttr = EnumAttribute(name: attrName, options: options, currentOption: value, editable: editable)
                 self.enumAttrs.append(newAttr)

@@ -12,9 +12,11 @@ import MapKit
 
 struct DeviceDetailView: View {
     var device: UDODevice
+    var vc: DeviceDetailViewController
     
-    init(device:UDODevice) {
+    init(device:UDODevice, vc: DeviceDetailViewController) {
         self.device = device
+        self.vc = vc
     }
     
     
@@ -34,7 +36,7 @@ struct DeviceDetailView: View {
             
             HStack {
                 TabView{
-                    DeviceStatusView(device: self.device).tabItem {
+                    DeviceStatusView(device: self.device, deviceViewController: self.vc).tabItem {
                         Image(systemName: "star.square")
                         Text("设备状态")
                     }.tag(1)
@@ -53,7 +55,7 @@ struct DeviceDetailView: View {
 struct DeviceDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let previewDevice = UDODevice(id: 0x12345678, name: "XiaoMi Air Purifier")
+        let previewDevice = UDODevice(id: "1234", name: "XiaoMi Air Purifier")
         previewDevice.textAttrs = [
             TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
         ]
@@ -67,6 +69,6 @@ struct DeviceDetailView_Previews: PreviewProvider {
         previewDevice.booleanAttrs = [
             BooleanAttribute(name: "On", on: true, editable: false)
         ]
-        return DeviceDetailView(device: previewDevice)
+        return DeviceDetailView(device: previewDevice, vc: DeviceDetailViewController())
     }
 }
