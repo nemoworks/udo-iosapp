@@ -18,11 +18,16 @@ struct MQTTConfiguration : Codable {
 }
 
 class MQTTClient: NSObject {
+    static var USER_EMAIL = ""
     static var BROKER_HOST = ""
     static var BROKER_PORT:UInt16 = 1883
     static let clientID = "cn.edu.nju.udo.iOSClient-" + (UIDevice.current.identifierForVendor?.uuidString)!
     var client: CocoaMQTT?
     weak var delegate: MessageRecevieDelegate?
+    
+    static let LOGMQTT_HOST = "broker.emqx.io"
+    static let LOGMQTT_PORT:UInt16 = 1883
+    static let logClient = CocoaMQTT(clientID: clientID, host: LOGMQTT_HOST, port: LOGMQTT_PORT)
     
     private override init() {
         super.init()
@@ -31,6 +36,7 @@ class MQTTClient: NSObject {
             MQTTClient.BROKER_HOST = mqttConfiguration.host
             MQTTClient.BROKER_PORT = mqttConfiguration.port
         }
+        _ = MQTTClient.logClient.connect()
     }
     
     static var shared: MQTTClient = MQTTClient()
@@ -50,7 +56,14 @@ class MQTTClient: NSObject {
         self.client?.willMessage = CocoaMQTTMessage(topic: "/will ", string: "offline")
         self.client?.keepAlive = 60
         let connected = self.client?.connect()
-        return connected!
+        
+        if let connected = connected {
+            if connected {
+                self.saveMQTTConfiguration()
+            }
+            return connected
+        }
+        return false
     }
     
     func connectState() -> CocoaMQTTConnState? {
@@ -59,11 +72,13 @@ class MQTTClient: NSObject {
     
     func publish(data: Data)->Int?{
         let payload = String(data: data, encoding: .utf8)!
-        return self.client?.publish("topic/pub", withString: payload)
+        _ = MQTTClient.logClient.publish("topic/log", withString: payload)
+        return self.client?.publish("topic/pub-" + MQTTClient.USER_EMAIL, withString: payload)
     }
     
     func publish(str: String)->Int? {
-        return self.client?.publish("topic/pub", withString: str)
+        _ = MQTTClient.logClient.publish("topic/log", withString: str)
+        return self.client?.publish("topic/pub-" + MQTTClient.USER_EMAIL, withString: str)
     }
     
     func documentsDirectory() -> URL {
@@ -106,7 +121,7 @@ extension MQTTClient: CocoaMQTTDelegate {
     
     // These two methods are all we care about for now.
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        self.client?.subscribe("topic/sub")
+        self.client?.subscribe("topic/sub-" + MQTTClient.USER_EMAIL)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {

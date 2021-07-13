@@ -6,7 +6,8 @@ from paho.mqtt.subscribeoptions import SubscribeOptions
 
 def on_connect(client: mqtt.Client, userdata, flags, rc):
     print('Connected with result code: {}'.format(rc))
-    client.subscribe([('topic/pub', 0), ('topic/sub', 2)])
+    client.subscribe([('topic/pub-test@udo.com', 0),
+                      ('topic/sub-test@udo.com', 2)])
     # client.subscribe('topic/sub')
 
 

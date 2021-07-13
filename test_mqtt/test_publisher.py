@@ -10,6 +10,7 @@ def publish():
     payload = {
         'name': 'XiaoMi Air Purifier',
         'id': "1e2w3awdAWd2",
+        'avatarUrl': 'http://test.org',
         'attributes': {
             'Temperature': {
                 'value': 24.5,
@@ -60,7 +61,7 @@ def publish():
         payload['id'] += "1"
         payload_json = json.dumps(payload, indent='  ')
         print(payload_json)
-        client.publish('topic/sub', payload_json)
+        client.publish('topic/sub-test@udo.com', payload_json)
         time.sleep(1)
     client.disconnect()
 

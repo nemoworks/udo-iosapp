@@ -11,6 +11,7 @@ import MapKit
 class UDODevice: NSObject {
     let deviceID:String
     let deviceName: String
+    let avatarUrl: String
     var numericalAttrs : [NumericalAttribute]
     var textAttrs : [TextAttribute]
     var enumAttrs : [EnumAttribute]
@@ -22,9 +23,10 @@ class UDODevice: NSObject {
     
     public override var description: String {return "Device: \(self.deviceName) @ \(self.deviceID)"}
     
-    init(id:String, name:String) {
+    init(id:String, name:String, avatarUrl:String) {
         self.deviceID = id
         self.deviceName = name
+        self.avatarUrl = avatarUrl
         self.numericalAttrs = []
         self.textAttrs = []
         self.enumAttrs = []
@@ -32,6 +34,10 @@ class UDODevice: NSObject {
     }
     
     func loadAttrs(attrs:[String:[String:Any]]) {
+        self.numericalAttrs = []
+        self.textAttrs = []
+        self.enumAttrs = []
+        self.booleanAttrs = []
         for attr in attrs {
             let attrName = attr.key
             let attrContent = attr.value

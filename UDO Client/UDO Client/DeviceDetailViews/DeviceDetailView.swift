@@ -55,7 +55,7 @@ struct DeviceDetailView: View {
 struct DeviceDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let previewDevice = UDODevice(id: "1234", name: "XiaoMi Air Purifier")
+        let previewDevice = UDODevice(id: "1234", name: "XiaoMi Air Purifier", avatarUrl: "")
         previewDevice.textAttrs = [
             TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
         ]

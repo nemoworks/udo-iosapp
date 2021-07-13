@@ -17,11 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         UNUserNotificationCenter.current().delegate = self
-        let tabBarController = self.window?.rootViewController as! UITabBarController
-        let deviceViewController = (tabBarController.viewControllers?.first as! UINavigationController).viewControllers.first as! DeviceViewController
-        let userViewController = (tabBarController.viewControllers?[1] as! UINavigationController).viewControllers.first as! UserViewController
-        MQTTClient.shared.delegate = deviceViewController
-        userViewController.startTimer()
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

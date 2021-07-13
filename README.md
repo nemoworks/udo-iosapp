@@ -2,8 +2,7 @@
 
 ## TODO
 
-- implement history data chart
-- implement map view
+- 如何将设备接入到UDO：假定每个用户都有一个账号，用电子邮箱绑定，那么可以将电子邮箱的编码当作用户的ID，并且使用这个ID来指定topic。服务端使用这个ID来映射到UDO到object
 
 ## Test
 

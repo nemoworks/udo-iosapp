@@ -69,7 +69,11 @@ extension DeviceDetailViewController: MKMapViewDelegate {
         }
         
         let udoAnnotation = annotation as! UDOMapAnnotation
-        let image = UIImage(named: UDOMapAnnotation.ImageByDeviceName[udoAnnotation.deviceName!]!)
+        var imageName = UDOMapAnnotation.ImageByDeviceName[udoAnnotation.deviceName!]
+        if imageName == nil {
+            imageName = "air-purifier"
+        }
+        let image = UIImage(named: imageName!)
         annotationView!.image = imageWithImage(image: image!, scaledToSize: CGSize(width: 50, height: 50))
         return annotationView
     }
@@ -84,15 +88,29 @@ extension DeviceDetailViewController: DeviceStatusSendDelegate {
         var jsonObject = JSON(deviceOriginObject)
         
         for e in enumStatus {
-            jsonObject["attributes"][e.key].stringValue = e.value
+            jsonObject["attributes"][e.key]["value"].stringValue = e.value
         }
         for b in booleanStatus {
-            jsonObject["attributes"][b.key].boolValue = b.value
+            jsonObject["attributes"][b.key]["value"].boolValue = b.value
         }
         
         let jsonStr = jsonObject.rawString()!
         
-        _ = MQTTClient.shared.publish(str: jsonStr)
+        
+        
+        
+        let sendFlag = MQTTClient.shared.publish(str: jsonStr)
+        
+        if let sendFlag = sendFlag {
+            if sendFlag != -1 {
+                // send successfully
+                let alert = UIAlertAction(title: "OK", style: .default, handler: nil)
+                let alertController = UIAlertController(title: "Alert", message: "Send successfully", preferredStyle: .alert)
+                alertController.addAction(alert)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     

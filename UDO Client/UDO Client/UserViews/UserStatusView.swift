@@ -15,8 +15,10 @@ protocol UserStatusChangeDelegate:AnyObject {
 struct UserStatusView: View {
     
     var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 31, longitude: 118), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-    var userName: String = "test user"
-    var userID = UIDevice.current.identifierForVendor?.uuidString
+    var userName: String = "udo-user"
+    
+    var userEmail = MQTTClient.USER_EMAIL
+
     @State var isAvailable: Bool = false
     
     private var locationManager = CLLocationManager()
@@ -38,9 +40,9 @@ struct UserStatusView: View {
             Divider()
             
             HStack {
-                Text("User ID").font(.title2).bold().padding()
+                Text("Email").font(.title2).bold().padding()
                 Spacer(minLength: 10)
-                Text(self.userID!).font(.footnote).foregroundColor(.gray)
+                Text(self.userEmail).font(.title2).foregroundColor(.gray)
             }
             
             Divider()

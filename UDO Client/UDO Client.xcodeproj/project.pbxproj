@@ -15,6 +15,8 @@
 		A0065997266F54ED0089E5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0065995266F54ED0089E5F1 /* LaunchScreen.storyboard */; };
 		A04F7D59269A8F720028D9F1 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04F7D58269A8F720028D9F1 /* UserAvatar.swift */; };
 		A04F7D5B269AC9870028D9F1 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04F7D5A269AC9870028D9F1 /* SwiftyJSON.swift */; };
+		A064202E269D8E2900106529 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A064202D269D8E2900106529 /* LoginViewController.swift */; };
+		A0642036269DBB1800106529 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0642035269DBB1800106529 /* LoginView.swift */; };
 		A06BFB4526903D8500504FDF /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BFB4426903D8500504FDF /* UserViewController.swift */; };
 		A06BFB4726903D9900504FDF /* UserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BFB4626903D9900504FDF /* UserStatusView.swift */; };
 		A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD368266F8B1800E67089 /* MQTTClient.swift */; };
@@ -46,6 +48,8 @@
 		A0065998266F54ED0089E5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A04F7D58269A8F720028D9F1 /* UserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatar.swift; sourceTree = "<group>"; };
 		A04F7D5A269AC9870028D9F1 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		A064202D269D8E2900106529 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A0642035269DBB1800106529 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A06BFB4426903D8500504FDF /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		A06BFB4626903D9900504FDF /* UserStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusView.swift; sourceTree = "<group>"; };
 		A06BFB4A269329EA00504FDF /* UDO ClientDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UDO ClientDebug.entitlements"; sourceTree = "<group>"; };
@@ -104,14 +108,30 @@
 				A0ACD36D266F9F5400E67089 /* Utils */,
 				A06BFB4326903D1F00504FDF /* UserViews */,
 				A0D74F342678907A00FE86E1 /* DeviceDetailViews */,
+				A0642034269DBAE000106529 /* LoginViews */,
 				A0ACD36A266F9F2A00E67089 /* Types */,
-				A006598E266F54EC0089E5F1 /* DeviceViewController.swift */,
-				A06BFB4426903D8500504FDF /* UserViewController.swift */,
-				A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */,
-				A0B9DB7A26971C0400DD4134 /* UDOMapAnnotation.swift */,
+				A0642033269D941B00106529 /* ViewControllers */,
 				A0065998266F54ED0089E5F1 /* Info.plist */,
 			);
 			path = "UDO Client";
+			sourceTree = "<group>";
+		};
+		A0642033269D941B00106529 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A006598E266F54EC0089E5F1 /* DeviceViewController.swift */,
+				A06BFB4426903D8500504FDF /* UserViewController.swift */,
+				A064202D269D8E2900106529 /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A0642034269DBAE000106529 /* LoginViews */ = {
+			isa = PBXGroup;
+			children = (
+				A0642035269DBB1800106529 /* LoginView.swift */,
+			);
+			path = LoginViews;
 			sourceTree = "<group>";
 		};
 		A06BFB4326903D1F00504FDF /* UserViews */ = {
@@ -168,6 +188,8 @@
 		A0D74F342678907A00FE86E1 /* DeviceDetailViews */ = {
 			isa = PBXGroup;
 			children = (
+				A0B9DB7A26971C0400DD4134 /* UDOMapAnnotation.swift */,
+				A0ACD37D2670FDE600E67089 /* DeviceTableViewCell.swift */,
 				A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */,
 				A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */,
 				A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */,
@@ -255,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A064202E269D8E2900106529 /* LoginViewController.swift in Sources */,
 				A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */,
 				A06BFB4526903D8500504FDF /* UserViewController.swift in Sources */,
 				A06BFB4726903D9900504FDF /* UserStatusView.swift in Sources */,
@@ -262,6 +285,7 @@
 				A006598F266F54EC0089E5F1 /* DeviceViewController.swift in Sources */,
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
 				A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */,
+				A0642036269DBB1800106529 /* LoginView.swift in Sources */,
 				A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */,
 				A0ACD37A2670584100E67089 /* BooleanAttribute.swift in Sources */,
 				A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */,

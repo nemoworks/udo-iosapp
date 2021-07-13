@@ -85,6 +85,7 @@ struct DeviceStatusView: View {
                                     Text($0)
                                 }
                             }.frame(minWidth: 0, idealWidth: 80, maxWidth: 80, minHeight: 0, idealHeight: 90, maxHeight: 120, alignment: .center)
+                            .disabled(!self.enumAttrs[index].editable)
                             .clipped()
                             .cornerRadius(20)
                         }
@@ -100,7 +101,7 @@ struct DeviceStatusView: View {
                                 .font(.title2)
                                 .bold()
                             Spacer()
-                            Toggle("", isOn: self.$booleanAttrs[index].on)
+                            Toggle("", isOn: self.$booleanAttrs[index].on).disabled(!self.booleanAttrs[index].editable)
                         }
                     }
                     
@@ -147,7 +148,7 @@ struct DeviceStatus: Encodable {
 
 struct DeviceStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewDevice = UDODevice(id: "0x12345678", name: "XiaoMi Air Purifier")
+        let previewDevice = UDODevice(id: "0x12345678", name: "XiaoMi Air Purifier", avatarUrl: "")
         previewDevice.textAttrs = [
             TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
         ]
