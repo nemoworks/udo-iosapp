@@ -79,7 +79,8 @@ class DeviceViewController: UIViewController {
             }
             
             for (index, device) in self.devices.enumerated() {
-                if device.deviceID == id {
+                if device.uri == deviceUri {
+                    self.devices[index].deviceID = id
                     self.devices[index].originObject = contentDict
                     self.devices[index].loadAttrs(attrs: attrs)
                     self.devices[index].loadHistory(history: historyData)

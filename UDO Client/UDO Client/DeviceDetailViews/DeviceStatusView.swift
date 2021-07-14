@@ -33,7 +33,7 @@ struct DeviceStatusView: View {
     @ViewBuilder
     var body: some View {
         HStack {
-            ScrollView {
+            ScrollView(.vertical, showsIndicators: true) {
                 VStack {
                     ForEach(self.textAttrs) { textAttr in
                         HStack {
@@ -73,39 +73,45 @@ struct DeviceStatusView: View {
                     
                     
                     ForEach(self.enumAttrs.indices) { index in
-                        HStack {
-                            Text(self.enumAttrs[index].name)
-                                .font(.title2)
-                                .bold()
+                        VStack {
+                            HStack {
+                                Text(self.enumAttrs[index].name)
+                                    .font(.title2)
+                                    .bold()
+                                
+                                Spacer()
+                                
+                                Picker("", selection: self.$enumAttrs[index].currentOption) {
+                                    ForEach(self.enumAttrs[index].options, id:\.self) {
+                                        Text($0)
+                                    }
+                                }.frame(minWidth: 0, idealWidth: 80, maxWidth: 80, minHeight: 0, idealHeight: 90, maxHeight: 120, alignment: .center)
+                                .disabled(!self.enumAttrs[index].editable)
+                                .clipped()
+                                .cornerRadius(20)
+                            }
                             
-                            Spacer()
-                            
-                            Picker("", selection: self.$enumAttrs[index].currentOption) {
-                                ForEach(self.enumAttrs[index].options, id:\.self) {
-                                    Text($0)
-                                }
-                            }.frame(minWidth: 0, idealWidth: 80, maxWidth: 80, minHeight: 0, idealHeight: 90, maxHeight: 120, alignment: .center)
-                            .disabled(!self.enumAttrs[index].editable)
-                            .clipped()
-                            .cornerRadius(20)
+                            Divider().padding(.top, 5)
                         }
+                        
                     }
                     
-                    if(self.enumAttrs.count > 0) {
-                        Divider().padding(.top, 5)
-                    }
                     
                     ForEach(self.booleanAttrs.indices) { index in
-                        HStack {
-                            Text(self.booleanAttrs[index].name)
-                                .font(.title2)
-                                .bold()
-                            Spacer()
-                            Toggle("", isOn: self.$booleanAttrs[index].on).disabled(!self.booleanAttrs[index].editable)
+                        VStack {
+                            HStack {
+                                Text(self.booleanAttrs[index].name)
+                                    .font(.title2)
+                                    .bold()
+                                Spacer()
+                                Toggle("", isOn: self.$booleanAttrs[index].on).disabled(!self.booleanAttrs[index].editable)
+                            }
+                            
+                            Divider().padding(.top, 5)
                         }
                     }
                     
-                    Divider()
+                    
                     
                     Button(action: {
                         print("Done")

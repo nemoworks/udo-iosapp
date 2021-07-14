@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class UDODevice: NSObject {
-    let deviceID:String
+    var deviceID:String
     let deviceName: String
     let avatarUrl: String
     let uri: String
