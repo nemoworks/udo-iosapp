@@ -70,15 +70,15 @@ class MQTTClient: NSObject {
         return self.client?.connState
     }
     
-    func publish(data: Data)->Int?{
+    func publish(data: Data, uri: String)->Int?{
         let payload = String(data: data, encoding: .utf8)!
         _ = MQTTClient.logClient.publish("topic/log", withString: payload)
-        return self.client?.publish("topic/pub-" + MQTTClient.USER_EMAIL, withString: payload)
+        return self.client?.publish("topic/pub/" + uri, withString: payload)
     }
     
-    func publish(str: String)->Int? {
+    func publish(str: String, uri: String)->Int? {
         _ = MQTTClient.logClient.publish("topic/log", withString: str)
-        return self.client?.publish("topic/pub-" + MQTTClient.USER_EMAIL, withString: str)
+        return self.client?.publish("topic/pub/" + uri, withString: str)
     }
     
     func documentsDirectory() -> URL {
@@ -121,7 +121,7 @@ extension MQTTClient: CocoaMQTTDelegate {
     
     // These two methods are all we care about for now.
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        self.client?.subscribe("topic/sub-" + MQTTClient.USER_EMAIL)
+        self.client?.subscribe("topic/sub/" + MQTTClient.USER_EMAIL)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {

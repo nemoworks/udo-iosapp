@@ -12,11 +12,10 @@ import MapKit
 
 struct UserStatus: Codable {
     let name: String
-    let email: String
     let location: [String : Float64]
     let available: Bool
     let avatarUrl: String
-    
+    let uri: String
 }
 
 class UserViewController: UIViewController {
@@ -62,11 +61,8 @@ class UserViewController: UIViewController {
             coordinate = self.mapView.userLocation.coordinate
         }
         let available = self.isAvailable
-        
         let location = ["longitude": coordinate.longitude, "latitude": coordinate.latitude ]
-        
-        let userStatus = UserStatus(name: name, email: email, location: location ,available: available, avatarUrl: self.avatarURL)
-        
+        let userStatus = UserStatus(name: name, location: location ,available: available, avatarUrl: self.avatarURL, uri: email)
         let encoder = JSONEncoder()
         do {
             let data = try encoder.encode(userStatus)
@@ -74,7 +70,6 @@ class UserViewController: UIViewController {
         }catch {
             print("Encode error: \(error.localizedDescription)")
         }
-        
         return Data()
     }
     
@@ -84,7 +79,7 @@ class UserViewController: UIViewController {
                 timer in
                 DispatchQueue.global().async {
                     let payload = self.makeUserStatusPayload()
-                    _ = MQTTClient.shared.publish(data: payload)
+                    _ = MQTTClient.shared.publish(data: payload, uri: self.userView.userEmail)
                 }
             }
         }

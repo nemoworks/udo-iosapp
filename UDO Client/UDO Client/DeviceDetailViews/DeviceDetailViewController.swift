@@ -81,7 +81,7 @@ extension DeviceDetailViewController: MKMapViewDelegate {
 
 extension DeviceDetailViewController: DeviceStatusSendDelegate {
     func sendDeviceStatus(deviceStatus: DeviceStatus) {
-        print("Will send device status: \(deviceStatus)")
+        print("Will send device status: \(deviceStatus) to \(self.device?.uri ?? "123")")
         let deviceOriginObject:[String:Any] = (self.device?.originObject)!
         let enumStatus:[String:String] = deviceStatus.enum_status
         let booleanStatus:[String:Bool] = deviceStatus.boolean_status
@@ -96,10 +96,7 @@ extension DeviceDetailViewController: DeviceStatusSendDelegate {
         
         let jsonStr = jsonObject.rawString()!
         
-        
-        
-        
-        let sendFlag = MQTTClient.shared.publish(str: jsonStr)
+        let sendFlag = MQTTClient.shared.publish(str: jsonStr, uri: self.device?.uri ?? "")
         
         if let sendFlag = sendFlag {
             if sendFlag != -1 {

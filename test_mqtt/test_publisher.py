@@ -54,14 +54,15 @@ def publish():
         'location': {
             'latitude': 32.11088,
             'longitude': 118.9701
-        }
+        },
+        'uri': '123456'
     }
 
     for i in range(1):
         payload['id'] += "1"
         payload_json = json.dumps(payload, indent='  ')
         print(payload_json)
-        client.publish('topic/sub-test@udo.com', payload_json)
+        client.publish('topic/sub/test@udo.com', payload_json)
         time.sleep(1)
     client.disconnect()
 

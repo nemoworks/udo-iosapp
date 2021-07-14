@@ -59,6 +59,11 @@ class DeviceViewController: UIViewController {
                 avatarUrl = contentDict["avatarUrl"] as! String
             }
             
+            var deviceUri = ""
+            if contentDict["uri"] != nil {
+                deviceUri = contentDict["uri"] as! String
+            }
+            
             if contentDict["attributes"] == nil {
                 return nil
             }
@@ -83,7 +88,7 @@ class DeviceViewController: UIViewController {
                 }
             }
 //            //new device
-            let newDevice = UDODevice(id: id, name: name, avatarUrl: avatarUrl)
+            let newDevice = UDODevice(id: id, name: name, avatarUrl: avatarUrl, uri: deviceUri)
             newDevice.originObject = contentDict
             newDevice.loadAttrs(attrs: attrs)
             newDevice.loadHistory(history: historyData)
