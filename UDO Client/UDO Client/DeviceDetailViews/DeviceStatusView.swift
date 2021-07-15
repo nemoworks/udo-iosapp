@@ -10,23 +10,24 @@ import UIKit
 
 
 protocol DeviceStatusSendDelegate: AnyObject {
-    func sendDeviceStatus(deviceStatus: DeviceStatus)
+    func sendDeviceStatus(deviceStatus: DeviceStatus)->Int?
 }
 
 struct DeviceStatusView: View {
     var numericalAttrs : [NumericalAttribute]
     var textAttrs : [TextAttribute]
-    let deviceID: String
     @State var enumAttrs : [EnumAttribute]
     @State var booleanAttrs : [BooleanAttribute]
+    @State var showAlert = false
     var delegate: DeviceStatusSendDelegate?
+    var deviceUri: String
     
     init(device: UDODevice, deviceViewController: DeviceDetailViewController) {
-        self.deviceID = device.deviceID
         self.numericalAttrs = device.numericalAttrs
         self.textAttrs = device.textAttrs
         self.enumAttrs = device.enumAttrs
         self.booleanAttrs = device.booleanAttrs
+        self.deviceUri = device.uri
         self.delegate = deviceViewController
     }
     
@@ -130,8 +131,14 @@ struct DeviceStatusView: View {
                             }
                         }
                         
-                        let deviceStatus = DeviceStatus(device_id: self.deviceID, sender: userID, enum_status: deviceEnumAttributes, boolean_status: deviceBooleanAttributes)
-                        self.delegate?.sendDeviceStatus(deviceStatus: deviceStatus)
+                        let deviceStatus = DeviceStatus(uri: self.deviceUri, sender: userID, enum_status: deviceEnumAttributes, boolean_status: deviceBooleanAttributes)
+                        
+                        let statusCode = self.delegate?.sendDeviceStatus(deviceStatus: deviceStatus)
+                        if let sendFlag = statusCode {
+                            if sendFlag != -1 {
+                                self.showAlert = true
+                            }
+                        }
                         
                     }) {
                         Text("Done").font(.title2).bold().foregroundColor(.blue)
@@ -139,12 +146,15 @@ struct DeviceStatusView: View {
                     
                 }.padding()
             }
+        }.alert(isPresented: $showAlert, content: {
+            Alert(title: Text("Message confirmed"), message: Text("Send message successfully."))
         }
+        )
     }
 }
 
 struct DeviceStatus: Encodable {
-    let device_id: String
+    let uri: String
     let sender: String
     let enum_status: [String: String]
     let boolean_status: [String: Bool]
@@ -154,7 +164,7 @@ struct DeviceStatus: Encodable {
 
 struct DeviceStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewDevice = UDODevice(id: "0x12345678", name: "XiaoMi Air Purifier", avatarUrl: "", uri: "123")
+        let previewDevice = UDODevice(uri: "0x12345678", name: "XiaoMi Air Purifier", avatarUrl: "")
         previewDevice.textAttrs = [
             TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
         ]

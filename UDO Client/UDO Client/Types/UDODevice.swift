@@ -9,7 +9,6 @@ import UIKit
 import MapKit
 
 class UDODevice: NSObject {
-    var deviceID:String
     let deviceName: String
     let avatarUrl: String
     let uri: String
@@ -22,10 +21,9 @@ class UDODevice: NSObject {
     var deviceLocation: MKCoordinateRegion?
     var originObject: [String:Any]?
     
-    public override var description: String {return "Device: \(self.deviceName) @ \(self.deviceID)"}
+    public override var description: String {return "Device: \(self.deviceName) @ \(self.uri)"}
     
-    init(id:String, name:String, avatarUrl:String, uri: String) {
-        self.deviceID = id
+    init( uri: String, name:String, avatarUrl:String) {
         self.deviceName = name
         self.avatarUrl = avatarUrl
         self.uri = uri

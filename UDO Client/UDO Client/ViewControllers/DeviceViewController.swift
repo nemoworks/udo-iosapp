@@ -46,10 +46,6 @@ class DeviceViewController: UIViewController {
             let contentDict = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
             print("Parse to dictionary:  \(contentDict)")
             
-            var id = "1234567"
-            if contentDict["id"] != nil {
-                id = contentDict["id"] as! String
-            }
             var name = "XiaoMiAirPurifier"
             if contentDict["name"] != nil {
                 name = contentDict["name"] as! String
@@ -80,7 +76,6 @@ class DeviceViewController: UIViewController {
             
             for (index, device) in self.devices.enumerated() {
                 if device.uri == deviceUri {
-                    self.devices[index].deviceID = id
                     self.devices[index].originObject = contentDict
                     self.devices[index].loadAttrs(attrs: attrs)
                     self.devices[index].loadHistory(history: historyData)
@@ -89,7 +84,7 @@ class DeviceViewController: UIViewController {
                 }
             }
 //            //new device
-            let newDevice = UDODevice(id: id, name: name, avatarUrl: avatarUrl, uri: deviceUri)
+            let newDevice = UDODevice(uri: deviceUri, name: name, avatarUrl: avatarUrl)
             newDevice.originObject = contentDict
             newDevice.loadAttrs(attrs: attrs)
             newDevice.loadHistory(history: historyData)

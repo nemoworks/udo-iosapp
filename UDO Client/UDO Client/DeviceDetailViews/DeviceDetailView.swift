@@ -27,12 +27,6 @@ struct DeviceDetailView: View {
                     .font(.largeTitle)
                 
                 HStack {
-                    Text("Device ID: ").font(.subheadline).foregroundColor(.gray)
-                    Spacer(minLength: 10)
-                    Text(String(self.device.deviceID)).font(.subheadline).foregroundColor(.gray)
-                }.padding(.top, 5)
-                
-                HStack {
                     Text("Device Uri:")
                         .font(.subheadline).foregroundColor(.gray)
                     Spacer(minLength: 10)
@@ -63,7 +57,7 @@ struct DeviceDetailView: View {
 struct DeviceDetailView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let previewDevice = UDODevice(id: "1234", name: "XiaoMi Air Purifier", avatarUrl: "", uri: "123")
+        let previewDevice = UDODevice(uri: "1234", name: "XiaoMi Air Purifier", avatarUrl: "")
         previewDevice.textAttrs = [
             TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
         ]

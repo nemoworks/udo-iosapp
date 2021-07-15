@@ -80,33 +80,35 @@ extension DeviceDetailViewController: MKMapViewDelegate {
 }
 
 extension DeviceDetailViewController: DeviceStatusSendDelegate {
-    func sendDeviceStatus(deviceStatus: DeviceStatus) {
+    func sendDeviceStatus(deviceStatus: DeviceStatus)->Int? {
         print("Will send device status: \(deviceStatus) to \(self.device?.uri ?? "123")")
         let deviceOriginObject:[String:Any] = (self.device?.originObject)!
         let enumStatus:[String:String] = deviceStatus.enum_status
         let booleanStatus:[String:Bool] = deviceStatus.boolean_status
         var jsonObject = JSON(deviceOriginObject)
         
-        for e in enumStatus {
-            jsonObject["attributes"][e.key]["value"].stringValue = e.value
+        for e1 in enumStatus {
+            jsonObject["attributes"][e1.key]["value"].stringValue = e1.value
+            for e2 in self.device!.enumAttrs {
+                if e1.key == e2.name {
+                    e2.currentOption = e1.value
+                }
+            }
         }
-        for b in booleanStatus {
-            jsonObject["attributes"][b.key]["value"].boolValue = b.value
+        for b1 in booleanStatus {
+            jsonObject["attributes"][b1.key]["value"].boolValue = b1.value
+            for b2 in self.device!.booleanAttrs {
+                if b1.key == b2.name {
+                    b2.on = b1.value
+                }
+            }
         }
         
         let jsonStr = jsonObject.rawString()!
         
         let sendFlag = MQTTClient.shared.publish(str: jsonStr, uri: self.device?.uri ?? "")
         
-        if let sendFlag = sendFlag {
-            if sendFlag != -1 {
-                // send successfully
-                let alert = UIAlertAction(title: "OK", style: .default, handler: nil)
-                let alertController = UIAlertController(title: "Alert", message: "Send successfully", preferredStyle: .alert)
-                alertController.addAction(alert)
-                self.present(alertController, animated: true, completion: nil)
-            }
-        }
+        return sendFlag
         
     }
     
