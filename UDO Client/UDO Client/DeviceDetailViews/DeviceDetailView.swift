@@ -24,34 +24,9 @@ struct DeviceDetailView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading) {
-                HStack {
-                    Text(self.device.deviceName)
-                        .font(.largeTitle)
-                    Spacer(minLength: 5)
-                    Button(action: {
-                        self.refresh.toggle()
-                    }, label: {
-                        Image(systemName: "arrow.clockwise")
-                            .resizable()
-                            .frame(width: 35, height: 40, alignment: .center)
-                            .accentColor(.gray)
-                    })
-                }
-                
-                HStack {
-                    Text("Device Uri:")
-                        .font(.subheadline).foregroundColor(.gray)
-                        .padding(.trailing, 10)
-                    Text(self.device.uri).font(.subheadline)
-                        .foregroundColor(.gray)
-                }
-                Divider()
-            }.padding()
-            
             HStack {
                 TabView{
-                    DeviceStatusView(numericalAttrs: self.device.numericalAttrs, textAttrs: self.device.textAttrs, enumAttrs: self.device.enumAttrs, booleanAttrs: self.device.booleanAttrs, showAlert: false, refresh: $refresh, delegate: vc, deviceUri: self.device.uri)
+                    DeviceStatusView(device: self.device, delegate: self.vc)
                         .tabItem {
                             Image(systemName: "star.square")
                             Text("设备状态")

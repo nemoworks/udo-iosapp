@@ -17,7 +17,7 @@ def publish():
                 'category': 'numerical'
             },
             'Humidity': {
-                'value': 0.5,
+                'value': 0.9,
                 'category': 'numerical'
             },
             'Description': {
@@ -25,7 +25,7 @@ def publish():
                 'category': 'text'
             },
             'Speed': {
-                'value': 'mid',
+                'value': 'high',
                 'options': {
                     "option1": 'low',
                     "option2": 'mid',
