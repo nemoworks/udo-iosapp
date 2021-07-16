@@ -13,6 +13,8 @@ import MapKit
 struct DeviceDetailView: View {
     var device: UDODevice
     var vc: DeviceDetailViewController
+    @State var refresh = true
+    
     
     init(device:UDODevice, vc: DeviceDetailViewController) {
         self.device = device
@@ -23,13 +25,24 @@ struct DeviceDetailView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text(self.device.deviceName)
-                    .font(.largeTitle)
+                HStack {
+                    Text(self.device.deviceName)
+                        .font(.largeTitle)
+                    Spacer(minLength: 5)
+                    Button(action: {
+                        self.refresh.toggle()
+                    }, label: {
+                        Image(systemName: "arrow.clockwise")
+                            .resizable()
+                            .frame(width: 35, height: 40, alignment: .center)
+                            .accentColor(.gray)
+                    })
+                }
                 
                 HStack {
                     Text("Device Uri:")
                         .font(.subheadline).foregroundColor(.gray)
-                    Spacer(minLength: 10)
+                        .padding(.trailing, 10)
                     Text(self.device.uri).font(.subheadline)
                         .foregroundColor(.gray)
                 }
@@ -38,10 +51,12 @@ struct DeviceDetailView: View {
             
             HStack {
                 TabView{
-                    DeviceStatusView(device: self.device, deviceViewController: self.vc).tabItem {
-                        Image(systemName: "star.square")
-                        Text("设备状态")
-                    }.tag(1)
+                    DeviceStatusView(numericalAttrs: self.device.numericalAttrs, textAttrs: self.device.textAttrs, enumAttrs: self.device.enumAttrs, booleanAttrs: self.device.booleanAttrs, showAlert: false, refresh: $refresh, delegate: vc, deviceUri: self.device.uri)
+                        .tabItem {
+                            Image(systemName: "star.square")
+                            Text("设备状态")
+                        }.tag(1)
+                    
                     DeviceHistoryView(datas:self.device.history).tabItem {
                         Image(systemName: "chart.bar")
                         Text("历史数据")

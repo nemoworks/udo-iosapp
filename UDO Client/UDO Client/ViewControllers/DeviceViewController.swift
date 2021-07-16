@@ -126,6 +126,7 @@ class DeviceViewController: UIViewController {
 }
 
 extension DeviceViewController: MessageRecevieDelegate {
+    // MARK: - Receive Message
     func didReceiveMessage(message: CocoaMQTTMessage) {
         print("Recevie Message from MQTT")
         let newDevice = self.parseUDODevice(data: message.string!.data(using: .utf8)!)

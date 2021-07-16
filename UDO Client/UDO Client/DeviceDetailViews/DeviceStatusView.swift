@@ -19,17 +19,10 @@ struct DeviceStatusView: View {
     @State var enumAttrs : [EnumAttribute]
     @State var booleanAttrs : [BooleanAttribute]
     @State var showAlert = false
+    @Binding var refresh: Bool
     var delegate: DeviceStatusSendDelegate?
     var deviceUri: String
     
-    init(device: UDODevice, deviceViewController: DeviceDetailViewController) {
-        self.numericalAttrs = device.numericalAttrs
-        self.textAttrs = device.textAttrs
-        self.enumAttrs = device.enumAttrs
-        self.booleanAttrs = device.booleanAttrs
-        self.deviceUri = device.uri
-        self.delegate = deviceViewController
-    }
     
     @ViewBuilder
     var body: some View {
@@ -178,9 +171,7 @@ struct DeviceStatusView_Previews: PreviewProvider {
         previewDevice.booleanAttrs = [
             BooleanAttribute(name: "On", on: true, editable: false)
         ]
-        return DeviceStatusView(
-            device: previewDevice, deviceViewController: DeviceDetailViewController()
-        )
+        return DeviceStatusView(numericalAttrs: previewDevice.numericalAttrs, textAttrs: previewDevice.textAttrs, enumAttrs: previewDevice.enumAttrs, booleanAttrs: previewDevice.booleanAttrs, refresh: Binding.constant(false), deviceUri: "123")
             
     }
 }
