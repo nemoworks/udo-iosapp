@@ -29,17 +29,17 @@ struct DeviceDetailView: View {
                     DeviceStatusView(device: self.device, delegate: self.vc)
                         .tabItem {
                             Image(systemName: "star.square")
-                            Text("设备状态")
+                            Text("Status")
                         }.tag(1)
                     
                     DeviceHistoryView(datas:self.device.history).tabItem {
                         Image(systemName: "chart.bar")
-                        Text("历史数据")
+                        Text("History")
                     }.tag(2)
                 }
                 Spacer()
             }
-        }
+        }.padding(.init(top: 0, leading: 0, bottom: 20, trailing: 0))
     }
         
 }
