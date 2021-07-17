@@ -4,7 +4,7 @@
 
 - 修改发送到信息的格式： 
 
-  ```json
+  ```
   {
     source: "",
     destination: "",
@@ -25,7 +25,7 @@
 
   - Register： 人向 `topic/register`里发送信息，向后端表明身份。因为人此时未注册，所以`context`为空，发出的信息格式类似于：
 
-    ``` json
+    ``` 
     {
       source: "test@udo.com",
       destination: "backend",
@@ -39,7 +39,7 @@
 
   - Enter context： `backend`向`topic/register`中发送信息，指定将某个人加入到某个上下文中：
 
-    ```json
+    ```
     {
       source: "backend",
       destination: "test@udo.com",
@@ -53,7 +53,7 @@
 
     之后人会以一定周期向`topic/office-409`中发送更新自己的状态的信息：
 
-    ``` json
+    ``` 
     {
       source: "test@udo.com",
       destination: "test@udo.com",
@@ -69,7 +69,7 @@
 
   - Add device： 假定在上下文`office-409`中已经有了多个人，此时后端希望加入一个空气净化器，那么需要在`topic/office-409`中publish这样的信息
 
-    ``` json
+    ``` 
     {
       source: "backend",
       destination: "all",
@@ -85,7 +85,7 @@
 
   - Update device： 人可以对设备进行修改，通过在`topic/office-409`中发送这样的信息：
 
-    ```json
+    ```
     {
       source: "test@udo.com",
       destination: "123456", # 设备uri
@@ -101,7 +101,7 @@
 
   - Delete device: 后端可以将某个设备移出当前上下文，只需要向`topic/office-409`广播这样的信息：
 
-    ``` json
+    ``` 
     {
       source: "backend",
       destination: "all",
