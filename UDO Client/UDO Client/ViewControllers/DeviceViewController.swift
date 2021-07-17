@@ -39,6 +39,16 @@ class DeviceViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "deviceDetail" {
+            let vc = segue.destination as! DeviceDetailViewController
+            let cell = sender as! DeviceTableViewCell
+            let index = self.deviceTableView.indexPath(for: cell)!.row
+            vc.device = self.devices[index]
+        }
+    }
+    
+    
     // if the data represents a new device, return the new device object
     // else return nil
     func parseUDODevice(data: Data)->UDODevice? {
@@ -83,7 +93,7 @@ class DeviceViewController: UIViewController {
                     return nil
                 }
             }
-//            //new device
+            //            //new device
             let newDevice = UDODevice(uri: deviceUri, name: name, avatarUrl: avatarUrl)
             newDevice.originObject = contentDict
             newDevice.loadAttrs(attrs: attrs)
@@ -97,6 +107,79 @@ class DeviceViewController: UIViewController {
         return nil
     }
     
+}
+
+
+extension DeviceViewController: MessageRecevieDelegate {
+    // MARK: - Receive Message
+    // validate where the message come from
+    func didReceiveMessage(message: CocoaMQTTMessage) {
+        print("Recevie Message from MQTT")
+        let messageJSON = JSON(message.string!.data(using: .utf8)!)
+        let topic = message.topic
+        if topic == "topic/register" {
+            let source = messageJSON["source"].string ?? ""
+            let destination = messageJSON["destination"].string ?? ""
+            if source == "backend" && destination == MQTTClient.USER_EMAIL {
+                let newContext = messageJSON["context"].string ?? ""
+                MQTTClient.CURRENT_APPLICATION_CONTEXT = newContext
+                _ = MQTTClient.shared.setUpMQTT()
+                notifyContextChange(newContext: newContext)
+            }
+        } else {
+            print("Receive from topic: \(topic)")
+            let source = messageJSON["source"].string ?? ""
+            let destination = messageJSON["destination"].string ?? ""
+            if source != MQTTClient.USER_EMAIL {
+                // not a message send from myself
+                if destination == "all" {
+                    // parse the device from the message payload
+                    let category = messageJSON["category"].string ?? ""
+                    if category == "update" {
+                        let payload = messageJSON["payload"].rawString() ?? ""
+                        print("Get payload:\(payload)")
+                        if payload != "" {
+                            let data = payload.data(using: .utf8) ?? Data()
+                            let newDevice = parseUDODevice(data: data)
+                            if let newDevice = newDevice {
+                                self.notifyDeviceFound(device: newDevice)
+                                self.devices.append(newDevice)
+                            }
+                            self.deviceTableView.reloadData()
+                        }
+                    }
+                    
+                    if category == "delete" {
+                        print("Try to delete a device")
+                        let payload = messageJSON["payload"].rawString() ?? ""
+                        if payload != "" {
+                            let uri = messageJSON["payload"]["uri"].string ?? ""
+                            if uri != "" {
+                                var deviceIndex = -1
+                                for (index,device) in self.devices.enumerated() {
+                                    if device.uri == uri {
+                                        print("Find the device:\(index)")
+                                        deviceIndex = index
+                                        break
+                                    }
+                                }
+                                if deviceIndex != -1 {
+                                    self.devices.remove(at: deviceIndex)
+                                    self.notifyDeviceRemoved(deviceUri: uri)
+                                    self.deviceTableView.reloadData()
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension DeviceViewController {
+    // MARK: - Notification
     func notifyDeviceFound(device: UDODevice) {
         let content = UNMutableNotificationContent()
         content.title = "New device"
@@ -113,31 +196,41 @@ class DeviceViewController: UIViewController {
         }
     }
     
+    func notifyDeviceRemoved(deviceUri: String) {
+        let content = UNMutableNotificationContent()
+        content.title = "Remove device"
+        content.body = "Remove device: \(deviceUri)"
+        content.sound = .default
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        print("Send notification")
+        self.userNotificationCenter.add(request) {
+            error in
+            if let error = error {
+                print("Notification Error: \(error.localizedDescription)")
+            }
+        }
+    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "deviceDetail" {
-            let vc = segue.destination as! DeviceDetailViewController
-            let cell = sender as! DeviceTableViewCell
-            let index = self.deviceTableView.indexPath(for: cell)!.row
-            vc.device = self.devices[index]
+    func notifyContextChange(newContext: String) {
+        let content = UNMutableNotificationContent()
+        content.title = "Context change"
+        content.body = "Enter new context: \(newContext)"
+        content.sound = .default
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        print("Send notification")
+        self.userNotificationCenter.add(request) {
+            error in
+            if let error = error {
+                print("Notification Error: \(error.localizedDescription)")
+            }
         }
-    }
-
-}
-
-extension DeviceViewController: MessageRecevieDelegate {
-    // MARK: - Receive Message
-    func didReceiveMessage(message: CocoaMQTTMessage) {
-        print("Recevie Message from MQTT")
-        let newDevice = self.parseUDODevice(data: message.string!.data(using: .utf8)!)
-        if let newDevice = newDevice {
-            self.notifyDeviceFound(device: newDevice)
-            self.devices.append(newDevice)
-        }
-        self.deviceTableView.reloadData()
+        
     }
 }
 
+// MARK: - TableView Delegate
 extension DeviceViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.devices.count

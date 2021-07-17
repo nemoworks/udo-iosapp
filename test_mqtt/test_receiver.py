@@ -1,23 +1,26 @@
 import json
 from typing import Dict
 import paho.mqtt.client as mqtt
-from paho.mqtt.subscribeoptions import SubscribeOptions
+from termcolor import colored
 
 
 def on_connect(client: mqtt.Client, userdata, flags, rc):
     print('Connected with result code: {}'.format(rc))
-    client.subscribe([('topic/pub/test@udo.com', 0),
-                      ('topic/sub/test@udo.com', 2), ('topic/pub/123456', 2)])
+    client.subscribe([('topic/register', 0), ('topic/office-409', 0)])
     # client.subscribe('topic/sub')
 
 
-def on_message(client: mqtt.Client, userdata, msg):
+def on_message(client: mqtt.Client, userdata, msg: mqtt.MQTTMessage):
     payload = msg.payload.decode()
     try:
         content_dict = json.loads(s=payload)
-        print(content_dict)
+        print(
+            colored('[Topic:{}]'.format(msg.topic), 'red', attrs=['bold']) +
+            '{}'.format(content_dict))
     except:
-        print(payload)
+        print(
+            colored('[Topic:{}]'.format(msg.topic), 'red', attrs=['bold']) +
+            str(payload))
 
 
 client = mqtt.Client(client_id='cn.edu.nju.czh.Receiver')

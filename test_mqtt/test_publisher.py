@@ -1,23 +1,57 @@
+from io import UnsupportedOperation
 import paho.mqtt.client as mqtt
 import json
 import time
+from argparse import ArgumentParser
+import random
+import math
+
+parser: ArgumentParser = ArgumentParser("MQTT publisher argument parser")
+parser.add_argument(
+    "--type",
+    "-t",
+    required=True,
+    choices=['register', 'update', 'delete'],
+    help="publish to register topic",
+)
+
+opts = parser.parse_args()
 
 
-def publish():
+def publish_register():
+    client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
+    client.username_pw_set(username='udo-user', password='123456')
+    client.connect('210.28.134.32', port=1883)
+    payload = {'name': 'test-user'}
+
+    message = {
+        'source': 'backend',
+        'destination': 'test@udo.com',
+        'category': 'update',
+        'context': 'office-409',
+        'payload': payload
+    }
+
+    message_json = json.dumps(message, indent='  ')
+    client.publish(topic='topic/register', payload=message_json)
+    client.disconnect()
+
+
+def publish_device(category: str):
     client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
     client.username_pw_set(username='udo-user', password='123456')
     client.connect('210.28.134.32', port=1883)
     payload = {
         'name': 'XiaoMi Air Purifier',
-        'id': "1e2w3awdAWd2",
         'avatarUrl': 'http://test.org',
+        'uri': '1e2w3e4r5t',
         'attributes': {
             'Temperature': {
-                'value': 24.5,
+                'value': round(random.random() * 10 + 20, 2),
                 'category': 'numerical'
             },
             'Humidity': {
-                'value': 0.3,
+                'value': round(random.random(), 2),
                 'category': 'numerical'
             },
             'Description': {
@@ -70,16 +104,24 @@ def publish():
             'latitude': 32.11088,
             'longitude': 118.9701
         },
-        'uri': '123456'
     }
 
-    for i in range(1):
-        payload['id'] += "1"
-        payload_json = json.dumps(payload, indent='  ')
-        print(payload_json)
-        client.publish('topic/sub/test@udo.com', payload_json)
-        time.sleep(1)
+    message = {
+        'source': 'backend',
+        'destination': 'all',
+        'category': category,
+        'context': 'office-409',
+        'payload': payload
+    }
+    message_json = json.dumps(message, indent='  ')
+    client.publish(topic='topic/office-409', payload=message_json)
     client.disconnect()
 
 
-publish()
+if __name__ == '__main__':
+    if opts.type == 'register':
+        publish_register()
+    if opts.type == 'update':
+        publish_device(category='update')
+    if opts.type == 'delete':
+        publish_device(category='delete')

@@ -53,7 +53,7 @@ class UserViewController: UIViewController {
         return true
     }
     
-    func makeUserStatusPayload()->Data {
+    func makeUserStatusPayload()->[String: Any] {
         let name = self.userView.userName
         let email = self.userView.userEmail
         var coordinate = CLLocationCoordinate2D()
@@ -62,15 +62,14 @@ class UserViewController: UIViewController {
         }
         let available = self.isAvailable
         let location = ["longitude": coordinate.longitude, "latitude": coordinate.latitude ]
-        let userStatus = UserStatus(name: name, location: location ,available: available, avatarUrl: self.avatarURL, uri: email)
-        let encoder = JSONEncoder()
-        do {
-            let data = try encoder.encode(userStatus)
-            return data
-        }catch {
-            print("Encode error: \(error.localizedDescription)")
-        }
-        return Data()
+        let userStatus:[String: Any] = [
+            "name": name,
+            "uri" : email,
+            "location": location,
+            "available": available,
+            "avatarUrl": avatarURL
+        ]
+        return userStatus
     }
     
     func startTimer() {
@@ -78,8 +77,15 @@ class UserViewController: UIViewController {
             self.timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true){
                 timer in
                 DispatchQueue.global().async {
+                    // MARK:- TODO: check whether the application context is empty
+                    // if the application context is empty, publish to register and request an application context.
+                    // else publish to application context about the user status.
                     let payload = self.makeUserStatusPayload()
-                    _ = MQTTClient.shared.publish(data: payload, uri: self.userView.userEmail)
+                    if MQTTClient.CURRENT_APPLICATION_CONTEXT == "" {
+                        _ = MQTTClient.shared.publishToRegister(payload: payload, destination: MQTTClient.USER_EMAIL)
+                    } else {
+                        _ = MQTTClient.shared.publishToApplicationContext(payload: payload, destination: MQTTClient.USER_EMAIL)
+                    }              
                 }
             }
         }

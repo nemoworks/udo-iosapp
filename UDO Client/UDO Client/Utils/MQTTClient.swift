@@ -12,12 +12,15 @@ protocol MessageRecevieDelegate:AnyObject {
     func didReceiveMessage(message: CocoaMQTTMessage)
 }
 
+
+
 struct MQTTConfiguration : Codable {
     let host:String
     let port: UInt16
 }
 
 class MQTTClient: NSObject {
+    static var CURRENT_APPLICATION_CONTEXT = "" // 当前上下文
     static var USER_EMAIL = ""
     static var BROKER_HOST = ""
     static var BROKER_PORT:UInt16 = 1883
@@ -70,16 +73,32 @@ class MQTTClient: NSObject {
         return self.client?.connState
     }
     
-    func publish(data: Data, uri: String)->Int?{
-        let payload = String(data: data, encoding: .utf8)!
-        _ = MQTTClient.logClient.publish("topic/log", withString: payload)
-        return self.client?.publish("topic/pub/" + uri, withString: payload)
+    func publishToRegister(payload: [String: Any], destination:String)->Int? {
+        // MARK: - TODO: publish to register
+        var message:[String: Any] = [:]
+        message["source"] = MQTTClient.USER_EMAIL
+        message["destination"] = destination
+        message["category"] = "update"
+        message["context"] = ""
+        message["payload"] = payload
+        let jsonObject = JSON(message)
+        let jsonStr = jsonObject.rawString()!
+        return self.client?.publish("topic/register", withString: jsonStr)
     }
     
-    func publish(str: String, uri: String)->Int? {
-        _ = MQTTClient.logClient.publish("topic/log", withString: str)
-        return self.client?.publish("topic/pub/" + uri, withString: str)
+    func publishToApplicationContext(payload: [String: Any], destination:String)->Int? {
+        // MARK: - TODO: publish to application context
+        var message:[String: Any] = [:]
+        message["source"] = MQTTClient.USER_EMAIL
+        message["destination"] = destination
+        message["category"] = "update"
+        message["context"] = MQTTClient.CURRENT_APPLICATION_CONTEXT
+        message["payload"] = payload
+        let jsonObject = JSON(message)
+        let jsonStr = jsonObject.rawString()!
+        return self.client?.publish("topic/" + MQTTClient.CURRENT_APPLICATION_CONTEXT, withString: jsonStr)
     }
+    
     
     func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -121,7 +140,11 @@ extension MQTTClient: CocoaMQTTDelegate {
     
     // These two methods are all we care about for now.
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        self.client?.subscribe("topic/sub/" + MQTTClient.USER_EMAIL)
+        if MQTTClient.CURRENT_APPLICATION_CONTEXT == ""  {
+            self.client?.subscribe("topic/register")
+        } else {
+            self.client?.subscribe([("topic/register", .qos0), ("topic/" + MQTTClient.CURRENT_APPLICATION_CONTEXT, .qos0)])
+        }
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
@@ -137,8 +160,6 @@ extension MQTTClient: CocoaMQTTDelegate {
         print("MQTT did publish ack \(id) ")
     }
     
-    
-    
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
         
     }
@@ -148,11 +169,11 @@ extension MQTTClient: CocoaMQTTDelegate {
     }
     
     func mqttDidPing(_ mqtt: CocoaMQTT) {
-        print("MQTT did ping")
+//        print("MQTT did ping")
     }
     
     func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
-        print("MQTT did pong")
+//        print("MQTT did pong")
     }
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
