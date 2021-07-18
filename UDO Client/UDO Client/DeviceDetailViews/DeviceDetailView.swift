@@ -23,25 +23,23 @@ struct DeviceDetailView: View {
     
     
     var body: some View {
-        VStack {
-            HStack {
-                TabView{
-                    DeviceStatusView(device: self.device, delegate: self.vc)
-                        .tabItem {
-                            Image(systemName: "star.square")
-                            Text("Status")
-                        }.tag(1)
-                    
-                    DeviceHistoryView(datas:self.device.history).tabItem {
-                        Image(systemName: "chart.bar")
-                        Text("History")
-                    }.tag(2)
-                }
-                Spacer()
-            }
-        }.padding(.init(top: 0, leading: 0, bottom: 20, trailing: 0))
-    }
         
+        
+        TabView{
+            DeviceStatusView(device: self.device, delegate: self.vc)
+                .tabItem {
+                    Image(systemName: "star.square")
+                    Text("Status")
+                }.tag(1)
+            
+            DeviceHistoryView(datas:self.device.history).tabItem {
+                Image(systemName: "chart.bar")
+                Text("History")
+            }.tag(2)
+        }.edgesIgnoringSafeArea(.all)
+        
+    }
+    
 }
 
 struct DeviceDetailView_Previews: PreviewProvider {
