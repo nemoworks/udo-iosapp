@@ -28,7 +28,7 @@
     ``` 
     {
       source: "test@udo.com",
-      destination: "backend",
+      destination: "test@udo.com",
       context: "",
       category: "update",
       payload: {
