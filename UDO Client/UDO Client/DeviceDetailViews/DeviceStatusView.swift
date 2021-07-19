@@ -21,6 +21,7 @@ struct DeviceStatusView: View {
     @State var showAlert = false
     var delegate: DeviceStatusSendDelegate?
     var deviceUri: String
+    var context: String
     var device: UDODevice
     
     init(device: UDODevice, delegate: DeviceStatusSendDelegate?) {
@@ -31,6 +32,7 @@ struct DeviceStatusView: View {
         self.enumAttrs = device.enumAttrs
         self.booleanAttrs = device.booleanAttrs
         self.numericalAttrs = device.numericalAttrs
+        self.context = device.context
     }
     
     
@@ -63,6 +65,16 @@ struct DeviceStatusView: View {
                     Text(self.deviceUri).foregroundColor(.gray)
                     Spacer()
                 }
+                
+                HStack {
+                    Text("Device context:")
+                        .font(.title2)
+                        .bold()
+                        .padding(.trailing, 20)
+                    Text(self.context).foregroundColor(.gray)
+                    Spacer()
+                }
+                
             }.padding()
             
             Divider().padding()

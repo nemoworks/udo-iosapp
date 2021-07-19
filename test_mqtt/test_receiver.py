@@ -6,7 +6,8 @@ from termcolor import colored
 
 def on_connect(client: mqtt.Client, userdata, flags, rc):
     print('Connected with result code: {}'.format(rc))
-    client.subscribe([('topic/register', 0), ('topic/office-409', 0)])
+    client.subscribe([('topic/register', 0), ('topic/office-409', 0),
+                      ('topic/office-809', 0), ('topic/office-803', 0)])
     # client.subscribe('topic/sub')
 
 

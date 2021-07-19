@@ -20,16 +20,14 @@ class ResourceViewController: UIViewController {
         self.tableView.separatorStyle = .none
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "deviceDetail" {
+            let vc = segue.destination as! DeviceDetailViewController
+            let cell = sender as! ResourceTableViewCell
+            let index = self.tableView.indexPath(for: cell)!.row
+            vc.device = DataManager.shared.devices[index]
+        }
     }
-    */
 
 }
 
@@ -42,9 +40,9 @@ extension ResourceViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell") as! ResourceTableViewCell
         let index = indexPath.row
         let device = DataManager.shared.devices[index]
-        cell.context.text = device.context
+        cell.resourceContext.text = device.context
         cell.resourceUri.text = device.uri
-        let image = imageWithImage(image: UIImage(named: "air-purifier")!, scaledToSize: CGSize(width: 96, height: 96))
+        let image = UIImage(named: "air-purifier")
         cell.resourceImage.image = image
         return cell
     }
@@ -60,6 +58,10 @@ extension ResourceViewController: UITableViewDelegate, UITableViewDataSource {
         maskLayer.backgroundColor = UIColor.black.cgColor
         maskLayer.frame = CGRect(x: cell.bounds.origin.x, y: cell.bounds.origin.y, width: cell.bounds.width, height:cell.bounds.height).insetBy(dx: 0, dy: verticalPadding/2)
         cell.layer.mask = maskLayer
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
     }
     
 }

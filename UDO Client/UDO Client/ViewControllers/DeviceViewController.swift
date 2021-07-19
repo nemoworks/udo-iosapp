@@ -12,6 +12,7 @@ import UserNotifications
 class DeviceViewController: UIViewController {
     @IBOutlet weak var deviceTableView: UITableView!
     
+    var context: String = ""
     var devices: [UDODevice] = []
     
     override func viewDidLoad() {
@@ -22,6 +23,7 @@ class DeviceViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        self.loadDevices()
         self.deviceTableView.delegate = self
         self.deviceTableView.dataSource = self
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -36,6 +38,17 @@ class DeviceViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func refresh(_ sender: Any) {
+        if self.isViewLoaded {
+            self.loadDevices()
+        }
+    }
+    
+    func loadDevices() {
+        self.devices = DataManager.shared.getDevicesByContext(context: self.context)
+        self.deviceTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

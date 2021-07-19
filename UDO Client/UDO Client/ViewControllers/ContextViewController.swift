@@ -20,6 +20,18 @@ class ContextViewController: UIViewController {
         self.tableView.separatorStyle = .none
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "devicesSegue" {
+            let cell = sender as! ContextTableViewCell
+            let indexPath = tableView.indexPath(for: cell)
+            let index = indexPath!.row
+            let context = DataManager.shared.contexts[index]
+            let vc = segue.destination as! DeviceViewController
+            vc.context = context
+            vc.title = "Context/" + context
+        }
+    }
+    
 }
 
 extension ContextViewController: UITableViewDelegate, UITableViewDataSource {

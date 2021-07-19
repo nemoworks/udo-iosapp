@@ -8,9 +8,10 @@
 import UIKit
 
 class ResourceTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var resourceImage: UIImageView!
     @IBOutlet weak var resourceUri: UILabel!
-    @IBOutlet weak var context: UILabel!
+    @IBOutlet weak var resourceContext: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

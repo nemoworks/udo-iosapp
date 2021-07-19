@@ -25,7 +25,13 @@ class DataManager: NSObject {
     }
     
     func getDevicesByContext(context:String)->[UDODevice] {
-        return []
+        var devicesInContext:[UDODevice] = []
+        for device in self.devices {
+            if device.context == context {
+                devicesInContext.append(device)
+            }
+        }
+        return devicesInContext
     }
     
     func parseUDODevice(data: Data, context:String)->UDODevice? {
@@ -62,7 +68,7 @@ class DataManager: NSObject {
             }
             
             for (index, device) in self.devices.enumerated() {
-                if device.uri == deviceUri {
+                if device.uri == deviceUri && device.context == context {
                     self.devices[index].originObject = contentDict
                     self.devices[index].loadAttrs(attrs: attrs)
                     self.devices[index].loadHistory(history: historyData)
@@ -123,8 +129,9 @@ extension DataManager: MessageRecevieDelegate {
                             let data = payload.data(using: .utf8) ?? Data()
                             let newDevice = parseUDODevice(data: data, context: context)
                             if let newDevice = newDevice {
-                                self.notifyDeviceFound(device: newDevice)
+                                print("Will append new device:\(newDevice)")
                                 self.devices.append(newDevice)
+                                self.notifyDeviceFound(device: newDevice)
                             }
                         }
                     }

@@ -18,7 +18,7 @@ parser.add_argument(
 opts = parser.parse_args()
 
 
-def publish_register():
+def publish_register(context: str):
     client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
     client.username_pw_set(username='udo-user', password='123456')
     client.connect('210.28.134.32', port=1883)
@@ -28,7 +28,7 @@ def publish_register():
         'source': 'backend',
         'destination': 'test@udo.com',
         'category': 'update',
-        'context': 'office-409',
+        'context': context,
         'payload': payload
     }
 
@@ -37,14 +37,14 @@ def publish_register():
     client.disconnect()
 
 
-def publish_device(category: str):
+def publish_device(category: str, context: str, uri: str):
     client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
     client.username_pw_set(username='udo-user', password='123456')
     client.connect('210.28.134.32', port=1883)
     payload = {
         'name': 'XiaoMi Air Purifier',
         'avatarUrl': 'http://test.org',
-        'uri': '1e2w3e4r5t',
+        'uri': uri,
         'attributes': {
             'Temperature': {
                 'value': round(random.random() * 10 + 20, 2),
@@ -110,18 +110,26 @@ def publish_device(category: str):
         'source': 'backend',
         'destination': 'all',
         'category': category,
-        'context': 'office-409',
+        'context': context,
         'payload': payload
     }
     message_json = json.dumps(message, indent='  ')
-    client.publish(topic='topic/office-409', payload=message_json)
+    client.publish(topic='topic/' + context, payload=message_json)
     client.disconnect()
 
 
 if __name__ == '__main__':
+    device_uris = ['1q2w3e', '1q2w3f', '1q2w3g']
     if opts.type == 'register':
-        publish_register()
+        for context in ['office-409', 'office-809', 'office-803']:
+            publish_register(context=context)
+            time.sleep(0.4)
     if opts.type == 'update':
-        publish_device(category='update')
+        for context in ['office-409', 'office-809', 'office-803']:
+            for device_uri in device_uris:
+                publish_device(category='update',
+                               context=context,
+                               uri=device_uri)
+                time.sleep(0.4)
     if opts.type == 'delete':
         publish_device(category='delete')
