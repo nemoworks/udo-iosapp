@@ -199,7 +199,7 @@ struct DeviceStatus: Encodable {
 
 struct DeviceStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        let previewDevice = UDODevice(uri: "0x12345678", name: "XiaoMi Air Purifier", avatarUrl: "")
+        let previewDevice = UDODevice(uri: "0x12345678", name: "XiaoMi Air Purifier", context: "office-409", avatarUrl: "")
         previewDevice.textAttrs = [
             TextAttribute(name: "Description", content: "Xiaomi air purifier can purify the air")
         ]

@@ -104,7 +104,7 @@ extension DeviceDetailViewController: DeviceStatusSendDelegate {
             }
         }
         let payload = jsonObject.dictionaryObject!
-        let sendFlag = MQTTClient.shared.publishToApplicationContext(payload: payload, destination: deviceStatus.uri)
+        let sendFlag = MQTTClient.shared.publishToApplicationContext(payload: payload, destination: deviceStatus.uri, context: self.device!.context)
         return sendFlag
     }
 }

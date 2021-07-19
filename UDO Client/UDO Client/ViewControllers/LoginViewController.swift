@@ -31,9 +31,12 @@ extension LoginViewController: LoginProtocol {
         // self.dismiss(animated: true, completion: nil)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let tabBarController = storyboard.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
-        let deviceViewController = (tabBarController.viewControllers?.first as! UINavigationController).viewControllers.first as! DeviceViewController
-        let userViewController = (tabBarController.viewControllers?[1] as! UINavigationController).viewControllers.first as! UserViewController
-        MQTTClient.shared.delegate = deviceViewController
+        let userViewController = (tabBarController.viewControllers?[0] as! UINavigationController).viewControllers.first as! UserViewController
+        let resourceViewController = (tabBarController.viewControllers?[1] as! UINavigationController).viewControllers.first as! ResourceViewController
+        let contextViewController = (tabBarController.viewControllers?[2] as! UINavigationController).viewControllers.first as! ContextViewController
+        DataManager.shared.resourceFoundDelegate = resourceViewController
+        DataManager.shared.contextFoundDelegate = contextViewController
+        MQTTClient.shared.delegate = DataManager.shared
         userViewController.startTimer()
         tabBarController.modalPresentationStyle = .fullScreen
         self.present(tabBarController, animated: true, completion: nil)

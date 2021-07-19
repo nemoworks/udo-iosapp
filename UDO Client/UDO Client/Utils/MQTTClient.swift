@@ -20,7 +20,6 @@ struct MQTTConfiguration : Codable {
 }
 
 class MQTTClient: NSObject {
-    static var CURRENT_APPLICATION_CONTEXT = "" // 当前上下文
     static var USER_EMAIL = ""
     static var BROKER_HOST = ""
     static var BROKER_PORT:UInt16 = 1883
@@ -86,17 +85,17 @@ class MQTTClient: NSObject {
         return self.client?.publish("topic/register", withString: jsonStr)
     }
     
-    func publishToApplicationContext(payload: [String: Any], destination:String)->Int? {
+    func publishToApplicationContext(payload: [String: Any], destination:String, context:String)->Int? {
         // MARK: - TODO: publish to application context
         var message:[String: Any] = [:]
         message["source"] = MQTTClient.USER_EMAIL
         message["destination"] = destination
         message["category"] = "update"
-        message["context"] = MQTTClient.CURRENT_APPLICATION_CONTEXT
+        message["context"] = context
         message["payload"] = payload
         let jsonObject = JSON(message)
         let jsonStr = jsonObject.rawString()!
-        return self.client?.publish("topic/" + MQTTClient.CURRENT_APPLICATION_CONTEXT, withString: jsonStr)
+        return self.client?.publish("topic/" + context, withString: jsonStr)
     }
     
     
@@ -140,11 +139,11 @@ extension MQTTClient: CocoaMQTTDelegate {
     
     // These two methods are all we care about for now.
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        if MQTTClient.CURRENT_APPLICATION_CONTEXT == ""  {
-            self.client?.subscribe("topic/register")
-        } else {
-            self.client?.subscribe([("topic/register", .qos0), ("topic/" + MQTTClient.CURRENT_APPLICATION_CONTEXT, .qos0)])
+        var topicLists:[(String, CocoaMQTTQoS)] = [("topic/register", .qos0),]
+        for context in DataManager.shared.contexts {
+            topicLists.append(("topic/" + context, .qos0))
         }
+        self.client?.subscribe(topicLists)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {

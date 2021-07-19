@@ -12,6 +12,7 @@ class UDODevice: NSObject {
     let deviceName: String
     let avatarUrl: String
     let uri: String
+    let context: String
     var numericalAttrs : [NumericalAttribute]
     var textAttrs : [TextAttribute]
     var enumAttrs : [EnumAttribute]
@@ -23,10 +24,11 @@ class UDODevice: NSObject {
     
     public override var description: String {return "Device: \(self.deviceName) @ \(self.uri)"}
     
-    init( uri: String, name:String, avatarUrl:String) {
+    init( uri: String, name:String, context: String, avatarUrl:String) {
         self.deviceName = name
         self.avatarUrl = avatarUrl
         self.uri = uri
+        self.context = context
         self.numericalAttrs = []
         self.textAttrs = []
         self.enumAttrs = []

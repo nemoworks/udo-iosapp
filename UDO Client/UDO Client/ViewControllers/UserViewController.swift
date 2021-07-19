@@ -81,10 +81,12 @@ class UserViewController: UIViewController {
                     // if the application context is empty, publish to register and request an application context.
                     // else publish to application context about the user status.
                     let payload = self.makeUserStatusPayload()
-                    if MQTTClient.CURRENT_APPLICATION_CONTEXT == "" {
+                    if DataManager.shared.contexts.count == 0 {
                         _ = MQTTClient.shared.publishToRegister(payload: payload, destination: MQTTClient.USER_EMAIL)
                     } else {
-                        _ = MQTTClient.shared.publishToApplicationContext(payload: payload, destination: MQTTClient.USER_EMAIL)
+                        for context in DataManager.shared.contexts {
+                            _ = MQTTClient.shared.publishToApplicationContext(payload: payload, destination: MQTTClient.USER_EMAIL, context: context)
+                        }
                     }              
                 }
             }

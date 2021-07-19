@@ -19,6 +19,11 @@
 		A0642036269DBB1800106529 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0642035269DBB1800106529 /* LoginView.swift */; };
 		A06BFB4526903D8500504FDF /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BFB4426903D8500504FDF /* UserViewController.swift */; };
 		A06BFB4726903D9900504FDF /* UserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06BFB4626903D9900504FDF /* UserStatusView.swift */; };
+		A07C8FF426A5587900923CA0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C8FF326A5587900923CA0 /* DataManager.swift */; };
+		A07C8FF626A558A800923CA0 /* ContextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C8FF526A558A800923CA0 /* ContextViewController.swift */; };
+		A07C8FF826A55A2800923CA0 /* ResourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C8FF726A55A2800923CA0 /* ResourceViewController.swift */; };
+		A07C8FFC26A5657B00923CA0 /* ResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C8FFB26A5657B00923CA0 /* ResourceTableViewCell.swift */; };
+		A07C8FFE26A56D1D00923CA0 /* ContextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C8FFD26A56D1D00923CA0 /* ContextTableViewCell.swift */; };
 		A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD368266F8B1800E67089 /* MQTTClient.swift */; };
 		A0ACD36F266FA19900E67089 /* UDODevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD36E266FA19900E67089 /* UDODevice.swift */; };
 		A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3732670577600E67089 /* NumericalAttribute.swift */; };
@@ -54,6 +59,11 @@
 		A06BFB4426903D8500504FDF /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		A06BFB4626903D9900504FDF /* UserStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusView.swift; sourceTree = "<group>"; };
 		A06BFB4A269329EA00504FDF /* UDO ClientDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UDO ClientDebug.entitlements"; sourceTree = "<group>"; };
+		A07C8FF326A5587900923CA0 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		A07C8FF526A558A800923CA0 /* ContextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextViewController.swift; sourceTree = "<group>"; };
+		A07C8FF726A55A2800923CA0 /* ResourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceViewController.swift; sourceTree = "<group>"; };
+		A07C8FFB26A5657B00923CA0 /* ResourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceTableViewCell.swift; sourceTree = "<group>"; };
+		A07C8FFD26A56D1D00923CA0 /* ContextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextTableViewCell.swift; sourceTree = "<group>"; };
 		A08AF49B268C2F1E002F9D8C /* UDO ClientRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UDO ClientRelease.entitlements"; sourceTree = "<group>"; };
 		A0ACD368266F8B1800E67089 /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
 		A0ACD36E266FA19900E67089 /* UDODevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDODevice.swift; sourceTree = "<group>"; };
@@ -107,11 +117,13 @@
 				A06BFB4A269329EA00504FDF /* UDO ClientDebug.entitlements */,
 				A08AF49B268C2F1E002F9D8C /* UDO ClientRelease.entitlements */,
 				A0ACD37F2670FDF600E67089 /* Resources */,
+				A0ACD36A266F9F2A00E67089 /* Types */,
 				A0ACD36D266F9F5400E67089 /* Utils */,
 				A06BFB4326903D1F00504FDF /* UserViews */,
 				A0D74F342678907A00FE86E1 /* DeviceDetailViews */,
+				A07C8FF926A5647900923CA0 /* ResourceViews */,
+				A07C8FFA26A564A100923CA0 /* ContextViews */,
 				A0642034269DBAE000106529 /* LoginViews */,
-				A0ACD36A266F9F2A00E67089 /* Types */,
 				A0642033269D941B00106529 /* ViewControllers */,
 				A0065998266F54ED0089E5F1 /* Info.plist */,
 			);
@@ -121,8 +133,10 @@
 		A0642033269D941B00106529 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A006598E266F54EC0089E5F1 /* DeviceViewController.swift */,
+				A07C8FF726A55A2800923CA0 /* ResourceViewController.swift */,
+				A07C8FF526A558A800923CA0 /* ContextViewController.swift */,
 				A06BFB4426903D8500504FDF /* UserViewController.swift */,
+				A006598E266F54EC0089E5F1 /* DeviceViewController.swift */,
 				A064202D269D8E2900106529 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
@@ -145,6 +159,22 @@
 			path = UserViews;
 			sourceTree = "<group>";
 		};
+		A07C8FF926A5647900923CA0 /* ResourceViews */ = {
+			isa = PBXGroup;
+			children = (
+				A07C8FFB26A5657B00923CA0 /* ResourceTableViewCell.swift */,
+			);
+			path = ResourceViews;
+			sourceTree = "<group>";
+		};
+		A07C8FFA26A564A100923CA0 /* ContextViews */ = {
+			isa = PBXGroup;
+			children = (
+				A07C8FFD26A56D1D00923CA0 /* ContextTableViewCell.swift */,
+			);
+			path = ContextViews;
+			sourceTree = "<group>";
+		};
 		A0ACD36A266F9F2A00E67089 /* Types */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +190,7 @@
 				A04F7D5A269AC9870028D9F1 /* SwiftyJSON.swift */,
 				A0ACD368266F8B1800E67089 /* MQTTClient.swift */,
 				A0B9DB7C26971E3000DD4134 /* ImageUtils.swift */,
+				A07C8FF326A5587900923CA0 /* DataManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -283,9 +314,11 @@
 			files = (
 				A064202E269D8E2900106529 /* LoginViewController.swift in Sources */,
 				A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */,
+				A07C8FF626A558A800923CA0 /* ContextViewController.swift in Sources */,
 				A06BFB4526903D8500504FDF /* UserViewController.swift in Sources */,
 				A06BFB4726903D9900504FDF /* UserStatusView.swift in Sources */,
 				A04F7D5B269AC9870028D9F1 /* SwiftyJSON.swift in Sources */,
+				A07C8FF426A5587900923CA0 /* DataManager.swift in Sources */,
 				A006598F266F54EC0089E5F1 /* DeviceViewController.swift in Sources */,
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
 				A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */,
@@ -299,10 +332,13 @@
 				A006598D266F54EC0089E5F1 /* SceneDelegate.swift in Sources */,
 				A0B9DB7B26971C0400DD4134 /* UDOMapAnnotation.swift in Sources */,
 				A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */,
+				A07C8FF826A55A2800923CA0 /* ResourceViewController.swift in Sources */,
+				A07C8FFE26A56D1D00923CA0 /* ContextTableViewCell.swift in Sources */,
 				A0ACD3812671AFC600E67089 /* DeviceDetailViewController.swift in Sources */,
 				A0ACD3762670578500E67089 /* TextAttribute.swift in Sources */,
 				A04F7D59269A8F720028D9F1 /* UserAvatar.swift in Sources */,
 				A0ACD3782670579300E67089 /* EnumAttribute.swift in Sources */,
+				A07C8FFC26A5657B00923CA0 /* ResourceTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
