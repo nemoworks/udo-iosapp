@@ -21,14 +21,14 @@ class ContextViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "devicesSegue" {
+        if segue.identifier == "contextMenuSegue" {
             let cell = sender as! ContextTableViewCell
             let indexPath = tableView.indexPath(for: cell)
             let index = indexPath!.row
             let context = DataManager.shared.contexts[index]
-            let vc = segue.destination as! DeviceViewController
+            let vc = segue.destination as! ContextMenuViewController
             vc.context = context
-            vc.title = "Context/" + context
+            vc.title = "Applications/" + context
         }
     }
     

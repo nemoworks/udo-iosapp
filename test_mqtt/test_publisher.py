@@ -68,26 +68,11 @@ def publish_device(category: str, context: str, uri: str):
                 'category': 'enum',
                 'editable': True
             },
-            'Speed2': {
-                'value': 'mid',
-                'options': {
-                    "option1": 'low',
-                    "option2": 'mid',
-                    "option3": 'high'
-                },
-                'category': 'enum',
-                'editable': True
-            },
             'On': {
                 'value': True,
                 'category': 'boolean',
                 'editable': True
             },
-            'On2': {
-                'value': True,
-                'category': 'boolean',
-                'editable': False
-            }
         },
         'history': {
             'Temperature': [
