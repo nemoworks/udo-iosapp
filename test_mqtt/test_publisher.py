@@ -33,7 +33,7 @@ def publish_register(context: str):
     }
 
     message_json = json.dumps(message, indent='  ')
-    client.publish(topic='topic/register', payload=message_json)
+    client.publish(topic='topic/register', payload=message_json, qos=1)
     client.disconnect()
 
 
@@ -114,7 +114,7 @@ def publish_device(category: str, context: str, uri: str):
         'payload': payload
     }
     message_json = json.dumps(message, indent='  ')
-    client.publish(topic='topic/' + context, payload=message_json)
+    client.publish(topic='topic/' + context, payload=message_json, qos=1)
     client.disconnect()
 
 
@@ -123,13 +123,14 @@ if __name__ == '__main__':
     if opts.type == 'register':
         for context in ['office-409', 'office-809', 'office-803']:
             publish_register(context=context)
-            time.sleep(0.4)
+            time.sleep(0.5)
     if opts.type == 'update':
         for context in ['office-409', 'office-809', 'office-803']:
             for device_uri in device_uris:
                 publish_device(category='update',
                                context=context,
                                uri=device_uri)
-                time.sleep(0.4)
+                time.sleep(0.5)
+
     if opts.type == 'delete':
         publish_device(category='delete')

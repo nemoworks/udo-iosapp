@@ -82,7 +82,7 @@ class MQTTClient: NSObject {
         message["payload"] = payload
         let jsonObject = JSON(message)
         let jsonStr = jsonObject.rawString()!
-        return self.client?.publish("topic/register", withString: jsonStr)
+        return self.client?.publish("topic/register", withString: jsonStr, qos: .qos1)
     }
     
     func publishToApplicationContext(payload: [String: Any], destination:String, context:String)->Int? {
@@ -95,7 +95,7 @@ class MQTTClient: NSObject {
         message["payload"] = payload
         let jsonObject = JSON(message)
         let jsonStr = jsonObject.rawString()!
-        return self.client?.publish("topic/" + context, withString: jsonStr)
+        return self.client?.publish("topic/" + context, withString: jsonStr, qos: .qos1)
     }
     
     
@@ -139,15 +139,15 @@ extension MQTTClient: CocoaMQTTDelegate {
     
     // These two methods are all we care about for now.
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-        var topicLists:[(String, CocoaMQTTQoS)] = [("topic/register", .qos0),]
+        var topicLists:[(String, CocoaMQTTQoS)] = [("topic/register", .qos2),]
         for context in DataManager.shared.contexts {
-            topicLists.append(("topic/" + context, .qos0))
+            topicLists.append(("topic/" + context, .qos2))
         }
         self.client?.subscribe(topicLists)
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-        self.delegate?.didReceiveMessage(message: message)
+            self.delegate?.didReceiveMessage(message: message)
     }
     
     // Other methods

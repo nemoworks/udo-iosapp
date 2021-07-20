@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -70,6 +71,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="ltM-TS-1LF">
+                                <rect key="frame" x="312" y="730" width="70" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="rectangle.stack.fill.badge.plus" catalog="system" renderingMode="original"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Dp3-ci-jo5" kind="show" id="XVl-13-7zj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -93,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4358" y="905"/>
+            <point key="canvasLocation" x="4357.971014492754" y="904.6875"/>
         </scene>
         <!--Device Detail View Controller-->
         <scene sceneID="4yl-m2-pqm">
@@ -452,14 +463,52 @@
             </objects>
             <point key="canvasLocation" x="2106" y="119"/>
         </scene>
+        <!--Upload-->
+        <scene sceneID="FKh-3c-wmT">
+            <objects>
+                <viewController id="Dp3-ci-jo5" customClass="TaskViewController" customModule="UDO_Client" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WRE-rR-tKL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQl-3q-52d">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ajV-vF-yOa"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ajV-vF-yOa" firstAttribute="trailing" secondItem="WQl-3q-52d" secondAttribute="trailing" id="PIi-ZQ-aTk"/>
+                            <constraint firstItem="ajV-vF-yOa" firstAttribute="bottom" secondItem="WQl-3q-52d" secondAttribute="bottom" id="Uu9-ta-g9R"/>
+                            <constraint firstItem="WQl-3q-52d" firstAttribute="leading" secondItem="ajV-vF-yOa" secondAttribute="leading" id="lDW-x2-jmz"/>
+                            <constraint firstItem="WQl-3q-52d" firstAttribute="top" secondItem="ajV-vF-yOa" secondAttribute="top" id="ysu-9x-2Sf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Upload" id="ilq-rX-AK4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="qKK-o7-ZYb">
+                            <connections>
+                                <action selector="done:" destination="Dp3-ci-jo5" id="9oS-py-u66"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="theContainer" destination="WQl-3q-52d" id="lCG-o0-zaa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4zf-ic-mHF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4358" y="1661"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VYJ-QJ-gg9"/>
+        <segue reference="eFC-nF-ng2"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise.circle" catalog="system" width="128" height="121"/>
         <image name="circles.hexagonpath.fill" catalog="system" width="128" height="112"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="rectangle.stack.fill.badge.plus" catalog="system" width="128" height="117"/>
         <image name="square.grid.3x3.fill" catalog="system" width="128" height="112"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
