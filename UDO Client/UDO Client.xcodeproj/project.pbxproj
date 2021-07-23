@@ -27,6 +27,9 @@
 		A07C900A26A6BAE500923CA0 /* ContextMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C900926A6BAE500923CA0 /* ContextMenuViewController.swift */; };
 		A07C900C26A6BF6100923CA0 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C900B26A6BF6100923CA0 /* TaskViewController.swift */; };
 		A07C900F26A6C09900923CA0 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C900E26A6C09900923CA0 /* TaskTableViewCell.swift */; };
+		A07C901326A7E21600923CA0 /* TaskAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C901226A7E21600923CA0 /* TaskAddViewController.swift */; };
+		A07C901526A7E26300923CA0 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C901426A7E26300923CA0 /* TaskView.swift */; };
+		A07C901726A7E28200923CA0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07C901626A7E28200923CA0 /* ImagePicker.swift */; };
 		A0ACD369266F8B1800E67089 /* MQTTClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD368266F8B1800E67089 /* MQTTClient.swift */; };
 		A0ACD36F266FA19900E67089 /* UDODevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD36E266FA19900E67089 /* UDODevice.swift */; };
 		A0ACD3742670577600E67089 /* NumericalAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3732670577600E67089 /* NumericalAttribute.swift */; };
@@ -69,6 +72,9 @@
 		A07C900926A6BAE500923CA0 /* ContextMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuViewController.swift; sourceTree = "<group>"; };
 		A07C900B26A6BF6100923CA0 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		A07C900E26A6C09900923CA0 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		A07C901226A7E21600923CA0 /* TaskAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAddViewController.swift; sourceTree = "<group>"; };
+		A07C901426A7E26300923CA0 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
+		A07C901626A7E28200923CA0 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A08AF49B268C2F1E002F9D8C /* UDO ClientRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "UDO ClientRelease.entitlements"; sourceTree = "<group>"; };
 		A0ACD368266F8B1800E67089 /* MQTTClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTClient.swift; sourceTree = "<group>"; };
 		A0ACD36E266FA19900E67089 /* UDODevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDODevice.swift; sourceTree = "<group>"; };
@@ -145,6 +151,7 @@
 				A006598E266F54EC0089E5F1 /* DeviceViewController.swift */,
 				A064202D269D8E2900106529 /* LoginViewController.swift */,
 				A07C900B26A6BF6100923CA0 /* TaskViewController.swift */,
+				A07C901226A7E21600923CA0 /* TaskAddViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -186,6 +193,8 @@
 			isa = PBXGroup;
 			children = (
 				A07C900E26A6C09900923CA0 /* TaskTableViewCell.swift */,
+				A07C901426A7E26300923CA0 /* TaskView.swift */,
+				A07C901626A7E28200923CA0 /* ImagePicker.swift */,
 			);
 			path = TaskViews;
 			sourceTree = "<group>";
@@ -334,6 +343,7 @@
 				A06BFB4726903D9900504FDF /* UserStatusView.swift in Sources */,
 				A04F7D5B269AC9870028D9F1 /* SwiftyJSON.swift in Sources */,
 				A07C8FF426A5587900923CA0 /* DataManager.swift in Sources */,
+				A07C901326A7E21600923CA0 /* TaskAddViewController.swift in Sources */,
 				A006598F266F54EC0089E5F1 /* DeviceViewController.swift in Sources */,
 				A006598B266F54EC0089E5F1 /* AppDelegate.swift in Sources */,
 				A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */,
@@ -342,11 +352,13 @@
 				A0ACD37A2670584100E67089 /* BooleanAttribute.swift in Sources */,
 				A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */,
 				A0ACD37E2670FDE600E67089 /* DeviceTableViewCell.swift in Sources */,
+				A07C901726A7E28200923CA0 /* ImagePicker.swift in Sources */,
 				A0ACD36F266FA19900E67089 /* UDODevice.swift in Sources */,
 				A0B9DB7D26971E3000DD4134 /* ImageUtils.swift in Sources */,
 				A006598D266F54EC0089E5F1 /* SceneDelegate.swift in Sources */,
 				A0B9DB7B26971C0400DD4134 /* UDOMapAnnotation.swift in Sources */,
 				A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */,
+				A07C901526A7E26300923CA0 /* TaskView.swift in Sources */,
 				A07C8FF826A55A2800923CA0 /* ResourceViewController.swift in Sources */,
 				A07C900C26A6BF6100923CA0 /* TaskViewController.swift in Sources */,
 				A07C8FFE26A56D1D00923CA0 /* ContextTableViewCell.swift in Sources */,

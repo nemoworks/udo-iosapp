@@ -42,7 +42,10 @@ extension ResourceViewController: UITableViewDelegate, UITableViewDataSource {
         let device = DataManager.shared.devices[index]
         cell.resourceContext.text = device.context
         cell.resourceUri.text = device.uri
-        let image = UIImage(named: "air-purifier")
+        var image = UIImage(named: "bus")
+        if device.isHass {
+            image = UIImage(named: "air-purifier")
+        }
         cell.resourceImage.image = image
         return cell
     }

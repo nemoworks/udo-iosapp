@@ -15,10 +15,10 @@ class TaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.taskTableView.delegate = self
         self.taskTableView.dataSource = self
         // Do any additional setup after loading the view.
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.taskTableView.separatorStyle = .none
     }
     

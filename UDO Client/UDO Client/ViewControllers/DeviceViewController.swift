@@ -76,7 +76,10 @@ extension DeviceViewController: UITableViewDelegate, UITableViewDataSource {
         let device = self.devices[index]
         cell.deviceName.text = device.deviceName
         cell.deviceDescription.text = device.description
-        let image = UIImage(named: "air-purifier")
+        var image = UIImage(named: "bus")
+        if device.isHass {
+            image = UIImage(named: "air-purifier")
+        }
         cell.deviceImage.image = image
         return cell
     }

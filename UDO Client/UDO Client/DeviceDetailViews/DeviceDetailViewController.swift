@@ -87,6 +87,20 @@ extension DeviceDetailViewController: DeviceStatusSendDelegate {
         let booleanStatus:[String:Bool] = deviceStatus.boolean_status
         var jsonObject = JSON(deviceOriginObject)
         
+        // Hass devices
+        if ((device?.isHass) != nil) && device!.isHass {
+            let state = booleanStatus["state"] ?? false
+            if state {
+                jsonObject["state"] = "on"
+            } else {
+                jsonObject["state"] = "off"
+            }
+            let payload = jsonObject.dictionaryObject!
+            let sendFlag = MQTTClient.shared.publishToApplicationContext(payload: payload, destination: deviceStatus.uri, context: self.device!.context)
+            return sendFlag
+        }
+        
+        // Other devices
         for e1 in enumStatus {
             jsonObject["attributes"][e1.key]["value"].stringValue = e1.value
             for e2 in self.device!.enumAttrs {

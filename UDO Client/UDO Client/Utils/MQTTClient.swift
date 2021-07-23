@@ -82,6 +82,7 @@ class MQTTClient: NSObject {
         message["payload"] = payload
         let jsonObject = JSON(message)
         let jsonStr = jsonObject.rawString()!
+        _ = MQTTClient.logClient.publish("topic/log", withString: jsonStr, qos: .qos0)
         return self.client?.publish("topic/register", withString: jsonStr, qos: .qos1)
     }
     
@@ -95,6 +96,7 @@ class MQTTClient: NSObject {
         message["payload"] = payload
         let jsonObject = JSON(message)
         let jsonStr = jsonObject.rawString()!
+        _ = MQTTClient.logClient.publish("topic/log", withString: jsonStr, qos: .qos0)
         return self.client?.publish("topic/" + context, withString: jsonStr, qos: .qos1)
     }
     

@@ -53,12 +53,19 @@ class DataManager: NSObject {
                 deviceUri = contentDict["uri"] as! String
             }
             
+            if deviceUri == MQTTClient.USER_EMAIL {
+                return nil
+            }
+            
             if contentDict["attributes"] == nil {
                 return nil
             }
             
             let attrs = contentDict["attributes"] as! [String:[String:Any]]
-            var historyData:[String: [Double]] = [:]
+            var historyData:[String: [Double]] = [
+                "Temperature": [14.0,13.0,54.0,62.0,12.5,4.5,7.6,55.5],
+                "Humidity": [14.1,23.3,34.5,66.3,22.4,44.6,73.5,5.9],
+            ]
             if contentDict["history"] != nil && contentDict["history"] is [String: [Double]]{
                 historyData = contentDict["history"] as! [String: [Double]]
             }
@@ -89,6 +96,92 @@ class DataManager: NSObject {
         
         return nil
     }
+    
+    func parseAirPurifierFromHass(messageJSON: JSON)->UDODevice? {
+        let payload = messageJSON["payload"].dictionaryObject ?? [:]
+        let context = messageJSON["context"].stringValue
+        let name = "XiaoMiAirPurifier"
+        
+        var avatarUrl = ""
+        if payload["avatarUrl"] != nil && payload["avatarUrl"] is String {
+            avatarUrl = payload["avatarUrl"] as! String
+        }
+        
+        var deviceUri = ""
+        if payload["uri"] != nil && payload["uri"] is String {
+            deviceUri = payload["uri"] as! String
+        }
+        
+        let historyData:[String: [Double]] = [
+            "Temperature": [14.0,13.0,54.0,62.0,12.5,4.5,7.6,55.5],
+            "Humidity": [14.1,23.3,34.5,66.3,22.4,44.6,73.5,5.9],
+        ]
+        
+        var location = ["longitude":0.0, "latitude": 0.0]
+        if payload["location"] != nil && payload["location"] is [String: Double] {
+            location = payload["location"] as! [String:Double]
+        }
+        
+        if deviceUri == MQTTClient.USER_EMAIL {
+            return nil
+        }
+        
+        if payload["attributes"] == nil {
+            return nil
+        }
+        
+        var attrs:[String:[String: Any]] = [:]
+        attrs["state"] = ["category":"boolean", "editable": true]
+        let state = payload["state"] as? String ?? "off"
+        if state == "off" {
+            attrs["state"]!["value"] = false
+        } else {
+            attrs["state"]!["value"] = true
+        }
+        
+        for name in ["led_brightness", "percentage_step", "filter_life_remaining", "filter_hours_used", "purify_volume", "average_aqi", "supported_features", "motor_speed", "temperature", "aqi", "humidity"] {
+            attrs[name] = ["category": "numerical", "value": messageJSON["payload"]["attributes"][name].doubleValue]
+        }
+        
+        for name in ["friendly_name", "model"] {
+            attrs[name] = ["category": "text", "value": messageJSON["payload"]["attributes"][name].stringValue]
+        }
+        
+        for name in ["buzzer", "learn_mode", "child_lock", "turbo_mode_supported"] {
+            attrs[name] = ["category":"boolean", "editable":false, "value":messageJSON["payload"]["attributes"][name].boolValue]
+        }
+        
+        attrs["speed"] = ["category":"enum", "editable": false, "options":[
+            "option1": "Auto",
+            "option2": "Silent",
+            "option3": "Favorite",
+            "option4": "Idle"
+        ], "value":messageJSON["payload"]["attributes"]["speed"].stringValue]
+        
+        
+        
+        for (index, device) in self.devices.enumerated() {
+            if device.uri == deviceUri && device.context == context {
+                self.devices[index].originObject = payload
+                // load attrs
+                self.devices[index].loadAttrs(attrs: attrs)
+                self.devices[index].loadHistory(history: historyData)
+                self.devices[index].setDeviceRegion(latitude: location["latitude"]!, longitude: location["longitude"]!)
+                return nil
+            }
+        }
+        
+        let newDevice = UDODevice(uri: deviceUri, name: name, context: context, avatarUrl: avatarUrl)
+        newDevice.isHass = true
+        newDevice.loadAttrs(attrs: attrs)
+        newDevice.loadHistory(history: historyData)
+        newDevice.setDeviceRegion(latitude: location["latitude"]!, longitude: location["longitude"]!)
+        newDevice.originObject = payload
+        
+        return newDevice
+    }
+    
+    
 }
 
 extension DataManager: MessageRecevieDelegate {
@@ -126,6 +219,17 @@ extension DataManager: MessageRecevieDelegate {
                         let payload = messageJSON["payload"].rawString() ?? ""
                         print("Get payload:\(payload)")
                         if payload != "" {
+                            // air purifier from hass
+                            if messageJSON["payload"]["entity_id"].exists() {
+                                let newDevice = parseAirPurifierFromHass(messageJSON: messageJSON)
+                                if let newDevice = newDevice {
+                                    print("Will append new device:\(newDevice)")
+                                    self.devices.append(newDevice)
+                                    self.notifyDeviceFound(device: newDevice)
+                                }
+                                return
+                            }
+                            // other device
                             let data = payload.data(using: .utf8) ?? Data()
                             let newDevice = parseUDODevice(data: data, context: context)
                             if let newDevice = newDevice {

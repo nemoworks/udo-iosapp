@@ -28,7 +28,7 @@ class UserViewController: UIViewController {
     var timer: Timer?
     var isAvailable: Bool = false
     
-    let avatarURL = "super-mario.png"
+    let avatarURL = "E6FF994B62089DCFFDFEF286925D939144550C45DBEDF7491AAE2E47C464EF40211827BABD90D705F2C23F8A6E5B5AC88548D7597DE1D6F19238A5B37C18616A"
     
     override func viewDidLoad() {
         super.viewDidLoad()

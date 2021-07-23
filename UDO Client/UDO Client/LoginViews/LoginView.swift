@@ -25,10 +25,10 @@ struct LoginView: View {
                 .fontWeight(.semibold)
                 .padding(.bottom, 20)
             
-            Image("udo").resizable()
-                .frame(width: 150, height: 150, alignment: .center)
+            Image("cloud").resizable()
+                .frame(width: 180, height: 180, alignment: .center)
                 .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white))
+                .overlay(Circle().stroke(Color.init(.sRGB, red: 0.8, green: 0.8, blue: 0.9, opacity: 1.0)))
                 .shadow(radius: 3)
                 .padding(.bottom, 75)
             

@@ -21,6 +21,7 @@ class UDODevice: NSObject {
     var timestamp : UInt64 = 0
     var deviceLocation: MKCoordinateRegion?
     var originObject: [String:Any]?
+    public var isHass: Bool = false
     
     public override var description: String {return "Device: \(self.deviceName) @ \(self.uri)"}
     
