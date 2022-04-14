@@ -21,7 +21,7 @@ opts = parser.parse_args()
 def publish_register(context: str):
     client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
     client.username_pw_set(username='udo-user', password='123456')
-    client.connect('210.28.132.168', port=30609)
+    client.connect('210.28.132.168', port=31768)
     payload = {'name': 'test-user'}
 
     message = {
@@ -89,7 +89,7 @@ def publish_airpurifier(category: str, context: str, uri: str):
     message_json = json.dumps(message, indent='  ')
     client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
     client.username_pw_set(username='udo-user', password='123456')
-    client.connect('210.28.132.168', port=30609)
+    client.connect('210.28.132.168', port=31768)
     client.publish(topic='topic/' + context, payload=message_json, qos=1)
     client.disconnect()
 
@@ -97,7 +97,7 @@ def publish_airpurifier(category: str, context: str, uri: str):
 def publish_device(category: str, context: str, uri: str):
     client = mqtt.Client(client_id='cn.edu.nju.czh.Publisher')
     client.username_pw_set(username='udo-user', password='123456')
-    client.connect('210.28.132.168', port=30609)
+    client.connect('210.28.132.168', port=31768)
     payload = {
         'name': 'Bus',
         'avatarUrl': 'http://test.org',
