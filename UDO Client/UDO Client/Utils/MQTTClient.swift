@@ -57,12 +57,16 @@ class MQTTClient: NSObject {
         self.client?.password = "123456"
         self.client?.willMessage = CocoaMQTTMessage(topic: "/will ", string: "offline")
         self.client?.keepAlive = 60
+        print("Try to connect to MQTT service:\(MQTTClient.BROKER_HOST):\(MQTTClient.BROKER_PORT)")
         let connected = self.client?.connect()
         
         if let connected = connected {
             if connected {
                 self.saveMQTTConfiguration()
+            } else {
+                print("Can not connect to MQTT service:\(MQTTClient.BROKER_HOST):\(MQTTClient.BROKER_PORT)")
             }
+            
             return connected
         }
         return false

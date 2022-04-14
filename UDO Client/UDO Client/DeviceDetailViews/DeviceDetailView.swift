@@ -24,7 +24,6 @@ struct DeviceDetailView: View {
     
     var body: some View {
         
-        
         TabView{
             DeviceStatusView(device: self.device, delegate: self.vc)
                 .tabItem {

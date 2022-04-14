@@ -139,19 +139,25 @@ class DataManager: NSObject {
             attrs["state"]!["value"] = true
         }
         
-        for name in ["led_brightness", "percentage_step", "filter_life_remaining", "filter_hours_used", "purify_volume", "average_aqi", "supported_features", "motor_speed", "temperature", "aqi", "humidity"] {
+//        for name in ["led_brightness", "percentage_step", "filter_life_remaining", "filter_hours_used", "purify_volume", "average_aqi", "supported_features", "motor_speed", "temperature", "aqi", "humidity"] {
+//            attrs[name] = ["category": "numerical", "value": messageJSON["payload"]["attributes"][name].doubleValue]
+//        }
+        
+        for name in ["extra_features", "use_time", "supported_features"] {
             attrs[name] = ["category": "numerical", "value": messageJSON["payload"]["attributes"][name].doubleValue]
         }
+        attrs["temperature"] = ["category": "numerical", "value":23.5]
+        attrs["humidity"] = ["category": "numerical", "value":23.5]
         
-        for name in ["friendly_name", "model"] {
+        for name in ["friendly_name", "button_pressed"] {
             attrs[name] = ["category": "text", "value": messageJSON["payload"]["attributes"][name].stringValue]
         }
         
-        for name in ["buzzer", "learn_mode", "child_lock", "turbo_mode_supported"] {
+        for name in ["turbo_mode_supported"] {
             attrs[name] = ["category":"boolean", "editable":false, "value":messageJSON["payload"]["attributes"][name].boolValue]
         }
         
-        attrs["speed"] = ["category":"enum", "editable": false, "options":[
+        attrs["preset_mode"] = ["category":"enum", "editable": false, "options":[
             "option1": "Auto",
             "option2": "Silent",
             "option3": "Favorite",

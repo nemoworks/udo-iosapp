@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "SwiftUICharts",
-        "repositoryURL": "https://github.com/AppPear/ChartView",
+        "repositoryURL": "https://gitee.com/cui-zihan-123/ChartView",
         "state": {
           "branch": null,
           "revision": "9115a992c91fa19cbb4f2241084240d38654a1fc",
@@ -21,10 +21,10 @@
       },
       {
         "package": "CocoaMQTT",
-        "repositoryURL": "https://github.com/emqx/CocoaMQTT",
+        "repositoryURL": "https://gitee.com/mirrors/CocoaMQTT.git",
         "state": {
           "branch": "master",
-          "revision": "8be5c863b1f6adca4ce2212085d7473aa9e599f9",
+          "revision": "e1be2a2a9663f6ae5bf1e8fd1a43c4c7120646a7",
           "version": null
         }
       },

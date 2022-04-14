@@ -40,12 +40,11 @@
 		A0ACD3812671AFC600E67089 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACD3802671AFC600E67089 /* DeviceDetailViewController.swift */; };
 		A0B9DB7B26971C0400DD4134 /* UDOMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9DB7A26971C0400DD4134 /* UDOMapAnnotation.swift */; };
 		A0B9DB7D26971E3000DD4134 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9DB7C26971E3000DD4134 /* ImageUtils.swift */; };
-		A0D352C3267993960086B92F /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C2267993960086B92F /* SwiftUICharts */; };
-		A0D352C6267995610086B92F /* CocoaMQTTWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C5267995610086B92F /* CocoaMQTTWebSocket */; };
-		A0D352C8267995610086B92F /* CocoaMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = A0D352C7267995610086B92F /* CocoaMQTT */; };
 		A0D74F332678879E00FE86E1 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F322678879E00FE86E1 /* DeviceDetailView.swift */; };
 		A0D74F38267896B400FE86E1 /* DeviceStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F37267896B400FE86E1 /* DeviceStatusView.swift */; };
 		A0D74F3A267896C500FE86E1 /* DeviceHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D74F39267896C500FE86E1 /* DeviceHistoryView.swift */; };
+		A0FF66A82701790D00BEE98E /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = A0FF66A72701790D00BEE98E /* SwiftUICharts */; };
+		A0FF66AB2701843100BEE98E /* CocoaMQTT in Frameworks */ = {isa = PBXBuildFile; productRef = A0FF66AA2701843100BEE98E /* CocoaMQTT */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,9 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0D352C6267995610086B92F /* CocoaMQTTWebSocket in Frameworks */,
-				A0D352C8267995610086B92F /* CocoaMQTT in Frameworks */,
-				A0D352C3267993960086B92F /* SwiftUICharts in Frameworks */,
+				A0FF66AB2701843100BEE98E /* CocoaMQTT in Frameworks */,
+				A0FF66A82701790D00BEE98E /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,9 +270,8 @@
 			);
 			name = "UDO Client";
 			packageProductDependencies = (
-				A0D352C2267993960086B92F /* SwiftUICharts */,
-				A0D352C5267995610086B92F /* CocoaMQTTWebSocket */,
-				A0D352C7267995610086B92F /* CocoaMQTT */,
+				A0FF66A72701790D00BEE98E /* SwiftUICharts */,
+				A0FF66AA2701843100BEE98E /* CocoaMQTT */,
 			);
 			productName = "UDO Client";
 			productReference = A0065987266F54EC0089E5F1 /* UDO Client.app */;
@@ -304,8 +301,8 @@
 			);
 			mainGroup = A006597E266F54EC0089E5F1;
 			packageReferences = (
-				A0D352C1267993960086B92F /* XCRemoteSwiftPackageReference "ChartView" */,
-				A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */,
+				A0FF66A62701790D00BEE98E /* XCRemoteSwiftPackageReference "ChartView" */,
+				A0FF66A92701843100BEE98E /* XCRemoteSwiftPackageReference "CocoaMQTT" */,
 			);
 			productRefGroup = A0065988266F54EC0089E5F1 /* Products */;
 			projectDirPath = "";
@@ -576,17 +573,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A0D352C1267993960086B92F /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		A0FF66A62701790D00BEE98E /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
+			repositoryURL = "https://gitee.com/cui-zihan-123/ChartView";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.5.5;
 			};
 		};
-		A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */ = {
+		A0FF66A92701843100BEE98E /* XCRemoteSwiftPackageReference "CocoaMQTT" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/emqx/CocoaMQTT";
+			repositoryURL = "https://gitee.com/mirrors/CocoaMQTT.git";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -595,19 +592,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A0D352C2267993960086B92F /* SwiftUICharts */ = {
+		A0FF66A72701790D00BEE98E /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A0D352C1267993960086B92F /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = A0FF66A62701790D00BEE98E /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
-		A0D352C5267995610086B92F /* CocoaMQTTWebSocket */ = {
+		A0FF66AA2701843100BEE98E /* CocoaMQTT */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */;
-			productName = CocoaMQTTWebSocket;
-		};
-		A0D352C7267995610086B92F /* CocoaMQTT */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A0D352C4267995610086B92F /* XCRemoteSwiftPackageReference "CocoaMQTT" */;
+			package = A0FF66A92701843100BEE98E /* XCRemoteSwiftPackageReference "CocoaMQTT" */;
 			productName = CocoaMQTT;
 		};
 /* End XCSwiftPackageProductDependency section */
