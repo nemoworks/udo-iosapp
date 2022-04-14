@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GNY-bx-Z9H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GNY-bx-Z9H">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -22,7 +23,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="deviceCell" rowHeight="160" id="6AU-8N-ooY" customClass="DeviceTableViewCell" customModule="UDO_Client" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="374" height="160"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6AU-8N-ooY" id="aeY-nb-dnW">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="160"/>
@@ -109,7 +110,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskTableViewCell" rowHeight="90" id="NVU-zZ-gnp" customClass="TaskTableViewCell" customModule="UDO_Client" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="374" height="90"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NVU-zZ-gnp" id="QHh-ix-I2a">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="90"/>
@@ -231,11 +232,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXA-iM-mPA">
-                                <rect key="frame" x="0.0" y="316" width="414" height="526"/>
+                                <rect key="frame" x="0.0" y="360" width="414" height="482"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="T0a-qg-sov">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="308"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="308" id="xoN-D5-4Nb"/>
                                 </constraints>
@@ -276,7 +277,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="resourceCell" rowHeight="160" id="5gd-Na-L3M" customClass="ResourceTableViewCell" customModule="UDO_Client" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="374" height="160"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5gd-Na-L3M" id="wV2-nu-WWn">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="160"/>
@@ -361,7 +362,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="contextCell" rowHeight="160" id="rub-Sa-dhs" customClass="ContextTableViewCell" customModule="UDO_Client" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="374" height="160"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rub-Sa-dhs" id="Lky-FO-SlP">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="160"/>
@@ -677,7 +678,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="efV-aV-2HG"/>
+        <segue reference="VYJ-QJ-gg9"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise.circle" catalog="system" width="128" height="121"/>
